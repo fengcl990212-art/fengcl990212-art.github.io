@@ -399,6 +399,143 @@
             border: 1px solid rgba(226, 232, 240, 0.9);
         }
 
+    
+                /* ========= 个人简介下方 News 滚动条 ========= */
+        .news-strip {
+            padding: 18px 0 32px;
+            background: var(--bg-page);
+        }
+
+        .news-strip-card {
+            position: relative;
+            border-radius: 24px;
+            background: #ffffff;
+            box-shadow: var(--shadow-soft);
+            padding: 14px 56px; /* 留出左右给箭头 */
+            overflow: hidden;
+        }
+
+        /* 滑动轨道 + 每张幻灯片 */
+        .news-strip-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .news-strip-slide {
+            flex: 0 0 100%;          /* 一次只展示一张 */
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .news-strip-image {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #020617;
+        }
+
+        .news-strip-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 图片轻微放大动画 */
+.news-strip-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-out;
+}
+
+.news-strip-slide:hover .news-strip-image img {
+    transform: scale(1.02);
+}
+
+
+        /* 图片上的标题条（只显示新闻标题） */
+        .news-strip-caption {
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 14px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.72);
+            color: #f9fafb;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 左右切换按钮 */
+        .news-strip-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 999px;
+            border: none;
+            background: #ffffff;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #0f172a;
+            cursor: pointer;
+        }
+
+        #newsStripPrev {
+            left: 16px;
+        }
+
+        #newsStripNext {
+            right: 16px;
+        }
+
+        .news-strip-arrow:hover {
+            background: #e5edff;
+        }
+
+        /* 小圆点指示器 */
+        .news-strip-dots {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .news-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            border: none;
+            background: #cbd5f5;
+            cursor: pointer;
+        }
+
+        .news-dot-active {
+            width: 18px;
+            background: var(--primary);
+        }
+
+        /* 手机端：缩小内边距，箭头稍微收一点 */
+        @media (max-width: 768px) {
+            .news-strip-card {
+                padding: 12px 40px;
+            }
+
+            .news-strip-caption {
+                font-size: 12px;
+            }
+        }
+
+
         /* ========= Latest News 区块 ========= */
         .news-list {
             border-radius: var(--radius-xl);
@@ -795,6 +932,92 @@
         </div>
     </section>
 
+        </section>
+
+    <!-- ======= News 滚动条（个人简介下方） ======= -->
+    <section class="news-strip" aria-label="Latest news highlights">
+        <div class="container">
+            <div class="news-strip-card">
+                <!-- 左箭头 -->
+                <button class="news-strip-arrow" id="newsStripPrev" aria-label="Previous news">
+                    ‹
+                </button>
+
+                <!-- 滑动轨道：最新四条新闻 -->
+                <div class="news-strip-track" id="newsStripTrack">
+                    <!-- Slide 1 -->
+                    <a class="news-strip-slide"
+                       href="html/news_sub/iros_2025.html"
+                       target="_blank" rel="noopener noreferrer">
+                        <div class="news-strip-image">
+                            <img src="Fig/Fig11_1920x1080.png"
+                                 alt="IROS 2025 poster – constraint-aware motion planning" />
+                            <div class="news-strip-caption">
+                                IROS 2025 · Poster Presentation
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Slide 2 -->
+                    <a class="news-strip-slide"
+                       href="html/news_sub/yuhangxiehui.html"
+                       target="_blank" rel="noopener noreferrer">
+                        <div class="news-strip-image">
+                            <img src="Fig/Fig12_1920x1080.jpg"
+                                 alt="IROS 2025 oral presentation" />
+                            <div class="news-strip-caption">
+                                China Astronautics Society Student Forum · Invited Demo
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Slide 3 -->
+                    <a class="news-strip-slide"
+                       href="news-2024-demo.html"       
+                       target="_blank" rel="noopener noreferrer">
+                        <div class="news-strip-image">
+                            <img src="Fig/Fig11_1920x1080.png" 
+                                 alt="Robot demo at block party" />
+                            <div class="news-strip-caption">
+                                China Astronautics Society Student Forum · Invited Demo
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Slide 4 -->
+                    <a class="news-strip-slide"
+                       href="news-2023-paper.html"       
+                       target="_blank" rel="noopener noreferrer">
+                        <div class="news-strip-image">
+                            <img src="Fig/Fig11_1920x1080.png"
+                                 alt="RSS 2023 oral" />
+                            <div class="news-strip-caption">
+                                RSS 2023 · Diffusion for Shared Autonomy
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 右箭头 -->
+                <button class="news-strip-arrow" id="newsStripNext" aria-label="Next news">
+                    ›
+                </button>
+            </div>
+
+            <!-- 底部小圆点（4 条新闻对应 4 个点） -->
+            <div class="news-strip-dots">
+                <button class="news-dot news-dot-active" data-index="0" aria-label="Go to slide 1"></button>
+                <button class="news-dot" data-index="1" aria-label="Go to slide 2"></button>
+                <button class="news-dot" data-index="2" aria-label="Go to slide 3"></button>
+                <button class="news-dot" data-index="3" aria-label="Go to slide 4"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Latest News 区块 ======= -->
+    <section id="news">
+
+
     <!-- ======= Latest News 区块 ======= -->
     <section id="news">
         <div class="container">
@@ -813,6 +1036,16 @@
                         <div class="news-content-title">Poster Presentation</div>
                         <div class="news-content-desc">
                             Our research "<strong>Constraint-aware motion planning for vehicles with terrain traversability assessment and optimization in construction scenarios</strong>" was presented at the <strong>IROS 2025</strong> conference.
+                        </div>
+                    </div>
+                </a>
+
+                <a class="news-item" href="html/news_sub/yuhangxiehui.html" target="_blank" rel="noopener noreferrer">
+                    <div class="news-date">Oct 2025</div>
+                    <div>
+                        <div class="news-content-title">Invited Demo</div>
+                        <div class="news-content-desc">
+                            We were invited to present our research on <strong>autonomous navigation for off-road vehicles</strong> at the <strong>China Astronautics Society Student Forum</strong>.
                         </div>
                     </div>
                 </a>
@@ -1082,6 +1315,69 @@
             </div>
         </div>
     </footer>
+
+        <!-- News 滚动条轮播脚本 -->
+    <script>
+        (function () {
+            const track = document.getElementById("newsStripTrack");
+            if (!track) return;
+
+            const slides = Array.from(track.querySelectorAll(".news-strip-slide"));
+            const prevBtn = document.getElementById("newsStripPrev");
+            const nextBtn = document.getElementById("newsStripNext");
+            const dots = Array.from(document.querySelectorAll(".news-dot"));
+
+            let current = 0;
+            const total = slides.length;
+
+            function goTo(index) {
+                if (total === 0) return;
+                current = (index + total) % total;
+                track.style.transform = "translateX(-" + current * 100 + "%)";
+                dots.forEach(function (dot, i) {
+                    dot.classList.toggle("news-dot-active", i === current);
+                });
+            }
+
+            // 左右按钮
+            if (prevBtn) {
+                prevBtn.addEventListener("click", function () {
+                    goTo(current - 1);
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener("click", function () {
+                    goTo(current + 1);
+                });
+            }
+
+            // 点击小圆点
+            dots.forEach(function (dot, i) {
+                dot.addEventListener("click", function () {
+                    goTo(i);
+                });
+            });
+
+            // 可选：自动轮播（9 秒一张）
+            let timer = setInterval(function () {
+                goTo(current + 1);
+            }, 9000);
+
+            // 鼠标移入暂停，移出继续（主要对桌面端有用）
+            track.addEventListener("mouseenter", function () {
+                clearInterval(timer);
+            });
+            track.addEventListener("mouseleave", function () {
+                timer = setInterval(function () {
+                    goTo(current + 1);
+                }, 9000);
+            });
+
+            // 初始化位置
+            goTo(0);
+        })();
+    </script>
+
 
     <!-- ======= JS：导航平滑滚动 & 手机菜单 & 多语言 ======= -->
     <script>
