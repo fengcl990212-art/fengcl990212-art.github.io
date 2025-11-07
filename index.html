@@ -1,8 +1,1096 @@
-<p>Hello 大家好</p>
-<p>我是霸都丶傲天，这是我的个人网站。 </p>
-<p>很高兴你来到这里, 你可以在以下的网站找到我</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <!-- 让页面在手机上也能自适应 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Name | Personal Homepage</title>
 
-<ul>
-  <li> <a href="https://www.zhihu.com/people/AJLoveChina">知乎</a> </li>
-  <li> <a href="http://hejie.nigeerhuo.com">我的博客(已经不更细了,现在在知乎写文章)</a> </li>
-</ul>
+    <style>
+        /* ========= 全局基础样式 ========= */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #2563eb, #22c1c3);
+            --primary: #2563eb;
+            --primary-soft: #e0ebff;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --card-bg: #ffffff;
+            --border-soft: #e2e8f0;
+            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
+                "Microsoft YaHei", sans-serif;
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            /* 页面主体宽度控制 */
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========= 顶部导航 ========= */
+        .navbar {
+            position: sticky; /* 滚动时吸顶效果 */
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.85);
+            color: #e5e7eb;
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .nav-logo span.cn {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding-bottom: 2px;
+            cursor: pointer;
+            opacity: 0.85;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+        }
+
+        .nav-links a::after {
+            /* 下划线动画 */
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: #38bdf8;
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* 手机端导航按钮（汉堡菜单） */
+        .nav-toggle {
+            display: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 16px;
+            height: 2px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            position: relative;
+        }
+
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: inherit;
+        }
+
+        .nav-toggle span::before {
+            top: -5px;
+        }
+
+        .nav-toggle span::after {
+            top: 5px;
+        }
+
+        /* ========= 顶部大区（Overview） ========= */
+        .hero {
+            background: var(--bg-gradient);
+            color: #f9fafb;
+            padding: 48px 0 64px;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .hero-name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .hero-title {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .hero-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .hero-contact a {
+            border-bottom: 1px dashed rgba(226, 232, 240, 0.7);
+        }
+
+        .hero-bio {
+            font-size: 14px;
+            opacity: 0.95;
+            margin-bottom: 18px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.15);
+            border: 1px solid rgba(226, 232, 240, 0.4);
+        }
+
+        .tag-pill span.dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease,
+                background-color 0.15s ease, border-color 0.15s ease,
+                color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: #f9fafb;
+            color: #0f172a;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: rgba(226, 232, 240, 0.9);
+            color: #e5e7eb;
+        }
+
+        .btn-outline:hover {
+            background: rgba(15, 23, 42, 0.25);
+        }
+
+        .hero-profile {
+            justify-self: center;
+        }
+
+        .hero-avatar-wrap {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            border-radius: 999px;
+            padding: 6px;
+            background: radial-gradient(circle at 0% 0%, #bef264, transparent 60%),
+                radial-gradient(circle at 95% 10%, #7dd3fc, transparent 55%),
+                radial-gradient(circle at 0% 100%, #fb7185, transparent 55%),
+                #0f172a;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hero-avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            overflow: hidden;
+            border: 4px solid #e5e7eb;
+            background: #111827;
+        }
+
+        .hero-avatar-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-avatar-tag {
+            position: absolute;
+            bottom: 10px;
+            left: -14px;
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-avatar-tag-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        /* ========= 通用区块样式 ========= */
+        section {
+            padding: 56px 0;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .card-soft {
+            background: #f9fafb;
+            border-radius: var(--radius-lg);
+            padding: 18px 18px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+
+        /* ========= Latest News 区块 ========= */
+        .news-list {
+            border-radius: var(--radius-xl);
+            background: #ffffff;
+            box-shadow: var(--shadow-soft);
+            padding: 12px 0;
+        }
+
+        .news-item {
+            display: grid;
+            grid-template-columns: 80px minmax(0, 1fr);
+            gap: 12px;
+            padding: 10px 24px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .news-content-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: var(--primary);
+        }
+
+        .news-content-desc {
+            color: var(--text-sub);
+        }
+
+        .news-actions {
+            padding: 12px 24px 8px;
+            text-align: center;
+        }
+
+        .btn-ghost {
+            border-radius: 999px;
+            border: 1px solid #d4d4d8;
+            padding: 7px 14px;
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+            font-size: 13px;
+            color: #4b5563;
+            background: #f9fafb;
+        }
+
+        .btn-ghost:hover {
+            background: #e5e7eb;
+        }
+
+        /* ========= Publications 区块 ========= */
+        .pub-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .pub-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            display: grid;
+            grid-template-columns: 200px minmax(0, 1fr);
+            gap: 16px;
+            padding: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .pub-thumb {
+            border-radius: 14px;
+            overflow: hidden;
+            background: #e5e7eb;
+        }
+
+        .pub-meta-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .pub-meta-authors {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+        }
+
+        .pub-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .badge {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #4338ca;
+            font-weight: 500;
+        }
+
+        .badge-soft {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-link {
+            background: #f3f4f6;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .badge-link:hover {
+            background: #e5e7eb;
+        }
+
+        /* ========= Service / Awards / Projects 等通用列表 ========= */
+        .timeline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .timeline-item {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .timeline-meta {
+            font-size: 13px;
+            color: var(--text-sub);
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: 18px;
+            border-radius: var(--radius-lg);
+            background: #ffffff;
+            padding: 18px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .project-media {
+            border-radius: 14px;
+            overflow: hidden;
+            background: #e5e7eb;
+            position: relative;
+        }
+
+        .project-media-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .project-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        /* ========= 页脚 ========= */
+        .footer {
+            padding: 26px 0;
+            background: #020617;
+            color: #9ca3af;
+            margin-top: 24px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 16px;
+            font-size: 13px;
+            align-items: center;
+        }
+
+        .footer-map {
+            width: 150px;
+            height: 90px;
+            border-radius: 12px;
+            background: radial-gradient(circle at 20% 20%, #22c55e, transparent 55%),
+                radial-gradient(circle at 80% 30%, #38bdf8, transparent 55%),
+                radial-gradient(circle at 35% 85%, #f97316, transparent 55%),
+                #020617;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e5e7eb;
+        }
+
+        /* ========= 自适应（移动端） ========= */
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: minmax(0, 1fr);
+                text-align: left;
+            }
+
+            .hero-profile {
+                order: -1;
+            }
+
+            .pub-card {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .project-card {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-inner {
+                height: 56px;
+            }
+
+            .nav-links {
+                position: fixed;
+                inset: 56px 0 auto;
+                background: rgba(15, 23, 42, 0.98);
+                padding: 12px 20px 16px;
+                flex-direction: column;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.2s ease, opacity 0.2s ease;
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
+            .hero {
+                padding: 32px 0 40px;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ======= 顶部导航栏 ======= -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <!-- 左侧 Logo/姓名 -->
+            <div class="nav-logo">
+                <!-- TODO: 把 Your Name / 你的中文名 换成你自己的名字 -->
+                <span>Chenlong Feng</span>
+                <span class="cn">冯晨龙</span>
+            </div>
+
+            <!-- 右侧导航菜单（PC） -->
+            <nav class="nav-links" id="navLinks">
+                <!-- href 对应下面 section 的 id，可以平滑滚动过去 -->
+                <a href="#overview" class="active">Overview</a>
+                <a href="#news">News</a>
+                <a href="#publications">Publications</a>
+                <a href="#service">Service</a>
+                <a href="#awards">Awards</a>
+                <a href="#projects">Projects</a>
+                <!-- CV 可以跳转到你上传在仓库里的 cv.pdf -->
+                <a href="cv.pdf" target="_blank">CV</a>
+            </nav>
+
+            <!-- 手机端汉堡菜单按钮 -->
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ======= Overview 顶部大区 ======= -->
+    <section id="overview" class="hero">
+        <div class="container hero-inner">
+            <!-- 左侧文字介绍 -->
+            <div>
+                <div class="hero-subtitle">Ph.D. Researcher</div>
+                <!-- TODO: 修改为你的名字 -->
+                <div class="hero-name">Chenlong Feng 冯晨龙</div>
+                <!-- TODO: 修改为你的研究方向 -->
+                <div class="hero-title">
+                    Construction robotics, Motion planning and control
+                </div>
+
+                <!-- 联系方式，可以换成自己的邮箱 / 学校主页等 -->
+                <div class="hero-contact">
+                    <span>📧 <a href="fengcl24@mails.jlu.edu.cn">fengcl24@mails.jlu.edu.cn</a></span>
+                    <span>•</span>
+                    <span>Affiliation: Jilin University</span>
+                </div>
+
+                <!-- 简短介绍：建议 2~3 句，越具体越好 -->
+                <p class="hero-bio">
+                    I am a Ph.D. student in <strong>Mechanical Engineering / Robotics</strong>,
+                    focusing on <strong>motion planning</strong>, <strong>learning from expert demonstrations</strong>,
+                    and <strong>safe autonomy of construction robotics</strong>. My research
+                    aims to bridge robust control with data-driven intelligence for real-world
+                    embodied agents.
+                </p>
+
+                <!-- 状态 tag：比如开放合作 / 求实习等，不需要可以删除整个 hero-tags 块 -->
+                <div class="hero-tags">
+                    <div class="tag-pill">
+                        <span>🤝</span>
+                        <span>Open to collaborations</span>
+                    </div>
+                    <div class="tag-pill">
+                        <span class="dot"></span>
+                        <span>Looking for a job in 2027</span>
+                    </div>
+                </div>
+
+                <!-- 按钮：可以跳转到 Publications / GitHub / Google Scholar 等 -->
+                <div class="hero-actions">
+                    <!-- 锚点跳转到 Publication 区块 -->
+                    <a href="#publications" class="btn btn-primary">📄 View Publications</a>
+                    <!-- TODO: 替换为你的 GitHub / Scholar 链接 -->
+                    <a href="https://github.com/your-github-id" class="btn btn-outline" target="_blank">
+                        🐙 GitHub
+                    </a>
+                    <a href="https://scholar.google.com" class="btn btn-outline" target="_blank">
+                        🎓 Google Scholar
+                    </a>
+                </div>
+
+                <!-- 教育背景的简短一行，可在下面的 Education 部分再详细列出（如果想加可以自行扩展） -->
+            </div>
+
+            <!-- 右侧个人头像 -->
+            <div class="hero-profile">
+                <div class="hero-avatar-wrap">
+                    <div class="hero-avatar-inner">
+                        <!-- TODO: 将 your-photo.jpg 换成你仓库里图片的路径 -->
+                        <img src="Fig/fengcl.jpg" alt="Your portrait" />
+                    </div>
+                    <div class="hero-avatar-tag">
+                        <span class="hero-avatar-tag-dot"></span>
+                        <span>Robotics &amp; AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Latest News 区块 ======= -->
+    <section id="news">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest News</h2>
+                <p class="section-subtitle">
+                    <!-- 这一行可以写一句话介绍，例如“最近的一些进展/动态” -->
+                    A few recent updates from my research and work.
+                </p>
+            </div>
+
+            <div class="news-list">
+                <!-- 每一条 news-item 表示一条新闻，按照时间倒序 -->
+                <div class="news-item">
+                    <div class="news-date">Sep 2025</div>
+                    <div>
+                        <div class="news-content-title">Paper Accepted!</div>
+                        <!-- TODO: 将论文题目和会议信息改成你的内容 -->
+                        <div class="news-content-desc">
+                            Our paper "<strong>Title of Your Paper</strong>" has been accepted to
+                            <strong>Conference / Journal 2025</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">Jul 2025</div>
+                    <div>
+                        <div class="news-content-title">Oral Presentation</div>
+                        <div class="news-content-desc">
+                            I will give an oral talk on <strong>topic / paper name</strong> at
+                            <strong>Conference 2025</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">Apr 2025</div>
+                    <div>
+                        <div class="news-content-title">Invited Demo</div>
+                        <div class="news-content-desc">
+                            We were invited to present our <strong>embodied robot system</strong>
+                            at <strong>Robotics Exhibition / Museum</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-date">Jun 2024</div>
+                    <div>
+                        <div class="news-content-title">Workshop Organizer</div>
+                        <div class="news-content-desc">
+                            Co-organized the <strong>Workshop on Embodied Intelligence for
+                            Construction Robotics</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-actions">
+                    <!-- 如果以后做单独 News 页，可以改成真正的链接 -->
+                    <button class="btn-ghost" type="button">
+                        View All News
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Publications 区块 ======= -->
+    <section id="publications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Publications</h2>
+                <p class="section-subtitle">
+                    Representative works. * indicates equal contribution.
+                </p>
+            </div>
+
+            <div class="pub-list">
+                <!-- 单篇论文卡片：可以多复制几份，替换内容即可 -->
+                <article class="pub-card">
+                    <!-- 左侧缩略图：可以用论文 teaser 图 / 占位图 -->
+                    <div class="pub-thumb">
+                        <!-- TODO: 替换为你自己的论文 teaser 图片 -->
+                        <img src="teaser1.jpg" alt="Paper teaser 1" />
+                    </div>
+
+                    <!-- 右侧论文信息 -->
+                    <div>
+                        <!-- 论文标题 -->
+                        <div class="pub-meta-title">
+                            Title of Your Paper: Motion Planning for Autonomous Excavators
+                        </div>
+                        <!-- 作者和单位 -->
+                        <div class="pub-meta-authors">
+                            <strong>Your Name</strong>, Coauthor A, Coauthor B
+                        </div>
+                        <!-- 会议 / 期刊 信息 -->
+                        <div class="badge">IROS 2025</div>
+
+                        <!-- 一些链接按钮：arXiv、项目主页、代码等 -->
+                        <div class="pub-badges">
+                            <!-- TODO: 替换链接地址 -->
+                            <a class="badge badge-link" href="https://arxiv.org" target="_blank">
+                                arXiv
+                            </a>
+                            <a class="badge badge-link" href="#" target="_blank">
+                                Project Page
+                            </a>
+                            <a class="badge badge-link" href="https://github.com" target="_blank">
+                                Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="pub-card">
+                    <div class="pub-thumb">
+                        <img src="teaser2.jpg" alt="Paper teaser 2" />
+                    </div>
+                    <div>
+                        <div class="pub-meta-title">
+                            Learning Probabilistic Trajectory Primitives for Earthmoving Tasks
+                        </div>
+                        <div class="pub-meta-authors">
+                            <strong>Your Name*</strong>, Coauthor C*, Coauthor D
+                        </div>
+                        <div class="badge badge-soft">Journal of Field Robotics, 2024</div>
+
+                        <div class="pub-badges">
+                            <a class="badge badge-link" href="#" target="_blank"> PDF </a>
+                            <a class="badge badge-link" href="#" target="_blank"> Video </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 可以按需要继续添加更多文章 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Service and Volunteer 区块 ======= -->
+    <section id="service">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Service &amp; Volunteer</h2>
+                <p class="section-subtitle">
+                    Academic service and community activities.
+                </p>
+            </div>
+
+            <div class="timeline-list">
+                <div class="timeline-item">
+                    <div class="timeline-title">Conference Reviewer</div>
+                    <div class="timeline-meta">
+                        IEEE International Conference on Robotics and Automation (ICRA),
+                        IEEE/RSJ International Conference on Intelligent Robots and Systems
+                        (IROS), Conference on Robot Learning (CoRL)
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Workshop Organizer</div>
+                    <div class="timeline-meta">
+                        Multimodal Embodied Intelligence Workshop, 2024.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Invited Demo</div>
+                    <div class="timeline-meta">
+                        Robot Block Party, Museum of Science and Industry, 2023–2024.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Volunteer</div>
+                    <div class="timeline-meta">
+                        Midwest Robotics Workshop, 2022.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Awards and Honors 区块 ======= -->
+    <section id="awards">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Awards and Honors</h2>
+                <p class="section-subtitle">
+                    Major scholarships and awards.
+                </p>
+            </div>
+
+            <div class="timeline-list">
+                <!-- 每个 timeline-item 一条奖项记录 -->
+                <div class="timeline-item">
+                    <div class="timeline-title">
+                        National Scholarship (Top 0.1%)
+                    </div>
+                    <div class="timeline-meta">
+                        2020 • Ministry of Education, China
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Outstanding Graduate Student</div>
+                    <div class="timeline-meta">
+                        2021 • Your University
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">
+                        First Prize, National Undergraduate Mathematical Contest in Modeling
+                    </div>
+                    <div class="timeline-meta">
+                        2019 • China Society for Industrial and Applied Mathematics
+                    </div>
+                </div>
+
+                <!-- 可继续添加更多奖项 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Projects 区块 ======= -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">
+                    Selected research and side projects. Videos / demos can be embedded here.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- 项目卡片 1：可以放研究 demo -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <!-- 这里可以嵌入 YouTube / Bilibili iframe，示例先用占位 -->
+                        <div class="project-media-placeholder">
+                            Video / Demo Placeholder (UR5 / Excavator Demo)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="project-title">
+                            Embodied ChatGPT for Robot Block Party
+                        </div>
+                        <p class="project-desc">
+                            We implemented a language-driven control system on a UR5 robot. The
+                            robot can interpret natural language commands and perform pick-and-place
+                            and stacking tasks in a shared workspace, showcased at a public
+                            robotics festival.
+                        </p>
+                        <div class="project-links">
+                            <!-- TODO: 填入实际链接 -->
+                            <a href="#" class="badge badge-link" target="_blank"> Video </a>
+                            <a href="#" class="badge badge-link" target="_blank"> Code </a>
+                            <a href="#" class="badge badge-link" target="_blank">
+                                Project Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目卡片 2：APP / 其他项目 -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <div class="project-media-placeholder">
+                            Screenshot Placeholder (App / Web)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="project-title">
+                            AI Transnational Travel Assistant App
+                        </div>
+                        <p class="project-desc">
+                            An auxiliary application for tourists from China and Japan to travel
+                            independently. It leverages modern AI to translate signs and menus,
+                            recommend local attractions and restaurants, and provide navigation
+                            tips for public transportation.
+                        </p>
+                        <div class="project-links">
+                            <a href="#" class="badge badge-link" target="_blank"> GitHub </a>
+                            <a href="#" class="badge badge-link" target="_blank"> Demo Video </a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= 页脚 ======= -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div>
+                <!-- TODO: 可以把年份和姓名改成你的 -->
+                © 2024 Your Name. All rights reserved.
+            </div>
+            <div class="footer-map">
+                <!-- 简单的“访客地图”视觉占位 -->
+                Visitor Map
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======= 简单的 JS：导航平滑滚动 & 手机菜单 ======= -->
+    <script>
+        // 平滑滚动到指定 section
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute("href").substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+
+                // 点击菜单项后关闭手机端导航
+                document.getElementById("navLinks").classList.remove("open");
+            });
+        });
+
+        // 手机端导航展开/收起
+        const navToggle = document.getElementById("navToggle");
+        const navLinks = document.getElementById("navLinks");
+        navToggle.addEventListener("click", function () {
+            navLinks.classList.toggle("open");
+        });
+    </script>
+</body>
+</html>
