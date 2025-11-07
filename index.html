@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en"> <!-- 初始默认英文，切换语言时会用 JS 修改这个属性 -->
 <head>
     <meta charset="UTF-8" />
     <!-- 让页面在手机上也能自适应 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Name | Personal Homepage</title>
+    <title>Chenlong Feng | Personal Homepage</title>
 
     <style>
         /* ========= 全局基础样式 ========= */
@@ -82,6 +82,13 @@
             opacity: 0.8;
         }
 
+        /* 右侧：导航 + 语言切换 + 汉堡菜单 */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -121,7 +128,6 @@
 
         /* 手机端导航按钮（汉堡菜单） */
         .nav-toggle {
-            display: none;
             width: 32px;
             height: 32px;
             border-radius: 999px;
@@ -157,6 +163,29 @@
 
         .nav-toggle span::after {
             top: 5px;
+        }
+
+        /* ===== 语言切换按钮样式 ===== */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .lang-btn {
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: rgba(15, 23, 42, 0.6);
+            color: #e5e7eb;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .lang-btn.active {
+            background: #e5e7eb;
+            color: #0f172a;
         }
 
         /* ========= 顶部大区（Overview） ========= */
@@ -662,28 +691,37 @@
         <div class="container navbar-inner">
             <!-- 左侧 Logo/姓名 -->
             <div class="nav-logo">
-                <!-- TODO: 把 Your Name / 你的中文名 换成你自己的名字 -->
                 <span>Chenlong Feng</span>
                 <span class="cn">冯晨龙</span>
             </div>
 
-            <!-- 右侧导航菜单（PC） -->
-            <nav class="nav-links" id="navLinks">
-                <!-- href 对应下面 section 的 id，可以平滑滚动过去 -->
-                <a href="#overview" class="active">Overview</a>
-                <a href="#news">News</a>
-                <a href="#publications">Publications</a>
-                <a href="#service">Service</a>
-                <a href="#awards">Awards</a>
-                <a href="#projects">Projects</a>
-                <!-- CV 可以跳转到你上传在仓库里的 cv.pdf -->
-                <a href="cv.pdf" target="_blank">CV</a>
-            </nav>
+            <!-- 右侧：导航 + 语言切换 + 汉堡菜单 -->
+            <div class="nav-right">
+                <!-- 右侧导航菜单（PC） -->
+                <nav class="nav-links" id="navLinks">
+                    <!-- href 对应下面 section 的 id，可以平滑滚动过去 -->
+                    <a href="#overview" class="active" data-i18n="nav.overview">Overview</a>
+                    <a href="#news" data-i18n="nav.news">News</a>
+                    <a href="#publications" data-i18n="nav.publications">Publications</a>
+                    <a href="#service" data-i18n="nav.service">Service</a>
+                    <a href="#awards" data-i18n="nav.awards">Awards</a>
+                    <a href="#projects" data-i18n="nav.projects">Projects</a>
+                    <!-- CV 可以跳转到你上传在仓库里的 cv.pdf -->
+                    <a href="cv.pdf" target="_blank" data-i18n="nav.cv">CV</a>
+                </nav>
 
-            <!-- 手机端汉堡菜单按钮 -->
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span>
-            </button>
+                <!-- 语言切换按钮：EN / 中文 -->
+                <div class="lang-switch">
+                    <!-- data-lang 用来告诉 JS 这是哪种语言 -->
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="zh">中文</button>
+                </div>
+
+                <!-- 手机端汉堡菜单按钮 -->
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -692,23 +730,21 @@
         <div class="container hero-inner">
             <!-- 左侧文字介绍 -->
             <div>
-                <div class="hero-subtitle">Ph.D. Researcher</div>
-                <!-- TODO: 修改为你的名字 -->
-                <div class="hero-name">Chenlong Feng 冯晨龙</div>
-                <!-- TODO: 修改为你的研究方向 -->
-                <div class="hero-title">
+                <div class="hero-subtitle" data-i18n="hero.subtitle">Ph.D. Researcher</div>
+                <div class="hero-name" data-i18n="hero.name">Chenlong Feng 冯晨龙</div>
+                <div class="hero-title" data-i18n="hero.title">
                     Construction robotics, Motion planning and control
                 </div>
 
-                <!-- 联系方式，可以换成自己的邮箱 / 学校主页等 -->
+                <!-- 联系方式 -->
                 <div class="hero-contact">
-                    <span>📧 <a href="fengcl24@mails.jlu.edu.cn">fengcl24@mails.jlu.edu.cn</a></span>
+                    <span>📧 <a href="mailto:fengcl24@mails.jlu.edu.cn">fengcl24@mails.jlu.edu.cn</a></span>
                     <span>•</span>
-                    <span>Affiliation: Jilin University</span>
+                    <div class="hero-school" data-i18n="hero.school">Affiliation: Jilin University</div>
                 </div>
 
-                <!-- 简短介绍：建议 2~3 句，越具体越好 -->
-                <p class="hero-bio">
+                <!-- 简短介绍 -->
+                <p class="hero-bio" data-i18n="hero.bio">
                     I am a Ph.D. student in <strong>Mechanical Engineering / Robotics</strong>,
                     focusing on <strong>motion planning</strong>, <strong>learning from expert demonstrations</strong>,
                     and <strong>safe autonomy of construction robotics</strong>. My research
@@ -716,40 +752,39 @@
                     embodied agents.
                 </p>
 
-                <!-- 状态 tag：比如开放合作 / 求实习等，不需要可以删除整个 hero-tags 块 -->
+                <!-- 状态 tag -->
                 <div class="hero-tags">
                     <div class="tag-pill">
                         <span>🤝</span>
-                        <span>Open to collaborations</span>
+                        <span data-i18n="hero.tag1">Open to collaborations</span>
                     </div>
                     <div class="tag-pill">
                         <span class="dot"></span>
-                        <span>Looking for a job in 2027</span>
+                        <span data-i18n="hero.tag2">Looking for a job in 2027</span>
                     </div>
                 </div>
 
-                <!-- 按钮：可以跳转到 Publications / GitHub / Google Scholar 等 -->
+                <!-- 按钮：跳转论文 / GitHub / Scholar -->
                 <div class="hero-actions">
                     <!-- 锚点跳转到 Publication 区块 -->
-                    <a href="#publications" class="btn btn-primary">📄 View Publications</a>
+                    <a href="#publications" class="btn btn-primary" data-i18n="btn.viewPublications">
+                        📄 View Publications
+                    </a>
                     <!-- TODO: 替换为你的 GitHub / Scholar 链接 -->
-                    <a href="https://github.com/your-github-id" class="btn btn-outline" target="_blank">
+                    <a href="https://github.com/fengcl990212-art?tab=repositories" class="btn btn-outline" target="_blank" data-i18n="btn.github">
                         🐙 GitHub
                     </a>
-                    <a href="https://scholar.google.com" class="btn btn-outline" target="_blank">
-                        🎓 Google Scholar
+                    <a href="https://www.scopus.com/authid/detail.uri?authorId=58130885800" class="btn btn-outline" target="_blank" data-i18n="btn.scholar">
+                        🎓 Scopus
                     </a>
                 </div>
-
-                <!-- 教育背景的简短一行，可在下面的 Education 部分再详细列出（如果想加可以自行扩展） -->
             </div>
 
             <!-- 右侧个人头像 -->
             <div class="hero-profile">
                 <div class="hero-avatar-wrap">
                     <div class="hero-avatar-inner">
-                        <!-- TODO: 将 your-photo.jpg 换成你仓库里图片的路径 -->
-                        <img src="Fig/fengcl.jpg" alt="Your portrait" />
+                        <img src="Fig/fengcl.jpg" alt="Chenlong Feng portrait" />
                     </div>
                     <div class="hero-avatar-tag">
                         <span class="hero-avatar-tag-dot"></span>
@@ -764,26 +799,23 @@
     <section id="news">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Latest News</h2>
-                <p class="section-subtitle">
-                    <!-- 这一行可以写一句话介绍，例如“最近的一些进展/动态” -->
+                <h2 class="section-title" data-i18n="news.title">Latest News</h2>
+                <p class="section-subtitle" data-i18n="news.subtitle">
                     A few recent updates from my research and work.
                 </p>
             </div>
 
             <div class="news-list">
                 <!-- 每一条 news-item 表示一条新闻，按照时间倒序 -->
-                <div class="news-item">
-                    <div class="news-date">Sep 2025</div>
+                <a class="news-item" href="html/news_sub/iros_2025.html" target="_blank" rel="noopener noreferrer">
+                    <div class="news-date">Oct 2025</div>
                     <div>
-                        <div class="news-content-title">Paper Accepted!</div>
-                        <!-- TODO: 将论文题目和会议信息改成你的内容 -->
+                        <div class="news-content-title">Poster Presentation</div>
                         <div class="news-content-desc">
-                            Our paper "<strong>Title of Your Paper</strong>" has been accepted to
-                            <strong>Conference / Journal 2025</strong>.
+                            Our research "<strong>Constraint-aware motion planning for vehicles with terrain traversability assessment and optimization in construction scenarios</strong>" was presented at the <strong>IROS 2025</strong> conference.
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <div class="news-item">
                     <div class="news-date">Jul 2025</div>
@@ -820,9 +852,9 @@
 
                 <div class="news-actions">
                     <!-- 如果以后做单独 News 页，可以改成真正的链接 -->
-                    <button class="btn-ghost" type="button">
+                    <a class="btn-ghost" type="button" href="html/news.html" data-i18n="news.viewAll">
                         View All News
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -832,37 +864,29 @@
     <section id="publications">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Publications</h2>
-                <p class="section-subtitle">
+                <h2 class="section-title" data-i18n="pubs.title">Publications</h2>
+                <p class="section-subtitle" data-i18n="pubs.subtitle">
                     Representative works. * indicates equal contribution.
                 </p>
             </div>
 
             <div class="pub-list">
-                <!-- 单篇论文卡片：可以多复制几份，替换内容即可 -->
+                <!-- 单篇论文卡片 -->
                 <article class="pub-card">
-                    <!-- 左侧缩略图：可以用论文 teaser 图 / 占位图 -->
                     <div class="pub-thumb">
-                        <!-- TODO: 替换为你自己的论文 teaser 图片 -->
                         <img src="teaser1.jpg" alt="Paper teaser 1" />
                     </div>
 
-                    <!-- 右侧论文信息 -->
                     <div>
-                        <!-- 论文标题 -->
                         <div class="pub-meta-title">
                             Title of Your Paper: Motion Planning for Autonomous Excavators
                         </div>
-                        <!-- 作者和单位 -->
                         <div class="pub-meta-authors">
                             <strong>Your Name</strong>, Coauthor A, Coauthor B
                         </div>
-                        <!-- 会议 / 期刊 信息 -->
                         <div class="badge">IROS 2025</div>
 
-                        <!-- 一些链接按钮：arXiv、项目主页、代码等 -->
                         <div class="pub-badges">
-                            <!-- TODO: 替换链接地址 -->
                             <a class="badge badge-link" href="https://arxiv.org" target="_blank">
                                 arXiv
                             </a>
@@ -895,8 +919,6 @@
                         </div>
                     </div>
                 </article>
-
-                <!-- 可以按需要继续添加更多文章 -->
             </div>
         </div>
     </section>
@@ -905,8 +927,8 @@
     <section id="service">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Service &amp; Volunteer</h2>
-                <p class="section-subtitle">
+                <h2 class="section-title" data-i18n="service.title">Service &amp; Volunteer</h2>
+                <p class="section-subtitle" data-i18n="service.subtitle">
                     Academic service and community activities.
                 </p>
             </div>
@@ -949,14 +971,13 @@
     <section id="awards">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Awards and Honors</h2>
-                <p class="section-subtitle">
+                <h2 class="section-title" data-i18n="awards.title">Awards and Honors</h2>
+                <p class="section-subtitle" data-i18n="awards.subtitle">
                     Major scholarships and awards.
                 </p>
             </div>
 
             <div class="timeline-list">
-                <!-- 每个 timeline-item 一条奖项记录 -->
                 <div class="timeline-item">
                     <div class="timeline-title">
                         National Scholarship (Top 0.1%)
@@ -981,8 +1002,6 @@
                         2019 • China Society for Industrial and Applied Mathematics
                     </div>
                 </div>
-
-                <!-- 可继续添加更多奖项 -->
             </div>
         </div>
     </section>
@@ -991,17 +1010,16 @@
     <section id="projects">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Projects</h2>
-                <p class="section-subtitle">
+                <h2 class="section-title" data-i18n="projects.title">Projects</h2>
+                <p class="section-subtitle" data-i18n="projects.subtitle">
                     Selected research and side projects. Videos / demos can be embedded here.
                 </p>
             </div>
 
             <div class="projects-grid">
-                <!-- 项目卡片 1：可以放研究 demo -->
+                <!-- 项目卡片 1 -->
                 <div class="project-card">
                     <div class="project-media">
-                        <!-- 这里可以嵌入 YouTube / Bilibili iframe，示例先用占位 -->
                         <div class="project-media-placeholder">
                             Video / Demo Placeholder (UR5 / Excavator Demo)
                         </div>
@@ -1017,7 +1035,6 @@
                             robotics festival.
                         </p>
                         <div class="project-links">
-                            <!-- TODO: 填入实际链接 -->
                             <a href="#" class="badge badge-link" target="_blank"> Video </a>
                             <a href="#" class="badge badge-link" target="_blank"> Code </a>
                             <a href="#" class="badge badge-link" target="_blank">
@@ -1027,7 +1044,7 @@
                     </div>
                 </div>
 
-                <!-- 项目卡片 2：APP / 其他项目 -->
+                <!-- 项目卡片 2 -->
                 <div class="project-card">
                     <div class="project-media">
                         <div class="project-media-placeholder">
@@ -1057,39 +1074,184 @@
     <!-- ======= 页脚 ======= -->
     <footer class="footer">
         <div class="container footer-inner">
-            <div>
-                <!-- TODO: 可以把年份和姓名改成你的 -->
-                © 2024 Your Name. All rights reserved.
+            <div data-i18n="footer.copy">
+                © 2024 Chenlong Feng. All rights reserved.
             </div>
             <div class="footer-map">
-                <!-- 简单的“访客地图”视觉占位 -->
                 Visitor Map
             </div>
         </div>
     </footer>
 
-    <!-- ======= 简单的 JS：导航平滑滚动 & 手机菜单 ======= -->
+    <!-- ======= JS：导航平滑滚动 & 手机菜单 & 多语言 ======= -->
     <script>
-        // 平滑滚动到指定 section
+        // ===== 平滑滚动到指定 section =====
         document.querySelectorAll('a[href^="#"]').forEach(function (link) {
             link.addEventListener("click", function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute("href").substring(1);
-                const target = document.getElementById(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                const href = this.getAttribute("href");
+                // 只处理 # 开头且不是纯 "#" 的链接
+                if (href && href.startsWith("#") && href.length > 1) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                    // 点击菜单项后关闭手机端导航
+                    document.getElementById("navLinks").classList.remove("open");
                 }
-
-                // 点击菜单项后关闭手机端导航
-                document.getElementById("navLinks").classList.remove("open");
             });
         });
 
-        // 手机端导航展开/收起
+        // ===== 手机端导航展开/收起 =====
         const navToggle = document.getElementById("navToggle");
         const navLinks = document.getElementById("navLinks");
         navToggle.addEventListener("click", function () {
             navLinks.classList.toggle("open");
+        });
+
+        // ===== 多语言字典：根据 data-i18n 的 key 替换文本 =====
+        const i18n = {
+            en: {
+                "nav.overview": "Overview",
+                "nav.news": "News",
+                "nav.publications": "Publications",
+                "nav.service": "Service",
+                "nav.awards": "Awards",
+                "nav.projects": "Projects",
+                "nav.cv": "CV",
+
+                "hero.subtitle": "Ph.D. Researcher",
+                "hero.name": "Chenlong Feng 冯晨龙",
+                "hero.title": "Construction robotics, Motion planning and control",
+                "hero.bio":
+                    "I am a Ph.D. student in Mechanical Engineering / Robotics, focusing on motion planning, learning from expert demonstrations, and safe autonomy of construction robotics. My research aims to bridge robust control with data-driven intelligence for real-world embodied agents.",
+                "hero.tag1": "Open to collaborations",
+                "hero.tag2": "Looking for a job in 2027",
+                "hero.school": "Affiliation: Jilin University",
+
+                "btn.viewPublications": "📄 View Publications",
+                "btn.github": "🐙 GitHub",
+                "btn.scholar": "🎓 Google Scholar",
+
+                "news.title": "Latest News",
+                "news.subtitle": "A few recent updates from my research and work.",
+                "news.viewAll": "View All News",
+
+                "pubs.title": "Publications",
+                "pubs.subtitle": "Representative works. * indicates equal contribution.",
+
+                "service.title": "Service & Volunteer",
+                "service.subtitle": "Academic service and community activities.",
+
+                "awards.title": "Awards and Honors",
+                "awards.subtitle": "Major scholarships and awards.",
+
+                "projects.title": "Projects",
+                "projects.subtitle":
+                    "Selected research and side projects. Videos / demos can be embedded here.",
+
+                "footer.copy": "© 2024 Chenlong Feng. All rights reserved."
+            },
+            zh: {
+                "nav.overview": "概览",
+                "nav.news": "动态",
+                "nav.publications": "论文成果",
+                "nav.service": "学术服务",
+                "nav.awards": "奖励荣誉",
+                "nav.projects": "项目",
+                "nav.cv": "简历",
+
+                "hero.subtitle": "博士研究生",
+                "hero.name": "冯晨龙 Chenlong Feng",
+                "hero.title": "施工机器人 · 运动规划与控制",
+                "hero.bio":
+                    "我是一名机械工程 / 机器人学方向的博士研究生，主要研究施工机器人的运动规划、专家示教轨迹学习以及安全自主控制。我的工作致力于将鲁棒控制与数据驱动智能结合起来，使具身智能体在真实复杂环境中更加可靠、高效。",
+                "hero.tag1": "欢迎学术合作",
+                "hero.tag2": "计划 2027 年毕业求职",
+                "hero.school": "毕业学校：吉林大学",
+
+                "btn.viewPublications": "📄 查看论文",
+                "btn.github": "🐙 GitHub",
+                "btn.scholar": "🎓 谷歌学术",
+
+                "news.title": "最新动态",
+                "news.subtitle": "这里记录我最近的一些科研与工作进展。",
+                "news.viewAll": "查看更多动态",
+
+                "pubs.title": "论文成果",
+                "pubs.subtitle": "代表性工作；* 表示共同一作。",
+
+                "service.title": "学术服务与志愿活动",
+                "service.subtitle": "包括会议审稿、研讨会组织及科普活动等。",
+
+                "awards.title": "奖励与荣誉",
+                "awards.subtitle": "部分奖学金与竞赛获奖。",
+
+                "projects.title": "项目",
+                "projects.subtitle": "部分科研项目与兴趣项目展示，可嵌入视频或交互 Demo。",
+
+                "footer.copy": "© 2024 冯晨龙。保留所有权利。"
+            }
+        };
+
+        /**
+         * 设置站点语言
+         * @param {("en"|"zh")} lang
+         */
+        function setLanguage(lang) {
+            // html 标签 lang，用于 SEO / 无障碍
+            document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+
+            // 按 data-i18n 替换文本
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const key = el.getAttribute("data-i18n");
+                const text = i18n[lang][key];
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+
+            // 更新语言按钮样式
+            document.querySelectorAll(".lang-btn").forEach(function (btn) {
+                btn.classList.toggle("active", btn.dataset.lang === lang);
+            });
+
+            // 存储到 localStorage，记住用户选择
+            try {
+                localStorage.setItem("siteLanguage", lang);
+            } catch (e) {
+                // 有些隐私模式可能禁止 localStorage，这里忽略错误即可
+            }
+        }
+
+        // ===== 初始化语言：优先使用用户上次选择，其次根据浏览器语言自动判断 =====
+        (function initLanguage() {
+            let lang = "en";
+            try {
+                const saved = localStorage.getItem("siteLanguage");
+                if (saved === "en" || saved === "zh") {
+                    lang = saved;
+                } else {
+                    const browserLang = navigator.language || navigator.userLanguage || "";
+                    if (browserLang.toLowerCase().startsWith("zh")) {
+                        lang = "zh";
+                    }
+                }
+            } catch (e) {
+                // localStorage 取值失败时退化为默认英文
+            }
+            setLanguage(lang);
+        })();
+
+        // ===== 给语言按钮绑定点击事件 =====
+        document.querySelectorAll(".lang-btn").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                const lang = this.dataset.lang;
+                if (lang === "en" || lang === "zh") {
+                    setLanguage(lang);
+                }
+            });
         });
     </script>
 </body>
