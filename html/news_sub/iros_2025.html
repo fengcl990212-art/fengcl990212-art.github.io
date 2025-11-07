@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IROS 2025 Poster – Constraint-aware Motion Planning | Chenlong Feng</title>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-soft: #eff4ff;
+            --text-main: #0f172a;
+            --text-sub: #6b7280;
+            --border-soft: #e5e7eb;
+            --bg-page: #f9fafb;
+            --card-bg: #ffffff;
+            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
+                "Microsoft YaHei", sans-serif;
+            background: var(--bg-page);
+            color: var(--text-main);
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .page-shell {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部细导航条（返回首页） */
+        .topbar {
+            background: #0b1120;
+            color: #e5e7eb;
+            padding: 10px 0;
+        }
+
+        .topbar-inner {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .topbar-left a {
+            color: #93c5fd;
+        }
+
+        .topbar-left a:hover { text-decoration: underline; }
+
+        .topbar-right { opacity: 0.75; }
+
+        /* 主体容器 */
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 32px 20px 40px;
+            flex: 1;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+            padding: 24px 24px 30px;
+        }
+
+        /* ===== 顶部大图 ===== */
+        .hero-figure-top {
+            margin: 0 0 18px;
+        }
+
+        .hero-figure-inner {
+            width: 100%;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #020617;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+        }
+
+        .hero-figure-inner img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 标题区 */
+        .article-head {
+            margin-bottom: 18px;
+        }
+
+        .article-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #6366f1;
+            margin-bottom: 4px;
+        }
+
+        .article-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 0 8px;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: var(--text-sub);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .badge-soft {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* 说明文字：只保留一小段 */
+        .section-brief {
+            margin-top: 16px;
+            margin-bottom: 18px;
+            max-width: 800px;
+        }
+
+.section-brief p {
+    font-size: 14px;
+    color: var(--text-main);
+    margin: 0;
+    line-height: 1.6;
+    text-align: justify;              /* 两端对齐 */
+    text-justify: inter-ideograph;    /* 对中文更友好，可以保留 */
+}
+
+.section p {
+    font-size: 14px;
+    margin: 0 0 6px;
+    color: var(--text-main);
+    text-align: justify;              /* 两端对齐 */
+    text-justify: inter-ideograph;
+}
+
+
+        /* 资源按钮 */
+        .section {
+            margin-bottom: 16px;
+            max-width: 800px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .section p {
+            font-size: 14px;
+            margin: 0 0 6px;
+            color: var(--text-main);
+        }
+
+        .resource-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            border: 1px solid #d4d4d8;
+            background: #f9fafb;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #f9fafb;
+            border-color: var(--primary);
+        }
+
+        .btn:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .team-list {
+            font-size: 14px;
+        }
+
+        .team-list span.pi { font-weight: 600; }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 14px 20px 20px;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        /* 移动端 */
+        @media (max-width: 900px) {
+            .article-card {
+                padding: 20px 16px 24px;
+            }
+
+            .article-title {
+                font-size: 22px;
+            }
+
+            .section,
+            .section-brief {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-shell">
+    <!-- 顶部小条：返回首页 / 简短标识 -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="topbar-left">
+                <a href="../../index.html#news">← Back to News on Homepage</a>
+            </div>
+            <div class="topbar-right">
+                Chenlong Feng · Research News
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-card">
+            <!-- 大图主视觉，在最上方 -->
+            <div class="hero-figure-top">
+                <div class="hero-figure-inner">
+                    <img src="../../Fig/Fig11.png" alt="IROS 2025 poster teaser">
+                </div>
+            </div>
+
+            <!-- 标题和基本信息 -->
+            <div class="article-head">
+                <div class="article-label">News · Poster Presentation</div>
+                <h1 class="article-title">
+                    Our research work was presented at IROS 2025.
+                </h1>
+                <div class="article-meta">
+                    <span>Oct 2025</span>
+                    <span>•</span>
+                    <span>📍 IROS 2025, Hangzhou, China</span>
+                    <span>•</span>
+                    <span class="badge-soft">Poster</span>
+                </div>
+            </div>
+
+            <!-- 简短说明，仅 2–3 行 -->
+            <section class="section-brief">
+                <p>
+                    This poster presents a <strong>constraint-aware motion planning
+                    framework</strong> for construction vehicles on uneven terrain. By
+                    coupling <strong>terrain traversability assessment</strong> with
+                    <strong>trajectory optimization</strong>, the method improves safety
+                    and efficiency in realistic construction scenarios.
+                </p>
+            </section>
+
+            <!-- 资源链接：可以随着后续更新 -->
+            <section class="section">
+                <h2 class="section-title">Resources</h2>
+                <p>Materials will be released around the conference date.</p>
+                <div class="resource-row">
+                    <a class="btn btn-primary" href="../../file/IROS_Workshop.pdf" target="_blank">
+                        📄 Poster (PDF)
+                    </a>
+                </div>
+            </section>
+
+            <!-- 团队信息：保持一段话即可 -->
+            <section class="section">
+                <h2 class="section-title">Team</h2>
+                <p class="team-list">
+                    <span class="pi">Chenlong Feng*</span>, Coauthor A, Coauthor B, Coauthor C ·
+                    Jilin University, [Your Lab / Group Name]
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="footer">
+        © 2024 Chenlong Feng. All rights reserved.
+    </footer>
+</div>
+</body>
+</html>

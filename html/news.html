@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Archive - Chenlong Feng</title>
+
+    <style>
+        /* ========== 基础样式 ========== */
+        :root {
+            --primary: #2563eb;
+            --primary-soft: #eff4ff;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --bg-page: #ffffff;
+            --border-soft: #e2e8f0;
+            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.06);
+            --radius-lg: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
+                "Microsoft YaHei", sans-serif;
+            background: var(--bg-page);
+            color: var(--text-main);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px 56px;
+        }
+
+        /* ========== 顶部标题区 ========== */
+        .page-title {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 15px;
+            color: var(--text-sub);
+            margin-bottom: 32px;
+        }
+
+        .divider {
+            max-width: 960px;
+            margin: 0 auto 32px;
+            border: none;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        /* 返回首页链接 */
+        .back-link {
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .back-link a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== 时间线卡片 ========== */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .news-card {
+            background: #f8fafc;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            padding: 18px 24px 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .news-date {
+            font-size: 14px;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .news-title a {
+            color: inherit;
+        }
+
+        .news-title a:hover {
+            text-decoration: underline;
+        }
+
+        .news-text {
+            font-size: 14px;
+            color: #111827;
+        }
+
+        .more-text {
+            margin-top: 36px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-sub);
+            font-style: italic;
+        }
+
+        /* ========== 浮动语言按钮 ========== */
+        .lang-fab {
+            position: fixed;
+            right: 18px;
+            bottom: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 50;
+        }
+
+        .lang-fab button {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: rgba(248, 250, 252, 0.96);
+            color: #0f172a;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
+        }
+
+        .lang-fab button.active {
+            background: var(--primary);
+            color: #f9fafb;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 32px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .news-card {
+                padding: 16px 18px 18px;
+            }
+
+            .lang-fab {
+                right: 12px;
+                bottom: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部大标题和副标题（支持中英文切换） -->
+        <h1 class="page-title" data-i18n="newsArchive.title">News Archive</h1>
+        <p class="page-subtitle" data-i18n="newsArchive.subtitle">
+            Complete timeline of updates and achievements
+        </p>
+
+        <hr class="divider" />
+
+        <!-- 返回首页链接：指向 index.html，可以改成 index.html#news -->
+        <div class="back-link">
+            <a href="../index.html" data-i18n="newsArchive.back">
+                ← Back to Homepage
+            </a>
+        </div>
+
+        <!-- 时间线区域：每个 .news-card 就是一条新闻 -->
+        <div class="timeline">
+            <!-- 下面的内容你可以自由替换成你自己的新闻 -->
+            <article class="news-card">
+                <div class="news-date">September 2025</div>
+                <h2 class="news-title">
+                    <a href="#" target="_blank">Paper Accepted!</a>
+                </h2>
+                <p class="news-text">
+                    Our paper "FlashBack: Consistency Model-Accelerated Shared Autonomy"
+                    has been accepted to CoRL 2025.
+                </p>
+            </article>
+
+            <article class="news-card">
+                <div class="news-date">September 2025</div>
+                <h2 class="news-title">
+                    <a href="#" target="_blank">Oral Presentation!</a>
+                </h2>
+                <p class="news-text">
+                    Our paper "StackGen: Generating Stable Structures from Silhouettes via
+                    Diffusion" will be presented as an oral at IROS 2025.
+                </p>
+            </article>
+
+            <article class="news-card">
+                <div class="news-date">July 2024</div>
+                <h2 class="news-title">
+                    <a href="#" target="_blank">Workshop Organizer</a>
+                </h2>
+                <p class="news-text">
+                    Successfully organized the Multimodal Artificial Intelligence Workshop
+                    at TTIC, Chicago.
+                </p>
+            </article>
+
+            <article class="news-card">
+                <div class="news-date">June 2023</div>
+                <h2 class="news-title">
+                    <a href="#" target="_blank">RSS 2023 Oral</a>
+                </h2>
+                <p class="news-text">
+                    Our work "To the Noise and Back: Diffusion for Shared Autonomy" was
+                    accepted as an oral presentation at RSS 2023.
+                </p>
+            </article>
+
+            <article class="news-card">
+                <div class="news-date">March 2023</div>
+                <h2 class="news-title">
+                    <a href="#" target="_blank">Demo at MSI</a>
+                </h2>
+                <p class="news-text">
+                    Demonstrated our embodied AI system at the 2023 Robot Block Party at
+                    the Museum of Science and Industry in Chicago.
+                </p>
+            </article>
+
+            <article class="news-card">
+                <div class="news-date">January 2022</div>
+                <h2 class="news-title">
+                    <a href="#" target="_blank">Paper Published</a>
+                </h2>
+                <p class="news-text">
+                    Our work on "Decompositional Quantum Graph Neural Network" is now
+                    available on arXiv.
+                </p>
+            </article>
+        </div>
+
+        <!-- 底部说明文字 -->
+        <p class="more-text" data-i18n="newsArchive.more">
+            More news items will be added as they happen...
+        </p>
+    </div>
+
+    <!-- 右侧浮动语言切换按钮 -->
+    <div class="lang-fab">
+        <!-- 英文 -->
+        <button data-lang="en" class="active">EN</button>
+        <!-- 中文 -->
+        <button data-lang="zh">中</button>
+    </div>
+
+    <!-- ========== 多语言脚本 ========== -->
+    <script>
+        // 与首页保持一致的简单 i18n 方案：
+        // 用 data-i18n 标记元素，再用字典替换文本内容。
+
+        const i18n = {
+            en: {
+                "newsArchive.title": "News Archive",
+                "newsArchive.subtitle": "Complete timeline of updates and achievements",
+                "newsArchive.back": "← Back to Homepage",
+                "newsArchive.more": "More news items will be added as they happen..."
+            },
+            zh: {
+                "newsArchive.title": "新闻时间轴",
+                "newsArchive.subtitle": "完整记录科研进展与阶段性成果",
+                "newsArchive.back": "← 返回首页",
+                "newsArchive.more": "更多动态会在产生后持续更新……"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+
+            // 替换所有带 data-i18n 的元素文本
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const key = el.getAttribute("data-i18n");
+                const text = i18n[lang][key];
+                if (text) el.textContent = text;
+            });
+
+            // 更新按钮高亮
+            document.querySelectorAll(".lang-fab button").forEach(function (btn) {
+                btn.classList.toggle("active", btn.dataset.lang === lang);
+            });
+
+            // 记住选择，和首页共用一个 key
+            try {
+                localStorage.setItem("siteLanguage", lang);
+            } catch (e) {}
+        }
+
+        // 页面初始化时，根据 localStorage / 浏览器语言确定默认语言
+        (function initLanguage() {
+            let lang = "en";
+            try {
+                const saved = localStorage.getItem("siteLanguage");
+                if (saved === "en" || saved === "zh") {
+                    lang = saved;
+                } else {
+                    const browserLang = navigator.language || "";
+                    if (browserLang.toLowerCase().startsWith("zh")) lang = "zh";
+                }
+            } catch (e) {}
+            setLanguage(lang);
+        })();
+
+        // 给两个按钮绑定点击事件
+        document.querySelectorAll(".lang-fab button").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                const lang = this.dataset.lang;
+                if (lang === "en" || lang === "zh") setLanguage(lang);
+            });
+        });
+    </script>
+</body>
+</html>
