@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>访问统计 | 冯晨龙</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --ink: #1f2937;
+      --muted: #5f6b7a;
+      --line: #d8dee6;
+      --accent: #2f5a82;
+      --accent-soft: #e8eff6;
+      --shadow: 0 14px 32px rgba(23, 38, 54, 0.07);
+      --radius: 16px;
+      --container: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      line-height: 1.75;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--container), calc(100% - 40px)); margin: 0 auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(244, 246, 248, 0.94);
+      border-bottom: 1px solid rgba(216, 222, 230, 0.95);
+      backdrop-filter: blur(10px);
+    }
+    .site-header-inner {
+      min-height: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      position: relative;
+    }
+    .brand { display: flex; flex-direction: column; gap: 2px; }
+    .brand-title { font-size: 22px; font-weight: 700; }
+    .brand-subtitle { font-size: 12px; color: var(--muted); }
+    .nav { display: flex; align-items: center; gap: 20px; color: var(--muted); font-size: 14px; }
+    .nav a { position: relative; padding: 6px 0; }
+    .nav a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+      background: var(--accent); transform: scaleX(0); transform-origin: left center; transition: transform 0.2s ease;
+    }
+    .nav a:hover::after, .nav a:focus-visible::after { transform: scaleX(1); }
+    .nav-toggle { display: none; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+    .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+      display: block; width: 18px; height: 2px; margin: 0 auto; background: var(--accent); border-radius: 999px; content: "";
+    }
+    .nav-toggle span::before { transform: translateY(-6px); }
+    .nav-toggle span::after { transform: translateY(4px); }
+    main { padding: 28px 0 48px; }
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center;
+      padding: 5px 12px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 700;
+      margin-bottom: 14px;
+    }
+    h1 { margin: 0 0 10px; font-size: 42px; line-height: 1.12; }
+    .summary { max-width: 760px; margin: 0 0 18px; color: var(--muted); font-size: 15px; }
+    .status-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .status-pill {
+      padding: 6px 10px; border-radius: 999px; background: var(--surface-soft); border: 1px solid var(--line);
+      color: var(--muted); font-size: 12px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .metric {
+      background: linear-gradient(180deg, #fff, #fbfcfe);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      min-height: 104px;
+    }
+    .metric-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .metric-value { font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+    .metric-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .panel-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .panel-title { margin: 0; font-size: 18px; }
+    .panel-subtitle { color: var(--muted); font-size: 12px; }
+    .map-wrap { position: relative; min-height: 520px; }
+    #chinaMap { width: 100%; height: 520px; }
+    .side-grid { display: grid; gap: 16px; }
+    #trendChart { width: 100%; height: 240px; }
+    .log-list { display: grid; gap: 10px; }
+    .log-row {
+      display: grid;
+      grid-template-columns: 82px 80px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface-soft);
+    }
+    .log-time { color: var(--accent); font-weight: 700; font-size: 13px; }
+    .log-meta { color: var(--muted); font-size: 12px; line-height: 1.45; word-break: break-word; }
+    .section-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .province-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .province-chip {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff;
+      font-size: 13px;
+    }
+    .province-chip span:last-child { color: var(--accent); font-weight: 700; }
+    .site-footer { padding: 24px 0 36px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 1024px) {
+      .stats-grid, .panel-grid { grid-template-columns: 1fr; }
+      .map-wrap, #chinaMap { min-height: 420px; height: 420px; }
+    }
+
+    @media (max-width: 768px) {
+      .container { width: min(var(--container), calc(100% - 28px)); }
+      .site-header-inner { min-height: 58px; }
+      .nav-toggle { display: inline-grid; place-items: center; }
+      .nav {
+        position: absolute; top: calc(100% + 1px); left: 0; right: 0;
+        display: grid; gap: 0; padding: 8px 14px 14px;
+        background: rgba(244, 246, 248, 0.98); border-bottom: 1px solid var(--line);
+        transform: translateY(-10px); opacity: 0; pointer-events: none;
+      }
+      .nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nav a { padding: 10px 0; }
+      h1 { font-size: 32px; }
+      .hero { padding: 20px; }
+      .metric-value { font-size: 24px; }
+      .log-row { grid-template-columns: 70px 72px 1fr; }
+      .province-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <div class="brand">
+        <div class="brand-title">冯晨龙</div>
+        <div class="brand-subtitle">匿名访问统计</div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="切换导航"><span></span></button>
+      <nav class="nav" id="siteNav">
+        <a href="../index.html#overview">简介</a>
+        <a href="../index.html#research">研究</a>
+        <a href="../index.html#publications">论文</a>
+        <a href="../index.html#news">动态</a>
+        <a href="../index.html#profile">经历</a>
+        <a href="../index.html#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <span class="eyebrow">匿名统计面板</span>
+        <h1>浏览量与省级热度</h1>
+        <p class="summary">仅保存脱敏哈希与省级聚合，不记录明文 IP。页面用于展示总浏览量、当日浏览量、匿名访客轨迹和中国省级访问分布，适合与边缘函数或 D1 数据库配合部署。</p>
+        <div class="status-row">
+          <span class="status-pill" id="dataStatus">等待接口数据</span>
+          <span class="status-pill">原始 IP 不入库</span>
+          <span class="status-pill">哈希按日轮换</span>
+          <span class="status-pill">保留 30 天明细</span>
+        </div>
+
+        <div class="stats-grid">
+          <article class="metric">
+            <div class="metric-label">总浏览量</div>
+            <div class="metric-value" id="totalVisits">0</div>
+            <div class="metric-note">站点全量累计访问次数</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">当日浏览量</div>
+            <div class="metric-value" id="todayVisits">0</div>
+            <div class="metric-note">按北京时间自然日统计</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">当日匿名访客</div>
+            <div class="metric-value" id="todayUnique">0</div>
+            <div class="metric-note">同日脱敏哈希去重</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">活跃省份</div>
+            <div class="metric-value" id="activeProvinces">0</div>
+            <div class="metric-note">当日有访问记录的省份数量</div>
+          </article>
+        </div>
+
+        <div class="panel-grid">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2 class="panel-title">中国匿名访问热力图</h2>
+                <div class="panel-subtitle">按省级聚合展示，不暴露明文定位</div>
+              </div>
+              <div class="panel-subtitle" id="mapUpdated">--</div>
+            </div>
+            <div class="map-wrap">
+              <div id="chinaMap"></div>
+            </div>
+            <div class="province-list" id="provinceList"></div>
+          </section>
+
+          <div class="side-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2 class="panel-title">最近 7 日趋势</h2>
+                  <div class="panel-subtitle">总浏览量与匿名访客</div>
+                </div>
+              </div>
+              <div id="trendChart"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2 class="panel-title">最近匿名记录</h2>
+                  <div class="panel-subtitle">仅显示脱敏识别码与省份</div>
+                </div>
+              </div>
+              <div class="log-list" id="logList"></div>
+              <div class="section-note">显示内容仅包含匿名识别码、访问省份与页面路径，不保存明文 IP。</div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2026 冯晨龙。匿名统计面板。</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="../js/visit-tracker.js"></script>
+  <script>
+    const demoData = {
+      generatedAt: Date.now(),
+      today: new Date().toISOString().slice(0, 10),
+      total: 12586,
+      todayTotal: 218,
+      todayUnique: 137,
+      activeProvinces: 15,
+      provinces: [
+        { name: "江苏", value: 42 },
+        { name: "浙江", value: 35 },
+        { name: "广东", value: 31 },
+        { name: "北京", value: 29 },
+        { name: "山东", value: 24 },
+        { name: "上海", value: 19 },
+        { name: "河南", value: 17 },
+        { name: "湖北", value: 14 }
+      ],
+      trend: [
+        { day: "04-18", total: 176, unique: 122 },
+        { day: "04-19", total: 184, unique: 128 },
+        { day: "04-20", total: 190, unique: 131 },
+        { day: "04-21", total: 204, unique: 136 },
+        { day: "04-22", total: 208, unique: 134 },
+        { day: "04-23", total: 214, unique: 139 },
+        { day: "04-24", total: 218, unique: 137 }
+      ],
+      recent: [
+        { time: "16:20:11", hash: "a1b2c3d4", province: "江苏", path: "/index.html" },
+        { time: "16:18:32", hash: "b2c3d4e5", province: "浙江", path: "/html/news.html" },
+        { time: "16:11:07", hash: "c3d4e5f6", province: "广东", path: "/html/stats.html" },
+        { time: "15:54:48", hash: "d4e5f607", province: "北京", path: "/index.html" }
+      ]
+    };
+
+    const el = (id) => document.getElementById(id);
+    const totalVisits = el("totalVisits");
+    const todayVisits = el("todayVisits");
+    const todayUnique = el("todayUnique");
+    const activeProvinces = el("activeProvinces");
+    const dataStatus = el("dataStatus");
+    const mapUpdated = el("mapUpdated");
+    const provinceList = el("provinceList");
+    const logList = el("logList");
+    const chart = echarts.init(document.getElementById("chinaMap"));
+    const trendChart = echarts.init(document.getElementById("trendChart"));
+    let mapLoaded = false;
+
+    document.getElementById("navToggle").addEventListener("click", () => {
+      document.getElementById("siteNav").classList.toggle("open");
+    });
+
+    async function loadMapData() {
+      if (mapLoaded) return;
+      const response = await fetch("https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json");
+      const geojson = await response.json();
+      echarts.registerMap("china", geojson);
+      mapLoaded = true;
+    }
+
+    function renderMetrics(data, sourceLabel) {
+      totalVisits.textContent = data.total.toLocaleString("zh-CN");
+      todayVisits.textContent = data.todayTotal.toLocaleString("zh-CN");
+      todayUnique.textContent = data.todayUnique.toLocaleString("zh-CN");
+      activeProvinces.textContent = data.activeProvinces.toLocaleString("zh-CN");
+      dataStatus.textContent = sourceLabel;
+      mapUpdated.textContent = `更新时间 ${new Date(data.generatedAt).toLocaleString("zh-CN", { hour12: false })}`;
+    }
+
+    function renderProvinceList(data) {
+      provinceList.innerHTML = "";
+      const rows = [...data.provinces].sort((a, b) => b.value - a.value).slice(0, 8);
+      rows.forEach((row) => {
+        const item = document.createElement("div");
+        item.className = "province-chip";
+        item.innerHTML = `<span>${row.name}</span><span>${row.value}</span>`;
+        provinceList.appendChild(item);
+      });
+    }
+
+    function renderLogs(data) {
+      logList.innerHTML = "";
+      data.recent.forEach((row) => {
+        const item = document.createElement("div");
+        item.className = "log-row";
+        item.innerHTML = `
+          <div class="log-time">${row.time}</div>
+          <div class="log-meta">#${row.hash}</div>
+          <div class="log-meta">${row.province} · ${row.path}</div>
+        `;
+        logList.appendChild(item);
+      });
+    }
+
+    async function renderMap(data) {
+      await loadMapData();
+      const provinceValues = data.provinces.map((item) => ({ name: item.name, value: item.value }));
+      chart.setOption({
+        backgroundColor: "#ffffff",
+        tooltip: { trigger: "item" },
+        visualMap: {
+          min: 0,
+          max: Math.max(10, ...provinceValues.map((item) => item.value)),
+          left: 16,
+          bottom: 14,
+          text: ["高", "低"],
+          inRange: { color: ["#e6f0fa", "#b5d2ee", "#7ea9d0", "#416f97", "#274d70"] },
+          textStyle: { color: "#60798e" }
+        },
+        series: [{
+          name: "匿名访问量",
+          type: "map",
+          map: "china",
+          roam: false,
+          emphasis: { label: { color: "#17314f" } },
+          label: { show: false },
+          itemStyle: { borderColor: "#d8e2eb" },
+          data: provinceValues
+        }]
+      });
+    }
+
+    function renderTrend(data) {
+      trendChart.setOption({
+        grid: { left: 36, right: 14, top: 18, bottom: 28 },
+        tooltip: { trigger: "axis" },
+        xAxis: {
+          type: "category",
+          data: data.trend.map((item) => item.day),
+          axisLine: { lineStyle: { color: "#d8dee6" } },
+          axisLabel: { color: "#5f6b7a" }
+        },
+        yAxis: {
+          type: "value",
+          axisLine: { show: false },
+          splitLine: { lineStyle: { color: "#edf1f5" } },
+          axisLabel: { color: "#5f6b7a" }
+        },
+        legend: {
+          top: 0,
+          textStyle: { color: "#5f6b7a" },
+          data: ["浏览量", "匿名访客"]
+        },
+        series: [
+          {
+            name: "浏览量",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 7,
+            lineStyle: { color: "#2f5a82", width: 3 },
+            itemStyle: { color: "#2f5a82" },
+            areaStyle: { color: "rgba(47, 90, 130, 0.08)" },
+            data: data.trend.map((item) => item.total)
+          },
+          {
+            name: "匿名访客",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 7,
+            lineStyle: { color: "#7c97b4", width: 3 },
+            itemStyle: { color: "#7c97b4" },
+            data: data.trend.map((item) => item.unique)
+          }
+        ]
+      });
+    }
+
+    async function loadAnalytics() {
+      try {
+        const response = await fetch("/api/analytics?days=14", { cache: "no-store" });
+        if (!response.ok) throw new Error("analytics endpoint unavailable");
+        const data = await response.json();
+        renderMetrics(data, "实时数据");
+        renderProvinceList(data);
+        renderLogs(data);
+        renderMap(data);
+        renderTrend(data);
+      } catch (error) {
+        renderMetrics(demoData, "示例数据");
+        renderProvinceList(demoData);
+        renderLogs(demoData);
+        renderMap(demoData);
+        renderTrend(demoData);
+      }
+    }
+
+    loadAnalytics();
+    window.addEventListener("resize", () => {
+      chart.resize();
+      trendChart.resize();
+    });
+  </script>
+</body>
+</html>

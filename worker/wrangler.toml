@@ -1,0 +1,11 @@
+name = "fengcl-homepage-analytics"
+main = "analytics-worker.js"
+compatibility_date = "2026-04-24"
+
+[build]
+command = ""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "homepage_analytics"
+database_id = "REPLACE_WITH_D1_ID"
