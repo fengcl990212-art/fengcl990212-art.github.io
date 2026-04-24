@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>冯晨龙 | 学术主页</title>
+    <title>冯晨龙 | 主页</title>
     <style>
         :root {
             --bg: #f4f6f8;
@@ -156,13 +156,14 @@
 
         .hero-panel {
             display: grid;
-            grid-template-columns: minmax(0, 1.55fr) 280px;
-            gap: 24px;
-            padding: 28px;
+            grid-template-columns: minmax(0, 1.55fr) 220px;
+            gap: 20px;
+            padding: 24px;
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: 22px;
             box-shadow: var(--shadow);
+            align-items: start;
         }
 
         .hero-copy {
@@ -226,6 +227,34 @@
             gap: 10px;
         }
 
+        .hero-facts {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .hero-fact {
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, #ffffff, #f7fbff);
+        }
+
+        .hero-fact-label {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.35;
+        }
+
+        .hero-fact-value {
+            margin-top: 4px;
+            color: var(--ink);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
         .button {
             display: inline-flex;
             align-items: center;
@@ -260,8 +289,10 @@
 
         .hero-side {
             display: grid;
-            gap: 14px;
+            gap: 12px;
             align-content: start;
+            justify-items: stretch;
+            max-width: 240px;
         }
 
         .portrait-card,
@@ -278,13 +309,15 @@
         }
 
         .portrait-card {
-            padding: 14px;
+            width: 100%;
+            padding: 12px;
+            justify-self: stretch;
         }
 
         .portrait-frame {
             overflow: hidden;
             border-radius: 12px;
-            aspect-ratio: 4 / 5;
+            aspect-ratio: 1 / 1.22;
             background: #dee5ec;
         }
 
@@ -297,22 +330,7 @@
         .portrait-note {
             padding-top: 10px;
             color: var(--muted);
-            font-size: 13px;
-        }
-
-        .fact-card {
-            padding: 16px;
-        }
-
-        .fact-title {
-            margin-bottom: 8px;
-            color: var(--muted);
             font-size: 12px;
-        }
-
-        .fact-value {
-            font-size: 15px;
-            font-weight: 700;
             line-height: 1.6;
         }
 
@@ -348,7 +366,9 @@
         }
 
         .section-card {
-            padding: 20px;
+            display: grid;
+            gap: 12px;
+            padding: 16px;
         }
 
         .section-index {
@@ -357,12 +377,26 @@
             justify-content: center;
             width: 32px;
             height: 32px;
-            margin-bottom: 14px;
+            margin-bottom: 0;
             border-radius: 999px;
             background: var(--accent-soft);
             color: var(--accent);
             font-size: 13px;
             font-weight: 700;
+        }
+
+        .section-visual {
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: #dde8f1;
+        }
+
+        .section-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .section-card h3 {
@@ -437,6 +471,14 @@
             align-items: start;
         }
 
+        .news-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-self: end;
+            align-self: center;
+        }
+
         .news-date {
             color: var(--accent);
             font-size: 13px;
@@ -448,6 +490,12 @@
             margin: 0 0 4px;
             font-size: 16px;
             line-height: 1.45;
+        }
+
+        .button-compact {
+            min-height: 36px;
+            padding: 7px 12px;
+            font-size: 13px;
         }
 
         .split-grid {
@@ -622,7 +670,24 @@
             }
 
             .hero-panel {
-                padding: 20px;
+                padding: 18px;
+            }
+
+            .hero-facts {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-side {
+                max-width: none;
+            }
+
+            .portrait-card {
+                width: min(100%, 150px);
+                justify-self: start;
+            }
+
+            .fact-card {
+                width: 100%;
             }
 
             .section-title {
@@ -633,6 +698,10 @@
             .news-item {
                 grid-template-columns: 1fr;
                 gap: 10px;
+            }
+
+            .news-actions {
+                justify-self: start;
             }
         }
     </style>
@@ -681,6 +750,20 @@
                             <a class="button" href="#news">近期动态</a>
                             <a class="button" href="html/news.html">动态归档</a>
                         </div>
+                        <div class="hero-facts">
+                            <div class="hero-fact">
+                                <div class="hero-fact-label">代表性论文</div>
+                                <div class="hero-fact-value">4 篇核心论文</div>
+                            </div>
+                            <div class="hero-fact">
+                                <div class="hero-fact-label">近期报告</div>
+                                <div class="hero-fact-value">6 场学术交流</div>
+                            </div>
+                            <div class="hero-fact">
+                                <div class="hero-fact-label">科研项目</div>
+                                <div class="hero-fact-value">3 项主持项目</div>
+                            </div>
+                        </div>
                     </div>
 
                     <aside class="hero-side">
@@ -690,10 +773,6 @@
                             </div>
                             <div class="portrait-note">研究方向：具身智能工程装备、工程车辆智能控制与运动规划。</div>
                         </div>
-                        <!-- <div class="fact-card">
-                            <div class="fact-title">关键信息</div>
-                            <div class="fact-value">第一作者论文 4 篇，入选中国科协青年科技人才培育工程。</div>
-                        </div> -->
                     </aside>
                 </div>
             </div>
@@ -711,18 +790,27 @@
                 <div class="research-grid">
                     <article class="section-card">
                         <div class="section-index">01</div>
+                        <div class="section-visual">
+                            <img src="Fig/research_modeling.svg" alt="机理-数据融合建模示意图">
+                        </div>
                         <h3>机理-数据融合建模与精确控制</h3>
                         <p>面向液压挖掘装备精准作业场景，研究动力学建模、非线性残差学习与控制性能提升问题。</p>
                     </article>
 
                     <article class="section-card">
                         <div class="section-index">02</div>
+                        <div class="section-visual">
+                            <img src="Fig/research_imitation.svg" alt="模仿学习运动规划示意图">
+                        </div>
                         <h3>模仿学习运动规划</h3>
                         <p>从专家操作轨迹中学习任务演化规律，提升工程装备自主作业技能的泛化能力、可迁移性与作业效率。</p>
                     </article>
 
                     <article class="section-card">
                         <div class="section-index">03</div>
+                        <div class="section-visual">
+                            <img src="Fig/research_navigation.svg" alt="复杂场景车辆自主导航示意图">
+                        </div>
                         <h3>复杂场景车辆自主导航</h3>
                         <p>围绕非结构场景复杂特性，研究崎岖地形可穿越性评估、路径搜索和轨迹优化方法。</p>
                     </article>
@@ -744,56 +832,56 @@
                         <div class="pub-year">2026</div>
                         <div>
                             <h3 class="pub-title">Excavator trajectory planning via global probabilistic learning from expert demonstrations</h3>
-                            <p class="pub-text">基于专家示教全局概率学习的挖掘机轨迹规划，提出融合全局概率建模与采样优化的轨迹规划方法，实现任务变化下的高效泛化、跨平台迁移与安全执行。</p>
+                            <p class="pub-text">提出融合全局概率建模与采样优化的轨迹规划方法，实现任务变化下的高效泛化、跨平台迁移与安全执行。</p>
                             <div class="pub-meta">
                                 <span class="meta-tag">Automation in Construction</span>
-                                <span class="meta-tag">中科院一区Top期刊</span>
+                                <span class="meta-tag">中科院一区Top</span>
                                 <span class="meta-tag">IF=11.5</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.autcon.2025.106736" target="_blank" rel="noopener noreferrer">查看</a>
+                        <a class="button" href="https://doi.org/10.1016/j.autcon.2025.106736" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
 
                     <article class="pub-item">
                         <div class="pub-year">2025</div>
                         <div>
                             <h3 class="pub-title">Constraint-aware motion planning for vehicles with terrain traversability assessment and optimization in construction scenarios</h3>
-                            <p class="pub-text">融合地形可穿越性评估与优化的约束感知车辆运动规划，建立地形可穿越性评估、路径搜索与轨迹优化一体化框架，用于复杂施工场景车辆自主导航。</p>
+                            <p class="pub-text">建立地形可穿越性评估、路径搜索与轨迹优化一体化框架，用于复杂施工场景车辆自主导航。</p>
                             <div class="pub-meta">
                                 <span class="meta-tag">Advanced Engineering Informatics</span>
-                                <span class="meta-tag">中科院一区Top期刊，CCF-B</span>
+                                <span class="meta-tag">中科院一区Top</span>
                                 <span class="meta-tag">IF=9.9</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.aei.2025.103625" target="_blank" rel="noopener noreferrer">查看</a>
+                        <a class="button" href="https://doi.org/10.1016/j.aei.2025.103625" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
 
                     <article class="pub-item">
                         <div class="pub-year">2024</div>
                         <div>
                             <h3 class="pub-title">Task-unit based trajectory generation for excavators utilizing expert operator skills</h3>
-                            <p class="pub-text">利用专家操作技能的挖掘机任务单元轨迹生成，将挖掘任务分解为任务单元，结合动态运动基元与统计模型，实现复杂任务轨迹的组合与泛化。</p>
+                            <p class="pub-text">将挖掘任务分解为任务单元，结合动态运动基元与统计模型，实现复杂任务轨迹的组合与泛化。</p>
                             <div class="pub-meta">
                                 <span class="meta-tag">Automation in Construction</span>
-                                <span class="meta-tag">中科院一区Top期刊</span>
+                                <span class="meta-tag">中科院一区Top</span>
                                 <span class="meta-tag">IF=11.5</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.autcon.2023.105247" target="_blank" rel="noopener noreferrer">查看</a>
+                        <a class="button" href="https://doi.org/10.1016/j.autcon.2023.105247" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
 
                     <article class="pub-item">
                         <div class="pub-year">2024</div>
                         <div>
                             <h3 class="pub-title">Physics-informed neutral network with physically consistent and residual learning for excavator precision operation control</h3>
-                            <p class="pub-text">融合物理一致性与残差学习的挖掘机精确作业控制网络，针对非线性与外界扰动问题，构建物理信息模型与性能约束控制方法，实现挖掘机精确跟踪控制。</p>
+                            <p class="pub-text">针对非线性与外界扰动问题，构建物理信息模型与性能约束控制方法，实现挖掘机精确跟踪控制。</p>
                             <div class="pub-meta">
                                 <span class="meta-tag">Applied Soft Computing</span>
-                                <span class="meta-tag">中科院二区Top期刊</span>
+                                <span class="meta-tag">中科院二区Top</span>
                                 <span class="meta-tag">IF=6.6</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.asoc.2024.112402" target="_blank" rel="noopener noreferrer">查看</a>
+                        <a class="button" href="https://doi.org/10.1016/j.asoc.2024.112402" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
                 </div>
             </div>
@@ -811,12 +899,27 @@
 
                 <div class="news-list">
                     <article class="news-item">
+                        <div class="news-date">2026.04</div>
+                        <div>
+                            <h3 class="news-title">亚太具身智能与人形机器人创新周专题报告</h3>
+                            <p class="news-text">在上海作题为《专家技能驱动工程装备迈向具身智能的无人化演进》的专题报告，导师王继新教授指导。</p>
+                        </div>
+                        <div class="news-actions">
+                            <a class="button button-compact" href="html/news_sub/geia_2026.html">详情</a>
+                            <a class="button button-compact button-primary" href="file/pdf/2026-上海-具身智能大会-专家技能驱动工程装备迈向具身智能的无人化演进.pdf" download>下载PDF</a>
+                        </div>
+                    </article>
+
+                    <article class="news-item">
                         <div class="news-date">2025.10</div>
                         <div>
-                            <h3 class="news-title">IEEE/RSJ International Conference on Intelligent Robots and Systems 海报展示</h3>
+                            <h3 class="news-title">国际智能机器人与系统会议海报展示</h3>
                             <p class="news-text">展示施工场景车辆约束感知运动规划研究，重点交流复杂地形评估与轨迹优化方法。</p>
                         </div>
-                        <a class="button" href="html/news_sub/iros_2025.html">详情</a>
+                        <div class="news-actions">
+                            <a class="button button-compact" href="html/news_sub/iros_2025.html">详情</a>
+                            <a class="button button-compact button-primary" href="file/pdf/IROS_Workshop.pdf" target="_blank" rel="noopener noreferrer">下载PDF</a>
+                        </div>
                     </article>
 
                     <article class="news-item">
@@ -825,7 +928,10 @@
                             <h3 class="news-title">中国宇航学会吉林大学学生分会研讨会报告</h3>
                             <p class="news-text">汇报越野场景下融合地形可穿越性评估的约束感知车辆运动规划研究。</p>
                         </div>
-                        <a class="button" href="html/news_sub/yuhangxiehui.html">详情</a>
+                        <div class="news-actions">
+                            <a class="button button-compact" href="html/news_sub/yuhangxiehui.html">详情</a>
+                            <a class="button button-compact button-primary" href="file/pdf/2025-吉林大学宇航学会分会论坛-越野场景中融合地形可穿越性评估的约束感知车辆运动规划.pdf" download>下载PDF</a>
+                        </div>
                     </article>
 
                     <article class="news-item">
@@ -834,7 +940,10 @@
                             <h3 class="news-title">工程机械与车辆工程国际学术会议交流</h3>
                             <p class="news-text">在太原会议上汇报施工场景车辆约束感知运动规划的阶段性成果。</p>
                         </div>
-                        <a class="button" href="html/news_sub/zhongguogongchengjixie.html">详情</a>
+                        <div class="news-actions">
+                            <a class="button button-compact" href="html/news_sub/zhongguogongchengjixie.html">详情</a>
+                            <a class="button button-compact button-primary" href="file/pdf/2025-太原-工程机械与车辆工程国际学术会议-施工场景中融合地形可穿越性评估的约束感知车辆运动规划.pdf" download>下载PDF</a>
+                        </div>
                     </article>
 
                     <article class="news-item">
@@ -843,7 +952,10 @@
                             <h3 class="news-title">全国机械工程学科博士生论坛报告并获二等奖</h3>
                             <p class="news-text">围绕挖掘机动力学建模及精确控制方法研究进行报告并获奖。</p>
                         </div>
-                        <a class="button" href="html/news_sub/xuzhou_2024.html">详情</a>
+                        <div class="news-actions">
+                            <a class="button button-compact" href="html/news_sub/xuzhou_2024.html">详情</a>
+                            <a class="button button-compact button-primary" href="file/pdf/2024-徐州-工程机械博士生论坛-融合物理嵌入网络的挖掘机动力学建模及精确控制方法研究.pdf" download>下载PDF</a>
+                        </div>
                     </article>
 
                     <article class="news-item">
@@ -852,7 +964,10 @@
                             <h3 class="news-title">中国科学院大学学术论坛报告并获三等奖</h3>
                             <p class="news-text">汇报液压挖掘装备机理-数据融合建模机制与运动控制方法研究。</p>
                         </div>
-                        <a class="button" href="html/news_sub/changchun_2024.html">详情</a>
+                        <div class="news-actions">
+                            <a class="button button-compact" href="html/news_sub/changchun_2024.html">详情</a>
+                            <a class="button button-compact button-primary" href="file/pdf/2024-长春-中国科学院大学学术论坛-液压挖掘装备机理数据融合建模机制与运动控制方法研究.pdf" download>下载PDF</a>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -931,7 +1046,7 @@
                             </div>
                             <div class="item">
                                 <div class="item-title">期刊审稿人</div>
-                                <div class="item-text">参与AIC等相关国际期刊审稿工作。</div>
+                                <div class="item-text">参与工程建设自动化等相关国际期刊审稿工作。</div>
                             </div>
                             <!-- <div class="item">
                                 <div class="item-title">知识产权成果</div>
@@ -974,7 +1089,7 @@
                             </div>
                             <div class="contact-item">
                                 <div class="contact-label">邮箱</div>
-                                <div class="contact-value"><a href="mailto:fengcl24@mails.jlu.edu.cn">fengcl24@mails.jlu.edu.cn</a></div>
+                                <div class="contact-value"><a href="mailto:fengcl24@mails.jlu.edu.cn">点击发送邮件</a></div>
                             </div>
                         </div>
                     </article>

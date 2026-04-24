@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -110,16 +110,27 @@
             font-size: 14px;
         }
 
+        .entry-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
         .entry-link {
             display: inline-flex;
             align-items: center;
-            margin-top: 12px;
             padding: 8px 14px;
             border-radius: 999px;
             background: var(--accent-soft);
             color: var(--accent);
             font-size: 13px;
             font-weight: 700;
+        }
+
+        .entry-link-primary {
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .footer {
@@ -166,12 +177,27 @@
 
             <div class="timeline">
                 <article class="entry">
+                    <div class="entry-date">2026年4月</div>
+                    <h2 class="entry-title">亚太具身智能与人形机器人创新周专题报告</h2>
+                    <p class="entry-text">
+                        在上海作题为“专家技能驱动工程装备迈向具身智能的无人化演进”的专题报告，导师王继新教授指导。
+                    </p>
+                    <div class="entry-actions">
+                        <a class="entry-link" href="news_sub/geia_2026.html">查看详情</a>
+                        <a class="entry-link entry-link-primary" href="../file/pdf/2026-上海-具身智能大会-专家技能驱动工程装备迈向具身智能的无人化演进.pdf" download>下载PDF</a>
+                    </div>
+                </article>
+
+                <article class="entry">
                     <div class="entry-date">2025年10月</div>
                     <h2 class="entry-title">国际智能机器人与系统会议研讨活动海报展示</h2>
                     <p class="entry-text">
                         展示施工场景中融合地形可穿越性评估的约束感知车辆运动规划研究，围绕复杂地形建模、路径搜索和轨迹优化开展交流。
                     </p>
-                    <a class="entry-link" href="news_sub/iros_2025.html">查看详情</a>
+                    <div class="entry-actions">
+                        <a class="entry-link" href="news_sub/iros_2025.html">查看详情</a>
+                        <a class="entry-link entry-link-primary" href="../file/pdf/IROS_Workshop.pdf" target="_blank" rel="noopener noreferrer">下载PDF</a>
+                    </div>
                 </article>
 
                 <article class="entry">
@@ -180,7 +206,10 @@
                     <p class="entry-text">
                         以越野场景中融合地形可穿越性评估的约束感知车辆运动规划为题进行汇报，介绍车地耦合可穿越性评估和约束感知规划方法。
                     </p>
-                    <a class="entry-link" href="news_sub/yuhangxiehui.html">查看详情</a>
+                    <div class="entry-actions">
+                        <a class="entry-link" href="news_sub/yuhangxiehui.html">查看详情</a>
+                        <a class="entry-link entry-link-primary" href="../file/pdf/2025-吉林大学宇航学会分会论坛-越野场景中融合地形可穿越性评估的约束感知车辆运动规划.pdf" download>下载PDF</a>
+                    </div>
                 </article>
 
                 <article class="entry">
@@ -189,7 +218,10 @@
                     <p class="entry-text">
                         在太原举行的国际学术会议上汇报施工场景车辆约束感知运动规划研究，展示复杂场景自主导航方向的阶段性成果。
                     </p>
-                    <a class="entry-link" href="news_sub/zhongguogongchengjixie.html">查看详情</a>
+                    <div class="entry-actions">
+                        <a class="entry-link" href="news_sub/zhongguogongchengjixie.html">查看详情</a>
+                        <a class="entry-link entry-link-primary" href="../file/pdf/2025-太原-工程机械与车辆工程国际学术会议-施工场景中融合地形可穿越性评估的约束感知车辆运动规划.pdf" download>下载PDF</a>
+                    </div>
                 </article>
 
                 <article class="entry">
@@ -198,7 +230,10 @@
                     <p class="entry-text">
                         汇报融合物理嵌入网络的挖掘机动力学建模及精确控制方法研究，重点展示精准作业场景中的动力学建模与控制研究成果。
                     </p>
-                    <a class="entry-link" href="news_sub/xuzhou_2024.html">查看详情</a>
+                    <div class="entry-actions">
+                        <a class="entry-link" href="news_sub/xuzhou_2024.html">查看详情</a>
+                        <a class="entry-link entry-link-primary" href="../file/pdf/2024-徐州-工程机械博士生论坛-融合物理嵌入网络的挖掘机动力学建模及精确控制方法研究.pdf" download>下载PDF</a>
+                    </div>
                 </article>
 
                 <article class="entry">
@@ -207,7 +242,10 @@
                     <p class="entry-text">
                         以液压挖掘装备机理-数据融合建模机制与运动控制方法研究为主题作报告，从研究背景、技术路线和实验验证三个层面展开分享。
                     </p>
-                    <a class="entry-link" href="news_sub/changchun_2024.html">查看详情</a>
+                    <div class="entry-actions">
+                        <a class="entry-link" href="news_sub/changchun_2024.html">查看详情</a>
+                        <a class="entry-link entry-link-primary" href="../file/pdf/2024-长春-中国科学院大学学术论坛-液压挖掘装备机理数据融合建模机制与运动控制方法研究.pdf" download>下载PDF</a>
+                    </div>
                 </article>
             </div>
         </div>

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IROS WorkShop 海报展示 | 冯晨龙</title>
+    <title>国际智能机器人与系统会议海报展示 | 冯晨龙</title>
     <style>
         :root {
             --bg: #f3f5f7;
@@ -17,6 +17,7 @@
         }
 
         * { box-sizing: border-box; }
+
         body {
             margin: 0;
             background: var(--bg);
@@ -50,6 +51,7 @@
         }
 
         .back-link { color: var(--accent); font-weight: 700; }
+
         .page { padding: 34px 0 48px; }
 
         .article {
@@ -60,7 +62,35 @@
             box-shadow: var(--shadow);
         }
 
-        .hero img { width: 100%; height: auto; display: block; }
+        .hero {
+            min-height: 240px;
+            display: grid;
+            align-items: end;
+            padding: 24px;
+            background:
+                linear-gradient(180deg, rgba(47, 94, 137, 0.92), rgba(25, 53, 79, 0.95)),
+                radial-gradient(circle at top right, rgba(232, 239, 246, 0.18), transparent 42%);
+            color: #ffffff;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.22;
+        }
+
         .content { padding: 26px 28px 30px; }
 
         .tag {
@@ -75,12 +105,6 @@
             margin-bottom: 16px;
         }
 
-        h1 {
-            margin: 0 0 10px;
-            font-size: clamp(28px, 4vw, 38px);
-            line-height: 1.3;
-        }
-
         .meta {
             display: flex;
             flex-wrap: wrap;
@@ -90,9 +114,22 @@
             font-size: 14px;
         }
 
-        p { margin: 0 0 16px; font-size: 15px; }
-        .section-title { margin: 26px 0 10px; font-size: 18px; }
-        .button-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+        p {
+            margin: 0 0 16px;
+            font-size: 15px;
+        }
+
+        .section-title {
+            margin: 26px 0 10px;
+            font-size: 18px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
 
         .button {
             display: inline-flex;
@@ -113,36 +150,60 @@
             color: #ffffff;
         }
 
-        .footer { margin-top: 26px; color: var(--muted); font-size: 13px; }
+        .button-primary:hover,
+        .button-primary:focus-visible {
+            background: #244a6c;
+            border-color: #244a6c;
+        }
+
+        .footer {
+            margin-top: 26px;
+            color: var(--muted);
+            font-size: 13px;
+        }
 
         @media (max-width: 640px) {
-            .topbar-inner, .page, .footer { width: calc(100% - 28px); }
-            .content { padding: 20px 16px 24px; }
+            .topbar-inner,
+            .page,
+            .footer {
+                width: calc(100% - 28px);
+            }
+
+            .hero {
+                min-height: 190px;
+                padding: 20px;
+            }
+
+            .content {
+                padding: 20px 16px 24px;
+            }
         }
     </style>
 </head>
 <body>
     <header class="topbar">
         <div class="topbar-inner">
-            <a class="back-link" href="../../index.html#news">返回主页动态区</a>
+            <a class="back-link" href="../../index.html#news">返回动态归档</a>
             <div>学术动态详情</div>
         </div>
     </header>
 
     <main class="page">
         <article class="article">
+            <div class="hero">
+                <div>
+                    <div class="hero-kicker">海报展示 · 上海</div>
+                    <h1>国际智能机器人与系统会议海报展示</h1>
+                </div>
+            </div>
+
             <div class="content">
-                <div class="tag">海报展示</div>
-                <h1>国际智能机器人与系统会议研讨活动海报展示</h1>
+                <div class="tag">2025年10月</div>
                 <div class="meta">
                     <span>时间：2025年10月</span>
+                    <span>地点：上海</span>
                     <span>形式：海报展示</span>
-                    <span>主题：施工场景车辆约束感知运动规划</span>
                 </div>
-
-                <!-- <div class="hero">
-                <img src="../../Fig/Fig11_1920x1080.png" alt="会议海报展示图片">
-                </div> -->
 
                 <p>
                     本次展示围绕施工场景中融合地形可穿越性评估的约束感知车辆运动规划展开，重点介绍复杂地形下车辆运动规划所面临的安全性、平稳性和动力学可行性问题。
@@ -155,7 +216,7 @@
                 <p>当前站点目录中已保留与该次展示相关的材料，可直接查看。</p>
 
                 <div class="button-row">
-                    <a class="button button-primary" href="../../file/IROS_Workshop.pdf" target="_blank" rel="noopener noreferrer">查看材料</a>
+                    <a class="button button-primary" href="../../file/pdf/IROS_Workshop.pdf" target="_blank" rel="noopener noreferrer">下载PDF</a>
                     <a class="button" href="../news.html">返回动态归档</a>
                 </div>
             </div>

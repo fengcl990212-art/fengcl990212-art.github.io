@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="模仿学习运动规划示意图">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#102338"/>
+      <stop offset="100%" stop-color="#2f628f"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8ad7ff"/>
+      <stop offset="100%" stop-color="#e8f7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="36" fill="url(#bg)"/>
+  <g opacity="0.15" stroke="#d9ecff" stroke-width="1">
+    <path d="M60 120H1140M60 220H1140M60 320H1140M60 420H1140M60 520H1140M60 620H1140M60 720H1140"/>
+    <path d="M150 70V730M290 70V730M430 70V730M570 70V730M710 70V730M850 70V730M990 70V730"/>
+  </g>
+  <circle cx="940" cy="170" r="180" fill="#8ad7ff" fill-opacity="0.1"/>
+
+  <rect x="70" y="95" width="235" height="610" rx="28" fill="url(#card)" stroke="#e8f7ff" stroke-opacity="0.18"/>
+  <rect x="335" y="95" width="250" height="610" rx="28" fill="url(#card)" stroke="#e8f7ff" stroke-opacity="0.18"/>
+  <rect x="615" y="95" width="240" height="610" rx="28" fill="url(#card)" stroke="#e8f7ff" stroke-opacity="0.18"/>
+  <rect x="885" y="95" width="245" height="610" rx="28" fill="url(#card)" stroke="#e8f7ff" stroke-opacity="0.18"/>
+
+  <text x="187" y="145" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">专家示教</text>
+  <text x="187" y="178" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">人类操作轨迹</text>
+  <text x="460" y="145" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">任务单元</text>
+  <text x="460" y="178" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">分解与重组</text>
+  <text x="735" y="145" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">轨迹生成</text>
+  <text x="735" y="178" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">模仿学习与规划</text>
+  <text x="1007" y="145" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">自主执行</text>
+  <text x="1007" y="178" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">工程装备动作输出</text>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="106" y="260" width="162" height="210" rx="22" fill="#0f2538" stroke="#8ad7ff" stroke-width="2.5"/>
+    <path d="M135 425 L170 360 L205 392 L232 338" fill="none" stroke="#8ad7ff" stroke-width="5"/>
+    <path d="M135 455 C165 410, 185 405, 220 372" fill="none" stroke="#e8f7ff" stroke-width="4" stroke-dasharray="8 10"/>
+    <circle cx="135" cy="455" r="7" fill="#8ad7ff"/>
+    <circle cx="170" cy="360" r="7" fill="#8ad7ff"/>
+    <circle cx="205" cy="392" r="7" fill="#8ad7ff"/>
+    <circle cx="232" cy="338" r="7" fill="#8ad7ff"/>
+    <text x="187" y="505" fill="#d9ecff" font-size="14" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">示教轨迹库</text>
+
+    <rect x="370" y="260" width="160" height="210" rx="22" fill="#11314b" stroke="#8ad7ff" stroke-width="2.5"/>
+    <path d="M392 375 H508" stroke="#8ad7ff" stroke-width="5" stroke-dasharray="8 10"/>
+    <path d="M392 335 H470" stroke="#e8f7ff" stroke-width="5"/>
+    <path d="M392 420 H490" stroke="#e8f7ff" stroke-width="5"/>
+    <circle cx="400" cy="335" r="7" fill="#8ad7ff"/>
+    <circle cx="455" cy="375" r="7" fill="#8ad7ff"/>
+    <circle cx="490" cy="420" r="7" fill="#8ad7ff"/>
+    <text x="450" y="505" fill="#d9ecff" font-size="14" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">任务分解</text>
+
+    <rect x="640" y="255" width="180" height="220" rx="22" fill="#11314b" stroke="#8ad7ff" stroke-width="2.5"/>
+    <path d="M665 430 C695 390, 710 390, 735 340 S770 275, 795 300" stroke="url(#route)" stroke-width="7"/>
+    <path d="M665 370 C702 350, 730 360, 760 335 S795 310, 805 275" stroke="#ffffff" stroke-opacity="0.22" stroke-width="16"/>
+    <circle cx="665" cy="430" r="8" fill="#8ad7ff"/>
+    <circle cx="735" cy="340" r="8" fill="#8ad7ff"/>
+    <circle cx="795" cy="300" r="8" fill="#8ad7ff"/>
+    <circle cx="805" cy="275" r="8" fill="#8ad7ff"/>
+    <path d="M650 500 H805" stroke="#8ad7ff" stroke-width="4" opacity="0.7"/>
+    <text x="730" y="505" fill="#d9ecff" font-size="14" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">规划轨迹</text>
+
+    <rect x="915" y="255" width="155" height="220" rx="22" fill="#0f2538" stroke="#8ad7ff" stroke-width="2.5"/>
+    <path d="M940 415 L970 370 L1010 370 L1030 430 Z" fill="#f6fbff" fill-opacity="0.10" stroke="#e8f7ff" stroke-opacity="0.75" stroke-width="4"/>
+    <circle cx="965" cy="430" r="18" fill="#1b3550" stroke="#8ad7ff" stroke-width="5"/>
+    <circle cx="1010" cy="430" r="18" fill="#1b3550" stroke="#8ad7ff" stroke-width="5"/>
+    <path d="M960 370 L985 330 L1030 340" stroke="#e8f7ff" stroke-width="8"/>
+    <text x="992" y="505" fill="#d9ecff" font-size="14" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">装备执行</text>
+
+    <path d="M298 365 H370" stroke="url(#route)" stroke-width="7"/>
+    <path d="M353 353 L370 365 L353 377" fill="none" stroke="#8ad7ff" stroke-width="5"/>
+    <path d="M530 365 H640" stroke="url(#route)" stroke-width="7"/>
+    <path d="M623 353 L640 365 L623 377" fill="none" stroke="#8ad7ff" stroke-width="5"/>
+    <path d="M820 365 H915" stroke="url(#route)" stroke-width="7"/>
+    <path d="M898 353 L915 365 L898 377" fill="none" stroke="#8ad7ff" stroke-width="5"/>
+  </g>
+
+  <text x="600" y="734" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">专家技能驱动的轨迹生成与自主执行</text>
+</svg>
