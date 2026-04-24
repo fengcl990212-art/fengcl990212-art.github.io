@@ -75,18 +75,11 @@ async function readJsonBody(request) {
 }
 
 function corsHeaders(request) {
-  const origin = request.headers.get("origin") || "";
-  const allowOrigin = /^https:\/\/fengcl990212-art\.github\.io$/i.test(origin) ||
-    /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)
-    ? origin
-    : "https://fengcl990212-art.github.io";
-
   return {
-    "access-control-allow-origin": allowOrigin,
+    "access-control-allow-origin": "*",
     "access-control-allow-methods": "GET,POST,OPTIONS",
     "access-control-allow-headers": "content-type",
-    "access-control-max-age": "86400",
-    vary: "Origin"
+    "access-control-max-age": "86400"
   };
 }
 

@@ -319,6 +319,16 @@
     const logList = el("logList");
     const chart = echarts.init(document.getElementById("chinaMap"));
     const trendChart = echarts.init(document.getElementById("trendChart"));
+    const emptyData = {
+      generatedAt: Date.now(),
+      total: 0,
+      todayTotal: 0,
+      todayUnique: 0,
+      activeProvinces: 0,
+      provinces: [],
+      trend: [],
+      recent: []
+    };
     let mapLoaded = false;
     const DEFAULT_ANALYTICS_BASE = "https://fengcl-homepage-analytics.fengcl990212.workers.dev";
     const configuredBase = typeof window !== "undefined" && typeof window.__ANALYTICS_BASE__ === "string"
@@ -459,11 +469,12 @@
         renderMap(data);
         renderTrend(data);
       } catch (error) {
-        renderMetrics(demoData, "示例数据");
-        renderProvinceList(demoData);
-        renderLogs(demoData);
-        renderMap(demoData);
-        renderTrend(demoData);
+        const fallback = { ...emptyData, generatedAt: Date.now() };
+        renderMetrics(fallback, "后端暂不可达");
+        renderProvinceList(fallback);
+        renderLogs(fallback);
+        renderMap(fallback);
+        renderTrend(fallback);
       }
     }
 
