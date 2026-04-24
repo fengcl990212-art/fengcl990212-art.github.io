@@ -539,6 +539,36 @@
             font-size: 14px;
         }
 
+        .project-more {
+            margin-top: 6px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--line);
+        }
+
+        .project-more summary {
+            cursor: pointer;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 14px;
+            list-style: none;
+        }
+
+        .project-more summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .project-more summary::before {
+            content: "▸ ";
+        }
+
+        .project-more[open] summary::before {
+            content: "▾ ";
+        }
+
+        .project-more .item-list {
+            margin-top: 8px;
+        }
+
         .contact-grid {
             display: grid;
             grid-template-columns: minmax(0, 1fr) 320px;
@@ -761,7 +791,7 @@
                             </div>
                             <div class="hero-fact">
                                 <div class="hero-fact-label">科研项目</div>
-                                <div class="hero-fact-value">3 项主持项目</div>
+                                <div class="hero-fact-value">9 项（主持4 / 参与5）</div>
                             </div>
                         </div>
                     </div>
@@ -1005,18 +1035,47 @@
                         <h3>科研项目</h3>
                         <div class="item-list">
                             <div class="item">
-                                <div class="item-title">吉林省科技厅博士生科研创新能力提升项目 (2026.01-2027.01) · 主持</div>
-                                <div class="item-text">非结构环境下铰接作业车辆人-机-环境共融的智能协同控制研究。</div>
+                                <div class="item-title">2026.01-至今 · 吉林省科技厅博士研究生科研创新能力提升项目（主持）</div>
+                                <div class="item-text">非结构环境下铰接作业车辆人-机-环境共融的智能协同控制研究（JJKH20262210BS）。</div>
                             </div>
                             <div class="item">
-                                <div class="item-title">全国重点实验室开放课题 (2025.07-2026.07) · 主持</div>
-                                <div class="item-text">极端工况下可重构多轴越野车辆机理-数据融合建模与多模态状态估计。</div>
+                                <div class="item-title">2025.09-至今 · 全国重点实验室项目（主持）</div>
+                                <div class="item-text">极端工况下可重构多轴越野车辆动力学机理-数据融合建模与多模态状态估计方法研究（GZ2025KF004）。</div>
                             </div>
                             <div class="item">
-                                <div class="item-title">吉林大学研究生创新研究计划项目 (2025.03-2026.03) · 主持</div>
-                                <div class="item-text">面向复杂场景移动作业机器人的自主交互规划与运动控制方法研究。</div>
+                                <div class="item-title">2025.01-2025.12 · 吉林大学研究生创新研究计划项目（主持）</div>
+                                <div class="item-text">面向复杂星表探测的移动作业机器人自主交互规划与运动控制方法研究（2025CX140，优秀结题）。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">2023.01-2023.12 · 吉林大学研究生创新研究计划项目（主持）</div>
+                                <div class="item-text">一种非结构环境采样机器人知识引导自主规划技术（2023CX122，优秀结题）。</div>
                             </div>
                         </div>
+                        <details class="project-more">
+                            <summary>更多项目（参与 5 项）</summary>
+                            <div class="item-list">
+                                <div class="item">
+                                    <div class="item-title">2023.01-至今 · 国家自然科学基金面上项目（参与）</div>
+                                    <div class="item-text">非结构环境铰接作业车辆自主交互机理与共享混合控制方法研究（52272434，纵向）。</div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-title">2026.01-至今 · 吉林省自然科学基金面上项目（参与）</div>
+                                    <div class="item-text">非结构环境智能工程作业车辆人机协同与自主进化关键技术（20260102093JC，纵向）。</div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-title">2024.01-2026.01 · 军委科技委项目（参与）</div>
+                                    <div class="item-text">模块化机动平台（起重装置）相关研究，国营617科研所（2023JG***，纵向）。</div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-title">2024.02-2025.02 · 企业合作项目（参与）</div>
+                                    <div class="item-text">超大型分布式独立电驱动装载机功率分配技术开发（徐工铲运，横向）。</div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-title">2021.07-2022.07 · 企业合作项目（参与）</div>
+                                    <div class="item-text">液压挖掘机自主作业关键技术开发（吉林大学盐城研究院，JDYCYJY2021-10，横向）。</div>
+                                </div>
+                            </div>
+                        </details>
                     </article>
 
                     <article class="split-card">
