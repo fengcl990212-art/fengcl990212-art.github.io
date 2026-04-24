@@ -320,6 +320,12 @@
     const chart = echarts.init(document.getElementById("chinaMap"));
     const trendChart = echarts.init(document.getElementById("trendChart"));
     let mapLoaded = false;
+    const DEFAULT_ANALYTICS_BASE = "https://fengcl-homepage-analytics.fengcl990212.workers.dev";
+    const configuredBase = typeof window !== "undefined" && typeof window.__ANALYTICS_BASE__ === "string"
+      ? window.__ANALYTICS_BASE__.trim()
+      : "";
+    const analyticsBase = (configuredBase || DEFAULT_ANALYTICS_BASE).replace(/\/+$/, "");
+    const analyticsEndpoint = `${analyticsBase}/api/analytics?days=14`;
 
     document.getElementById("navToggle").addEventListener("click", () => {
       document.getElementById("siteNav").classList.toggle("open");
@@ -444,7 +450,7 @@
 
     async function loadAnalytics() {
       try {
-        const response = await fetch("/api/analytics?days=14", { cache: "no-store" });
+        const response = await fetch(analyticsEndpoint, { cache: "no-store" });
         if (!response.ok) throw new Error("analytics endpoint unavailable");
         const data = await response.json();
         renderMetrics(data, "实时数据");

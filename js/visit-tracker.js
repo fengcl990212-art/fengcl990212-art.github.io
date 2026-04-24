@@ -1,5 +1,10 @@
 (function () {
-  const endpoint = "/api/visit";
+  const DEFAULT_ANALYTICS_BASE = "https://fengcl-homepage-analytics.fengcl990212.workers.dev";
+  const configuredBase = typeof window !== "undefined" && typeof window.__ANALYTICS_BASE__ === "string"
+    ? window.__ANALYTICS_BASE__.trim()
+    : "";
+  const analyticsBase = (configuredBase || DEFAULT_ANALYTICS_BASE).replace(/\/+$/, "");
+  const endpoint = `${analyticsBase}/api/visit`;
   const payload = JSON.stringify({
     path: location.pathname + location.search,
     title: document.title || "",

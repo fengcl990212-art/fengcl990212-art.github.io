@@ -74,10 +74,27 @@ async function readJsonBody(request) {
   }
 }
 
-function jsonHeaders() {
+function corsHeaders(request) {
+  const origin = request.headers.get("origin") || "";
+  const allowOrigin = /^https:\/\/fengcl990212-art\.github\.io$/i.test(origin) ||
+    /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)
+    ? origin
+    : "https://fengcl990212-art.github.io";
+
+  return {
+    "access-control-allow-origin": allowOrigin,
+    "access-control-allow-methods": "GET,POST,OPTIONS",
+    "access-control-allow-headers": "content-type",
+    "access-control-max-age": "86400",
+    vary: "Origin"
+  };
+}
+
+function jsonHeaders(request) {
   return {
     "content-type": "application/json; charset=utf-8",
-    "cache-control": "no-store"
+    "cache-control": "no-store",
+    ...corsHeaders(request)
   };
 }
 
@@ -127,7 +144,7 @@ async function recordVisit(request, env) {
   await env.DB.prepare(`DELETE FROM province_stats WHERE day < ?1`).bind(shanghaiDayKey(cutoff)).run();
   await env.DB.prepare(`DELETE FROM daily_stats WHERE day < ?1`).bind(shanghaiDayKey(cutoff)).run();
 
-  return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders() });
+  return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders(request) });
 }
 
 async function readStats(request, env) {
@@ -204,18 +221,24 @@ async function readStats(request, env) {
     provinces,
     trend,
     recent
-  }), { headers: jsonHeaders() });
+  }), { headers: jsonHeaders(request) });
 }
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        status: 204,
+        headers: corsHeaders(request)
+      });
+    }
     if (url.pathname === "/api/visit" && request.method === "POST") {
       return recordVisit(request, env);
     }
     if (url.pathname === "/api/analytics" && request.method === "GET") {
       return readStats(request, env);
     }
-    return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders() });
+    return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders(request) });
   }
 };
