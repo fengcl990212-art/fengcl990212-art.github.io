@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- 初始默认英文，切换语言时会用 JS 修改这个属性 -->
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <!-- 让页面在手机上也能自适应 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chenlong Feng | Personal Homepage</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冯晨龙 | 学术主页</title>
     <style>
-        /* ========= 全局基础样式 ========= */
         :root {
-            --bg-gradient: linear-gradient(135deg, #2563eb, #22c1c3);
-            --primary: #2563eb;
-            --primary-soft: #e0ebff;
-            --text-main: #0f172a;
-            --text-sub: #64748b;
-            --card-bg: #ffffff;
-            --border-soft: #e2e8f0;
-            --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
-            --radius-lg: 18px;
-            --radius-xl: 24px;
+            --bg: #f4f6f8;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --ink: #1f2937;
+            --muted: #5f6b7a;
+            --line: #d8dee6;
+            --accent: #2f5a82;
+            --accent-soft: #e8eff6;
+            --shadow: 0 14px 32px rgba(23, 38, 54, 0.07);
+            --radius: 16px;
+            --container: 1120px;
         }
 
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
-                "Microsoft YaHei", sans-serif;
-            background-color: #f8fafc;
-            color: var(--text-main);
-            line-height: 1.6;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+            line-height: 1.75;
         }
 
         a {
@@ -41,1514 +41,986 @@
         }
 
         img {
-            max-width: 100%;
             display: block;
+            max-width: 100%;
         }
 
         .container {
-            /* 页面主体宽度控制 */
-            max-width: 1120px;
+            width: min(var(--container), calc(100% - 40px));
             margin: 0 auto;
-            padding: 0 20px;
         }
 
-        /* ========= 顶部导航 ========= */
-        .navbar {
-            position: sticky; /* 滚动时吸顶效果 */
+        .site-header {
+            position: sticky;
             top: 0;
-            z-index: 100;
-            backdrop-filter: blur(16px);
-            background: rgba(15, 23, 42, 0.85);
-            color: #e5e7eb;
+            z-index: 20;
+            background: rgba(244, 246, 248, 0.94);
+            border-bottom: 1px solid rgba(216, 222, 230, 0.95);
+            backdrop-filter: blur(10px);
         }
 
-        .navbar-inner {
+        .site-header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .nav-logo span.cn {
-            font-size: 16px;
-            opacity: 0.8;
-        }
-
-        /* 右侧：导航 + 语言切换 + 汉堡菜单 */
-        .nav-right {
-            display: flex;
-            align-items: center;
             gap: 16px;
+            min-height: 64px;
         }
 
-        .nav-links {
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .brand-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .nav {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 20px;
+            color: var(--muted);
             font-size: 14px;
         }
 
-        .nav-links a {
+        .nav a {
             position: relative;
-            padding-bottom: 2px;
-            cursor: pointer;
-            opacity: 0.85;
+            padding: 6px 0;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            opacity: 1;
-        }
-
-        .nav-links a::after {
-            /* 下划线动画 */
+        .nav a::after {
             content: "";
             position: absolute;
             left: 0;
-            bottom: -4px;
-            width: 0;
+            right: 0;
+            bottom: 0;
             height: 2px;
-            border-radius: 999px;
-            background: #38bdf8;
-            transition: width 0.25s ease;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.2s ease;
         }
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
+        .nav a:hover,
+        .nav a:focus-visible {
+            color: var(--ink);
         }
 
-        /* 手机端导航按钮（汉堡菜单） */
+        .nav a:hover::after,
+        .nav a:focus-visible::after {
+            transform: scaleX(1);
+        }
+
         .nav-toggle {
-            width: 32px;
-            height: 32px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.7);
             display: none;
-            align-items: center;
-            justify-content: center;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--surface);
             cursor: pointer;
         }
 
-        .nav-toggle span {
-            width: 16px;
-            height: 2px;
-            background: #e5e7eb;
-            border-radius: 999px;
-            position: relative;
-        }
-
+        .nav-toggle span,
         .nav-toggle span::before,
         .nav-toggle span::after {
+            display: block;
+            width: 18px;
+            height: 2px;
+            margin: 0 auto;
+            background: var(--accent);
+            border-radius: 999px;
             content: "";
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            border-radius: inherit;
         }
 
         .nav-toggle span::before {
-            top: -5px;
+            transform: translateY(-6px);
         }
 
         .nav-toggle span::after {
-            top: 5px;
+            transform: translateY(4px);
         }
 
-        /* ===== 语言切换按钮样式 ===== */
-        .lang-switch {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-        }
-
-        .lang-btn {
-            padding: 3px 8px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            background: rgba(15, 23, 42, 0.6);
-            color: #e5e7eb;
-            cursor: pointer;
-            line-height: 1.4;
-        }
-
-        .lang-btn.active {
-            background: #e5e7eb;
-            color: #0f172a;
-        }
-
-        /* ========= 顶部大区（Overview） ========= */
         .hero {
-            background: var(--bg-gradient);
-            color: #f9fafb;
-            padding: 48px 0 64px;
+            padding: 44px 0 24px;
         }
 
-        .hero-inner {
+        .hero-panel {
             display: grid;
-            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-            gap: 40px;
+            grid-template-columns: minmax(0, 1.55fr) 280px;
+            gap: 24px;
+            padding: 28px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-copy {
+            min-width: 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
             align-items: center;
-        }
-
-        .hero-subtitle {
-            font-size: 14px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 8px;
-        }
-
-        .hero-name {
-            font-size: 32px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 12px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 14px;
         }
 
-        .hero-title {
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: clamp(30px, 4.4vw, 46px);
+            line-height: 1.18;
+        }
+
+        .hero-role {
+            margin: 0 0 14px;
+            color: var(--accent);
             font-size: 16px;
-            opacity: 0.9;
-            margin-bottom: 16px;
+            font-weight: 600;
         }
 
-        .hero-contact {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 16px;
-        }
-
-        .hero-contact a {
-            border-bottom: 1px dashed rgba(226, 232, 240, 0.7);
-        }
-
-        .hero-bio {
-            font-size: 14px;
-            opacity: 0.95;
-            margin-bottom: 18px;
+        .hero-summary {
+            margin: 0 0 18px;
+            max-width: 720px;
+            color: var(--muted);
+            font-size: 15px;
         }
 
         .hero-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 18px;
         }
 
-        .tag-pill {
+        .tag {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 12px;
             padding: 6px 10px;
             border-radius: 999px;
-            background: rgba(15, 23, 42, 0.15);
-            border: 1px solid rgba(226, 232, 240, 0.4);
-        }
-
-        .tag-pill span.dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #22c55e;
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .btn {
+        .button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            padding: 8px 14px;
+            min-height: 40px;
+            padding: 9px 15px;
             border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--surface);
             font-size: 14px;
-            font-weight: 500;
-            border: 1px solid transparent;
-            cursor: pointer;
-            transition: transform 0.12s ease, box-shadow 0.12s ease,
-                background-color 0.15s ease, border-color 0.15s ease,
-                color 0.15s ease;
-            white-space: nowrap;
+            font-weight: 700;
+            transition: 0.2s ease;
         }
 
-        .btn-primary {
-            background: #f9fafb;
-            color: #0f172a;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
-        }
-
-        .btn-primary:hover {
+        .button:hover,
+        .button:focus-visible {
             transform: translateY(-1px);
-            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.3);
+            border-color: #b9c8d6;
         }
 
-        .btn-outline {
-            background: transparent;
-            border-color: rgba(226, 232, 240, 0.9);
-            color: #e5e7eb;
+        .button-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
         }
 
-        .btn-outline:hover {
-            background: rgba(15, 23, 42, 0.25);
+        .button-primary:hover,
+        .button-primary:focus-visible {
+            background: #274d70;
+            border-color: #274d70;
         }
 
-        .hero-profile {
-            justify-self: center;
+        .hero-side {
+            display: grid;
+            gap: 14px;
+            align-content: start;
         }
 
-        .hero-avatar-wrap {
-            position: relative;
-            width: 220px;
-            height: 220px;
-            border-radius: 999px;
-            padding: 6px;
-            background: radial-gradient(circle at 0% 0%, #bef264, transparent 60%),
-                radial-gradient(circle at 95% 10%, #7dd3fc, transparent 55%),
-                radial-gradient(circle at 0% 100%, #fb7185, transparent 55%),
-                #0f172a;
-            box-shadow: var(--shadow-soft);
+        .portrait-card,
+        .fact-card,
+        .section-card,
+        .pub-item,
+        .news-item,
+        .split-card,
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
 
-        .hero-avatar-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
+        .portrait-card {
+            padding: 14px;
+        }
+
+        .portrait-frame {
             overflow: hidden;
-            border: 4px solid #e5e7eb;
-            background: #111827;
+            border-radius: 12px;
+            aspect-ratio: 4 / 5;
+            background: #dee5ec;
         }
 
-        .hero-avatar-inner img {
+        .portrait-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .hero-avatar-tag {
-            position: absolute;
-            bottom: 10px;
-            left: -14px;
-            padding: 6px 10px;
+        .portrait-note {
+            padding-top: 10px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .fact-card {
+            padding: 16px;
+        }
+
+        .fact-title {
+            margin-bottom: 8px;
+            color: var(--muted);
             font-size: 12px;
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.9);
-            color: #e5e7eb;
-            border: 1px solid rgba(148, 163, 184, 0.6);
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
-        .hero-avatar-tag-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #22c55e;
-            box-shadow: 0 0 8px #22c55e;
+        .fact-value {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.6;
         }
 
-        /* ========= 通用区块样式 ========= */
         section {
-            padding: 56px 0;
+            padding: 22px 0;
         }
 
-        .section-header {
-            margin-bottom: 24px;
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
         }
 
         .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 6px;
+            margin: 0;
+            font-size: 26px;
+            line-height: 1.2;
         }
 
-        .section-subtitle {
+        .section-desc {
+            margin: 0;
+            max-width: 760px;
+            color: var(--muted);
             font-size: 14px;
-            color: var(--text-sub);
         }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .section-card {
             padding: 20px;
-            box-shadow: var(--shadow-soft);
         }
 
-        .card-soft {
-            background: #f9fafb;
-            border-radius: var(--radius-lg);
-            padding: 18px 18px;
-            border: 1px solid rgba(226, 232, 240, 0.9);
-        }
-
-    
-                /* ========= 个人简介下方 News 滚动条 ========= */
-        .news-strip {
-            padding: 18px 0 32px;
-            background: var(--bg-page);
-        }
-
-        .news-strip-card {
-            position: relative;
-            border-radius: 24px;
-            background: #ffffff;
-            box-shadow: var(--shadow-soft);
-            padding: 14px 56px; /* 留出左右给箭头 */
-            overflow: hidden;
-        }
-
-        /* 滑动轨道 + 每张幻灯片 */
-        .news-strip-track {
-            display: flex;
-            transition: transform 0.4s ease;
-        }
-
-        .news-strip-slide {
-            flex: 0 0 100%;          /* 一次只展示一张 */
-            display: block;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .news-strip-image {
-            position: relative;
-            border-radius: 18px;
-            overflow: hidden;
-            background: #020617;
-        }
-
-        .news-strip-image img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        /* 图片轻微放大动画 */
-.news-strip-image img {
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease-out;
-}
-
-.news-strip-slide:hover .news-strip-image img {
-    transform: scale(1.02);
-}
-
-
-        /* 图片上的标题条（只显示新闻标题） */
-        .news-strip-caption {
-            position: absolute;
-            left: 16px;
-            right: 16px;
-            bottom: 14px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.72);
-            color: #f9fafb;
-            font-size: 13px;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* 左右切换按钮 */
-        .news-strip-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 38px;
-            height: 38px;
-            border-radius: 999px;
-            border: none;
-            background: #ffffff;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
-            display: flex;
+        .section-index {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: #0f172a;
-            cursor: pointer;
-        }
-
-        #newsStripPrev {
-            left: 16px;
-        }
-
-        #newsStripNext {
-            right: 16px;
-        }
-
-        .news-strip-arrow:hover {
-            background: #e5edff;
-        }
-
-        /* 小圆点指示器 */
-        .news-strip-dots {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .news-dot {
-            width: 7px;
-            height: 7px;
+            width: 32px;
+            height: 32px;
+            margin-bottom: 14px;
             border-radius: 999px;
-            border: none;
-            background: #cbd5f5;
-            cursor: pointer;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 700;
         }
 
-        .news-dot-active {
-            width: 18px;
-            background: var(--primary);
+        .section-card h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            line-height: 1.4;
         }
 
-        /* 手机端：缩小内边距，箭头稍微收一点 */
-        @media (max-width: 768px) {
-            .news-strip-card {
-                padding: 12px 40px;
-            }
-
-            .news-strip-caption {
-                font-size: 12px;
-            }
+        .section-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
         }
 
-
-        /* ========= Latest News 区块 ========= */
+        .pub-list,
         .news-list {
-            border-radius: var(--radius-xl);
-            background: #ffffff;
-            box-shadow: var(--shadow-soft);
-            padding: 12px 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .pub-item {
+            display: grid;
+            grid-template-columns: 72px minmax(0, 1fr) auto;
+            gap: 18px;
+            padding: 18px 20px;
+            align-items: start;
+        }
+
+        .pub-year {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 700;
+            padding-top: 2px;
+        }
+
+        .pub-title {
+            margin: 0 0 6px;
+            font-size: 17px;
+            line-height: 1.45;
+        }
+
+        .pub-text,
+        .news-text {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .pub-meta {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 12px;
         }
 
         .news-item {
             display: grid;
-            grid-template-columns: 80px minmax(0, 1fr);
-            gap: 12px;
-            padding: 10px 24px;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 14px;
-        }
-
-        .news-item:last-child {
-            border-bottom: none;
+            grid-template-columns: 96px minmax(0, 1fr) auto;
+            gap: 16px;
+            padding: 17px 20px;
+            align-items: start;
         }
 
         .news-date {
-            color: var(--text-sub);
-            font-weight: 500;
-        }
-
-        .news-content-title {
-            font-weight: 600;
-            margin-bottom: 2px;
-            color: var(--primary);
-        }
-
-        .news-content-desc {
-            color: var(--text-sub);
-        }
-
-        .news-actions {
-            padding: 12px 24px 8px;
-            text-align: center;
-        }
-
-        .btn-ghost {
-            border-radius: 999px;
-            border: 1px solid #d4d4d8;
-            padding: 7px 14px;
-            display: inline-flex;
-            gap: 6px;
-            align-items: center;
+            color: var(--accent);
             font-size: 13px;
-            color: #4b5563;
-            background: #f9fafb;
+            font-weight: 700;
+            padding-top: 2px;
         }
 
-        .btn-ghost:hover {
-            background: #e5e7eb;
-        }
-
-        /* ========= Publications 区块 ========= */
-        .pub-list {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .pub-card {
-            background: #ffffff;
-            border-radius: var(--radius-lg);
-            display: grid;
-            grid-template-columns: 200px minmax(0, 1fr);
-            gap: 16px;
-            padding: 16px;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .pub-thumb {
-            border-radius: 14px;
-            overflow: hidden;
-            background: #e5e7eb;
-        }
-
-        .pub-meta-title {
-            font-weight: 600;
-            margin-bottom: 4px;
+        .news-title {
+            margin: 0 0 4px;
             font-size: 16px;
+            line-height: 1.45;
         }
 
-        .pub-meta-authors {
-            font-size: 13px;
-            color: var(--text-sub);
-            margin-bottom: 8px;
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
         }
 
-        .pub-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
+        .split-card {
+            padding: 20px;
         }
 
-        .badge {
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            background: #eef2ff;
-            color: #4338ca;
-            font-weight: 500;
+        .split-card h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
         }
 
-        .badge-soft {
-            background: #e0f2fe;
-            color: #0369a1;
-        }
-
-        .badge-link {
-            background: #f3f4f6;
-            color: #374151;
-            cursor: pointer;
-        }
-
-        .badge-link:hover {
-            background: #e5e7eb;
-        }
-
-        /* ========= Service / Awards / Projects 等通用列表 ========= */
-        .timeline-list {
-            display: flex;
-            flex-direction: column;
+        .item-list {
+            display: grid;
             gap: 12px;
         }
 
-        .timeline-item {
-            background: #ffffff;
-            border-radius: var(--radius-lg);
-            padding: 14px 16px;
-            border: 1px solid #e2e8f0;
+        .item {
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
         }
 
-        .timeline-title {
-            font-weight: 600;
-            margin-bottom: 3px;
+        .item:first-child {
+            padding-top: 0;
+            border-top: none;
         }
 
-        .timeline-meta {
-            font-size: 13px;
-            color: var(--text-sub);
+        .item-title {
+            margin-bottom: 4px;
+            font-size: 15px;
+            font-weight: 700;
         }
 
-        .projects-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .project-card {
-            display: grid;
-            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-            gap: 18px;
-            border-radius: var(--radius-lg);
-            background: #ffffff;
-            padding: 18px;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .project-media {
-            border-radius: 14px;
-            overflow: hidden;
-            background: #e5e7eb;
-            position: relative;
-        }
-
-        .project-media-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            color: #6b7280;
-        }
-
-        .project-title {
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .project-desc {
+        .item-text {
+            color: var(--muted);
             font-size: 14px;
-            color: var(--text-sub);
-            margin-bottom: 10px;
         }
 
-        .project-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            font-size: 13px;
-        }
-
-        /* ========= 页脚 ========= */
-        .footer {
-            padding: 26px 0;
-            background: #020617;
-            color: #9ca3af;
-            margin-top: 24px;
-        }
-
-        .footer-inner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
             gap: 16px;
-            font-size: 13px;
-            align-items: center;
         }
 
-        .footer-map {
-            width: 150px;
-            height: 90px;
-            border-radius: 12px;
-            background: radial-gradient(circle at 20% 20%, #22c55e, transparent 55%),
-                radial-gradient(circle at 80% 30%, #38bdf8, transparent 55%),
-                radial-gradient(circle at 35% 85%, #f97316, transparent 55%),
-                #020617;
+        .contact-card {
+            padding: 20px;
+        }
+
+        .contact-card h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-item {
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+        }
+
+        .contact-item:first-child {
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .contact-label {
+            margin-bottom: 4px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .contact-value {
+            font-size: 15px;
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .link-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .link-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #e5e7eb;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: var(--surface-soft);
+            border: 1px solid var(--line);
+            font-size: 14px;
+            font-weight: 700;
         }
 
-        /* ========= 自适应（移动端） ========= */
-        @media (max-width: 900px) {
-            .hero-inner {
-                grid-template-columns: minmax(0, 1fr);
-                text-align: left;
-            }
+        .link-item span {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
 
-            .hero-profile {
-                order: -1;
-            }
+        .site-footer {
+            padding: 26px 0 36px;
+            color: var(--muted);
+            font-size: 13px;
+        }
 
-            .pub-card {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .project-card {
-                grid-template-columns: minmax(0, 1fr);
+        @media (max-width: 1024px) {
+            .hero-panel,
+            .contact-grid,
+            .split-grid,
+            .research-grid {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .navbar-inner {
-                height: 56px;
+            .container {
+                width: min(var(--container), calc(100% - 28px));
             }
 
-            .nav-links {
-                position: fixed;
-                inset: 56px 0 auto;
-                background: rgba(15, 23, 42, 0.98);
-                padding: 12px 20px 16px;
-                flex-direction: column;
-                transform: translateY(-100%);
+            .site-header-inner {
+                min-height: 58px;
+            }
+
+            .nav-toggle {
+                display: inline-grid;
+                place-items: center;
+            }
+
+            .nav {
+                position: absolute;
+                top: calc(100% + 1px);
+                left: 0;
+                right: 0;
+                display: grid;
+                gap: 0;
+                padding: 8px 14px 14px;
+                background: rgba(244, 246, 248, 0.98);
+                border-bottom: 1px solid var(--line);
+                transform: translateY(-10px);
                 opacity: 0;
                 pointer-events: none;
-                transition: transform 0.2s ease, opacity 0.2s ease;
+                transition: 0.2s ease;
             }
 
-            .nav-links.open {
+            .nav.open {
                 transform: translateY(0);
                 opacity: 1;
                 pointer-events: auto;
             }
 
-            .nav-toggle {
-                display: inline-flex;
+            .nav a {
+                padding: 12px 4px;
+                border-bottom: 1px solid rgba(216, 222, 230, 0.9);
+            }
+
+            .nav a:last-child {
+                border-bottom: none;
             }
 
             .hero {
-                padding: 32px 0 40px;
+                padding-top: 32px;
             }
 
-            section {
-                padding: 40px 0;
+            .hero-panel {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 23px;
+            }
+
+            .pub-item,
+            .news-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ======= 顶部导航栏 ======= -->
-    <header class="navbar">
-        <div class="container navbar-inner">
-            <!-- 左侧 Logo/姓名 -->
-            <div class="nav-logo">
-                <span>Chenlong Feng</span>
-                <span class="cn">冯晨龙</span>
+    <header class="site-header">
+        <div class="container site-header-inner">
+            <div class="brand">
+                <div class="brand-title">冯晨龙</div>
+                <div class="brand-subtitle">个人学术主页</div>
             </div>
-
-            <!-- 右侧：导航 + 语言切换 + 汉堡菜单 -->
-            <div class="nav-right">
-                <!-- 右侧导航菜单（PC） -->
-                <nav class="nav-links" id="navLinks">
-                    <!-- href 对应下面 section 的 id，可以平滑滚动过去 -->
-                    <a href="#overview" class="active" data-i18n="nav.overview">Overview</a>
-                    <a href="#news" data-i18n="nav.news">News</a>
-                    <a href="#publications" data-i18n="nav.publications">Publications</a>
-                    <a href="#service" data-i18n="nav.service">Service</a>
-                    <a href="#awards" data-i18n="nav.awards">Awards</a>
-                    <a href="#projects" data-i18n="nav.projects">Projects</a>
-                    <!-- CV 可以跳转到你上传在仓库里的 cv.pdf -->
-                    <a href="cv.pdf" target="_blank" data-i18n="nav.cv">CV</a>
-                </nav>
-
-                <!-- 语言切换按钮：EN / 中文 -->
-                <div class="lang-switch">
-                    <!-- data-lang 用来告诉 JS 这是哪种语言 -->
-                    <button class="lang-btn active" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="zh">中文</button>
-                </div>
-
-                <!-- 手机端汉堡菜单按钮 -->
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                    <span></span>
-                </button>
-            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="打开导航">
+                <span></span>
+            </button>
+            <nav class="nav" id="siteNav">
+                <a href="#overview">简介</a>
+                <a href="#research">研究</a>
+                <a href="#publications">论文</a>
+                <a href="#news">动态</a>
+                <a href="#profile">经历</a>
+                <a href="#contact">联系</a>
+            </nav>
         </div>
     </header>
 
-    <!-- ======= Overview 顶部大区 ======= -->
-    <section id="overview" class="hero">
-        <div class="container hero-inner">
-            <!-- 左侧文字介绍 -->
-            <div>
-                <div class="hero-subtitle" data-i18n="hero.subtitle">Ph.D. Researcher</div>
-                <div class="hero-name" data-i18n="hero.name">Chenlong Feng 冯晨龙</div>
-                <div class="hero-title" data-i18n="hero.title">
-                    Construction robotics, Motion planning and control
-                </div>
-
-                <!-- 联系方式 -->
-                <div class="hero-contact">
-                    <span>📧 <a href="mailto:fengcl24@mails.jlu.edu.cn">fengcl24@mails.jlu.edu.cn</a></span>
-                    <span>•</span>
-                    <div class="hero-school" data-i18n="hero.school">Affiliation: Jilin University</div>
-                </div>
-
-                <!-- 简短介绍 -->
-                <p class="hero-bio" data-i18n="hero.bio">
-                    I am a Ph.D. student in <strong>Mechanical Engineering / Robotics</strong>,
-                    focusing on <strong>motion planning</strong>, <strong>learning from expert demonstrations</strong>,
-                    and <strong>safe autonomy of construction robotics</strong>. My research
-                    aims to bridge robust control with data-driven intelligence for real-world
-                    embodied agents.
-                </p>
-
-                <!-- 状态 tag -->
-                <div class="hero-tags">
-                    <div class="tag-pill">
-                        <span>🤝</span>
-                        <span data-i18n="hero.tag1">Open to collaborations</span>
+    <main>
+        <section class="hero" id="overview">
+            <div class="container">
+                <div class="hero-panel">
+                    <div class="hero-copy">
+                        <div class="eyebrow">机械工程博士研究生</div>
+                        <h1>冯晨龙</h1>
+                        <p class="hero-role">吉林大学机械与航空航天工程学院 · 导师王继新教授</p>
+                        <p class="hero-summary">
+                            吉林大学2024级博士生，入选中国科协青年科技人才培育工程（原青年人才托举计划），主要从事具身智能工程装备开发与智能化控制、无人驾驶工程车辆关键技术开发，当前工作重点是提升工程装备在非结构环境中的安全性、稳定性与自主作业能力。
+                        </p>
+                        <div class="hero-tags">
+                            <span class="tag">具身智能工程装备</span>
+                            <span class="tag">挖掘机器人智能化控制</span>
+                            <span class="tag">模仿学习</span>
+                            <span class="tag">动态系统建模</span>
+                            <span class="tag">非结构场景运动规划</span>
+                        </div>
+                        <div class="hero-actions">
+                            <a class="button button-primary" href="#publications">代表性论文</a>
+                            <a class="button" href="#news">近期动态</a>
+                            <a class="button" href="html/news.html">动态归档</a>
+                        </div>
                     </div>
-                    <div class="tag-pill">
-                        <span class="dot"></span>
-                        <span data-i18n="hero.tag2">Looking for a job in 2027</span>
-                    </div>
-                </div>
 
-                <!-- 按钮：跳转论文 / GitHub / Scholar -->
-                <div class="hero-actions">
-                    <!-- 锚点跳转到 Publication 区块 -->
-                    <a href="#publications" class="btn btn-primary" data-i18n="btn.viewPublications">
-                        📄 View Publications
-                    </a>
-                    <!-- TODO: 替换为你的 GitHub / Scholar 链接 -->
-                    <a href="https://github.com/fengcl990212-art?tab=repositories" class="btn btn-outline" target="_blank" data-i18n="btn.github">
-                        🐙 GitHub
-                    </a>
-                    <a href="https://www.scopus.com/authid/detail.uri?authorId=58130885800" class="btn btn-outline" target="_blank" data-i18n="btn.scholar">
-                        🎓 Scopus
-                    </a>
+                    <aside class="hero-side">
+                        <div class="portrait-card">
+                            <div class="portrait-frame">
+                                <img src="Fig/fengcl.jpg" alt="冯晨龙照片">
+                            </div>
+                            <div class="portrait-note">研究方向：具身智能工程装备、工程车辆智能控制与运动规划。</div>
+                        </div>
+                        <!-- <div class="fact-card">
+                            <div class="fact-title">关键信息</div>
+                            <div class="fact-value">第一作者论文 4 篇，入选中国科协青年科技人才培育工程。</div>
+                        </div> -->
+                    </aside>
                 </div>
             </div>
-
-            <!-- 右侧个人头像 -->
-            <div class="hero-profile">
-                <div class="hero-avatar-wrap">
-                    <div class="hero-avatar-inner">
-                        <img src="Fig/fengcl.jpg" alt="Chenlong Feng portrait" />
-                    </div>
-                    <!-- <div class="hero-avatar-tag">
-                        <span class="hero-avatar-tag-dot"></span>
-                        <span>Robotics &amp; AI</span>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </section>
-
         </section>
 
-    <!-- ======= News 滚动条（个人简介下方） ======= -->
-    <section class="news-strip" aria-label="Latest news highlights">
-        <div class="container">
-            <div class="news-strip-card">
-                <!-- 左箭头 -->
-                <button class="news-strip-arrow" id="newsStripPrev" aria-label="Previous news">
-                    ‹
-                </button>
+        <section id="research">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title">主要研究内容</h2>
+                        <!-- <p class="section-desc">仅保留当前研究最核心的三条主线，避免首页信息过载。</p> -->
+                    </div>
+                </div>
 
-                <!-- 滑动轨道：最新四条新闻 -->
-                <div class="news-strip-track" id="newsStripTrack">
-                    <!-- Slide 1 -->
-                    <a class="news-strip-slide"
-                       href="html/news_sub/iros_2025.html"
-                       target="_blank" rel="noopener noreferrer">
-                        <div class="news-strip-image">
-                            <img src="Fig/Fig11_1920x1080.png"
-                                 alt="IROS 2025 poster – constraint-aware motion planning" />
-                            <div class="news-strip-caption">
-                                IROS 2025 · Poster Presentation
+                <div class="research-grid">
+                    <article class="section-card">
+                        <div class="section-index">01</div>
+                        <h3>机理-数据融合建模与精确控制</h3>
+                        <p>面向液压挖掘装备精准作业场景，研究动力学建模、非线性残差学习与控制性能提升问题。</p>
+                    </article>
+
+                    <article class="section-card">
+                        <div class="section-index">02</div>
+                        <h3>模仿学习运动规划</h3>
+                        <p>从专家操作轨迹中学习任务演化规律，提升工程装备自主作业技能的泛化能力、可迁移性与作业效率。</p>
+                    </article>
+
+                    <article class="section-card">
+                        <div class="section-index">03</div>
+                        <h3>复杂场景车辆自主导航</h3>
+                        <p>围绕非结构场景复杂特性，研究崎岖地形可穿越性评估、路径搜索和轨迹优化方法。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title">代表性论文</h2>
+                        <!-- <p class="section-desc">按年份顺序列出核心论文，只保留题目、贡献摘要和少量关键词。</p> -->
+                    </div>
+                </div>
+
+                <div class="pub-list">
+                    <article class="pub-item">
+                        <div class="pub-year">2026</div>
+                        <div>
+                            <h3 class="pub-title">Excavator trajectory planning via global probabilistic learning from expert demonstrations</h3>
+                            <p class="pub-text">基于专家示教全局概率学习的挖掘机轨迹规划，提出融合全局概率建模与采样优化的轨迹规划方法，实现任务变化下的高效泛化、跨平台迁移与安全执行。</p>
+                            <div class="pub-meta">
+                                <span class="meta-tag">Automation in Construction</span>
+                                <span class="meta-tag">中科院一区Top期刊</span>
+                                <span class="meta-tag">IF=11.5</span>
                             </div>
                         </div>
-                    </a>
+                        <a class="button" href="https://doi.org/10.1016/j.autcon.2025.106736" target="_blank" rel="noopener noreferrer">查看</a>
+                    </article>
 
-                    <!-- Slide 2 -->
-                    <a class="news-strip-slide"
-                       href="html/news_sub/yuhangxiehui.html"
-                       target="_blank" rel="noopener noreferrer">
-                        <div class="news-strip-image">
-                            <img src="Fig/Fig12_1920x1080.png"
-                                 alt="IROS 2025 oral presentation" />
-                            <div class="news-strip-caption">
-                                China Astronautics Society Student Forum · Invited Demo
+                    <article class="pub-item">
+                        <div class="pub-year">2025</div>
+                        <div>
+                            <h3 class="pub-title">Constraint-aware motion planning for vehicles with terrain traversability assessment and optimization in construction scenarios</h3>
+                            <p class="pub-text">融合地形可穿越性评估与优化的约束感知车辆运动规划，建立地形可穿越性评估、路径搜索与轨迹优化一体化框架，用于复杂施工场景车辆自主导航。</p>
+                            <div class="pub-meta">
+                                <span class="meta-tag">Advanced Engineering Informatics</span>
+                                <span class="meta-tag">中科院一区Top期刊，CCF-B</span>
+                                <span class="meta-tag">IF=9.9</span>
                             </div>
                         </div>
-                    </a>
+                        <a class="button" href="https://doi.org/10.1016/j.aei.2025.103625" target="_blank" rel="noopener noreferrer">查看</a>
+                    </article>
 
-                    <!-- Slide 3 -->
-                    <a class="news-strip-slide"
-                       href="news-2024-demo.html"       
-                       target="_blank" rel="noopener noreferrer">
-                        <div class="news-strip-image">
-                            <img src="Fig/Fig11_1920x1080.png" 
-                                 alt="Robot demo at block party" />
-                            <div class="news-strip-caption">
-                                China Astronautics Society Student Forum · Invited Demo
+                    <article class="pub-item">
+                        <div class="pub-year">2024</div>
+                        <div>
+                            <h3 class="pub-title">Task-unit based trajectory generation for excavators utilizing expert operator skills</h3>
+                            <p class="pub-text">利用专家操作技能的挖掘机任务单元轨迹生成，将挖掘任务分解为任务单元，结合动态运动基元与统计模型，实现复杂任务轨迹的组合与泛化。</p>
+                            <div class="pub-meta">
+                                <span class="meta-tag">Automation in Construction</span>
+                                <span class="meta-tag">中科院一区Top期刊</span>
+                                <span class="meta-tag">IF=11.5</span>
                             </div>
                         </div>
-                    </a>
+                        <a class="button" href="https://doi.org/10.1016/j.autcon.2023.105247" target="_blank" rel="noopener noreferrer">查看</a>
+                    </article>
 
-                    <!-- Slide 4 -->
-                    <a class="news-strip-slide"
-                       href="news-2023-paper.html"       
-                       target="_blank" rel="noopener noreferrer">
-                        <div class="news-strip-image">
-                            <img src="Fig/Fig11_1920x1080.png"
-                                 alt="RSS 2023 oral" />
-                            <div class="news-strip-caption">
-                                RSS 2023 · Diffusion for Shared Autonomy
+                    <article class="pub-item">
+                        <div class="pub-year">2024</div>
+                        <div>
+                            <h3 class="pub-title">Physics-informed neutral network with physically consistent and residual learning for excavator precision operation control</h3>
+                            <p class="pub-text">融合物理一致性与残差学习的挖掘机精确作业控制网络，针对非线性与外界扰动问题，构建物理信息模型与性能约束控制方法，实现挖掘机精确跟踪控制。</p>
+                            <div class="pub-meta">
+                                <span class="meta-tag">Applied Soft Computing</span>
+                                <span class="meta-tag">中科院二区Top期刊</span>
+                                <span class="meta-tag">IF=6.6</span>
                             </div>
                         </div>
-                    </a>
+                        <a class="button" href="https://doi.org/10.1016/j.asoc.2024.112402" target="_blank" rel="noopener noreferrer">查看</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="news">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title">近期动态</h2>
+                        <!-- <p class="section-desc">首页仅保留最近和最重要的 5 条学术动态，完整内容放在归档页。</p> -->
+                    </div>
+                    <a class="button" href="html/news.html">查看全部</a>
                 </div>
 
-                <!-- 右箭头 -->
-                <button class="news-strip-arrow" id="newsStripNext" aria-label="Next news">
-                    ›
-                </button>
-            </div>
-
-            <!-- 底部小圆点（4 条新闻对应 4 个点） -->
-            <div class="news-strip-dots">
-                <button class="news-dot news-dot-active" data-index="0" aria-label="Go to slide 1"></button>
-                <button class="news-dot" data-index="1" aria-label="Go to slide 2"></button>
-                <button class="news-dot" data-index="2" aria-label="Go to slide 3"></button>
-                <button class="news-dot" data-index="3" aria-label="Go to slide 4"></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ======= Latest News 区块 ======= -->
-    <section id="news">
-
-
-    <!-- ======= Latest News 区块 ======= -->
-    <section id="news">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="news.title">Latest News</h2>
-                <p class="section-subtitle" data-i18n="news.subtitle">
-                    A few recent updates from my research and work.
-                </p>
-            </div>
-
-            <div class="news-list">
-                <!-- 每一条 news-item 表示一条新闻，按照时间倒序 -->
-                <a class="news-item" href="html/news_sub/iros_2025.html" target="_blank" rel="noopener noreferrer">
-                    <div class="news-date">Oct 2025</div>
-                    <div>
-                        <div class="news-content-title">Poster Presentation</div>
-                        <div class="news-content-desc">
-                            Our research "<strong>Constraint-aware motion planning for vehicles with terrain traversability assessment and optimization in construction scenarios</strong>" was presented at the <strong>IROS 2025</strong> conference.
+                <div class="news-list">
+                    <article class="news-item">
+                        <div class="news-date">2025.10</div>
+                        <div>
+                            <h3 class="news-title">IEEE/RSJ International Conference on Intelligent Robots and Systems 海报展示</h3>
+                            <p class="news-text">展示施工场景车辆约束感知运动规划研究，重点交流复杂地形评估与轨迹优化方法。</p>
                         </div>
-                    </div>
-                </a>
+                        <a class="button" href="html/news_sub/iros_2025.html">详情</a>
+                    </article>
 
-                <a class="news-item" href="html/news_sub/yuhangxiehui.html" target="_blank" rel="noopener noreferrer">
-                    <div class="news-date">Oct 2025</div>
-                    <div>
-                        <div class="news-content-title">Invited Demo</div>
-                        <div class="news-content-desc">
-                            We were invited to present our research on <strong>autonomous navigation for off-road vehicles</strong> at the <strong>China Astronautics Society Student Forum</strong>.
+                    <article class="news-item">
+                        <div class="news-date">2025.10</div>
+                        <div>
+                            <h3 class="news-title">中国宇航学会吉林大学学生分会研讨会报告</h3>
+                            <p class="news-text">汇报越野场景下融合地形可穿越性评估的约束感知车辆运动规划研究。</p>
                         </div>
-                    </div>
-                </a>
+                        <a class="button" href="html/news_sub/yuhangxiehui.html">详情</a>
+                    </article>
 
-                <div class="news-item">
-                    <div class="news-date">Jul 2025</div>
-                    <div>
-                        <div class="news-content-title">Oral Presentation</div>
-                        <div class="news-content-desc">
-                            I will give an oral talk on <strong>topic / paper name</strong> at
-                            <strong>Conference 2025</strong>.
+                    <article class="news-item">
+                        <div class="news-date">2025.08</div>
+                        <div>
+                            <h3 class="news-title">工程机械与车辆工程国际学术会议交流</h3>
+                            <p class="news-text">在太原会议上汇报施工场景车辆约束感知运动规划的阶段性成果。</p>
                         </div>
-                    </div>
+                        <a class="button" href="html/news_sub/zhongguogongchengjixie.html">详情</a>
+                    </article>
+
+                    <article class="news-item">
+                        <div class="news-date">2024.12</div>
+                        <div>
+                            <h3 class="news-title">全国机械工程学科博士生论坛报告并获二等奖</h3>
+                            <p class="news-text">围绕挖掘机动力学建模及精确控制方法研究进行报告并获奖。</p>
+                        </div>
+                        <a class="button" href="html/news_sub/xuzhou_2024.html">详情</a>
+                    </article>
+
+                    <article class="news-item">
+                        <div class="news-date">2024.12</div>
+                        <div>
+                            <h3 class="news-title">中国科学院大学学术论坛报告并获三等奖</h3>
+                            <p class="news-text">汇报液压挖掘装备机理-数据融合建模机制与运动控制方法研究。</p>
+                        </div>
+                        <a class="button" href="html/news_sub/changchun_2024.html">详情</a>
+                    </article>
                 </div>
+            </div>
+        </section>
 
-                <div class="news-item">
-                    <div class="news-date">Apr 2025</div>
+        <section id="profile">
+            <div class="container">
+                <div class="section-head">
                     <div>
-                        <div class="news-content-title">Invited Demo</div>
-                        <div class="news-content-desc">
-                            We were invited to present our <strong>embodied robot system</strong>
-                            at <strong>Robotics Exhibition / Museum</strong>.
-                        </div>
+                        <h2 class="section-title">经历与荣誉</h2>
+                        <!-- <p class="section-desc">把教育、项目、荣誉和学术服务拆开显示，减少信息缠绕。</p> -->
                     </div>
                 </div>
 
-                <div class="news-item">
-                    <div class="news-date">Jun 2024</div>
-                    <div>
-                        <div class="news-content-title">Workshop Organizer</div>
-                        <div class="news-content-desc">
-                            Co-organized the <strong>Workshop on Embodied Intelligence for
-                            Construction Robotics</strong>.
+                <div class="split-grid">
+                    <article class="split-card">
+                        <h3>教育经历</h3>
+                        <div class="item-list">
+                            <div class="item">
+                                <div class="item-title">吉林大学 · 机械工程博士</div>
+                                <div class="item-text">2024年9月—2027年6月，研究方向为具身智能工程装备。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">吉林大学 · 机械工程硕士</div>
+                                <div class="item-text">2021年9月—2024年6月。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">燕山大学 · 车辆工程学士</div>
+                                <div class="item-text">2017年9月—2021年6月。</div>
+                            </div>
                         </div>
+                    </article>
+
+                    <article class="split-card">
+                        <h3>科研项目</h3>
+                        <div class="item-list">
+                            <div class="item">
+                                <div class="item-title">吉林省科技厅博士生科研创新能力提升项目 (2026.01-2027.01) · 主持</div>
+                                <div class="item-text">非结构环境下铰接作业车辆人-机-环境共融的智能协同控制研究。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">全国重点实验室开放课题 (2025.07-2026.07) · 主持</div>
+                                <div class="item-text">极端工况下可重构多轴越野车辆机理-数据融合建模与多模态状态估计。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">吉林大学研究生创新研究计划项目 (2025.03-2026.03) · 主持</div>
+                                <div class="item-text">面向复杂场景移动作业机器人的自主交互规划与运动控制方法研究。</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="split-card">
+                        <h3>荣誉奖励</h3>
+                        <div class="item-list">
+                            <div class="item">
+                                <div class="item-title">中国科协青年科技人才培育工程</div>
+                                <div class="item-text">已入选人才培育计划。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">论坛获奖</div>
+                                <div class="item-text">全国机械工程学科博士生论坛二等奖，中国科学院大学学术论坛三等奖。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">校级荣誉</div>
+                                <div class="item-text">吉林大学优秀毕业生、优秀研究生及多项奖学金。</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="split-card">
+                        <h3>学术服务</h3>
+                        <div class="item-list">
+                            <div class="item">
+                                <div class="item-title">中国宇航学会吉林大学学生分会主席</div>
+                                <div class="item-text">任期 2025年9月—2027年9月。</div>
+                            </div>
+                            <div class="item">
+                                <div class="item-title">期刊审稿人</div>
+                                <div class="item-text">参与AIC等相关国际期刊审稿工作。</div>
+                            </div>
+                            <!-- <div class="item">
+                                <div class="item-title">知识产权成果</div>
+                                <div class="item-text">已授权发明专利、实用新型及软件著作权多项。</div>
+                            </div> -->
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title">联系方式</h2>
+                        <!-- <p class="section-desc">保留必要联络信息和外部链接，不再在首页展开过多说明。</p> -->
                     </div>
                 </div>
 
-                <div class="news-actions">
-                    <!-- 如果以后做单独 News 页，可以改成真正的链接 -->
-                    <a class="btn-ghost" type="button" href="html/news.html" data-i18n="news.viewAll">
-                        View All News
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ======= Publications 区块 ======= -->
-    <section id="publications">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="pubs.title">Publications</h2>
-                <p class="section-subtitle" data-i18n="pubs.subtitle">
-                    Representative works. * indicates equal contribution.
-                </p>
-            </div>
-
-            <div class="pub-list">
-                <!-- 单篇论文卡片 -->
-                <article class="pub-card">
-                    <div class="pub-thumb">
-                        <img src="teaser1.jpg" alt="Paper teaser 1" />
-                    </div>
-
-                    <div>
-                        <div class="pub-meta-title">
-                            Title of Your Paper: Motion Planning for Autonomous Excavators
+                <div class="contact-grid">
+                    <article class="contact-card">
+                        <h3>基本信息</h3>
+                        <div class="contact-list">
+                            <div class="contact-item">
+                                <div class="contact-label">姓名</div>
+                                <div class="contact-value">冯晨龙</div>
+                            </div>
+                            <!-- <div class="contact-item">
+                                <div class="contact-label">单位</div>
+                                <div class="contact-value">吉林大学机械与航空航天工程学院</div>
+                            </div> -->
+                            <!-- <div class="contact-item">
+                                <div class="contact-label">导师</div>
+                                <div class="contact-value">王继新教授</div>
+                            </div> -->
+                            <div class="contact-item">
+                                <div class="contact-label">电话</div>
+                                <div class="contact-value">15903387715</div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-label">邮箱</div>
+                                <div class="contact-value"><a href="mailto:fengcl24@mails.jlu.edu.cn">fengcl24@mails.jlu.edu.cn</a></div>
+                            </div>
                         </div>
-                        <div class="pub-meta-authors">
-                            <strong>Your Name</strong>, Coauthor A, Coauthor B
-                        </div>
-                        <div class="badge">IROS 2025</div>
+                    </article>
 
-                        <div class="pub-badges">
-                            <a class="badge badge-link" href="https://arxiv.org" target="_blank">
-                                arXiv
+                    <article class="contact-card">
+                        <h3>相关链接</h3>
+                        <div class="link-list">
+                            <a class="link-item" href="https://github.com/fengcl990212-art?tab=repositories" target="_blank" rel="noopener noreferrer">
+                                代码仓库
+                                <span>查看项目</span>
                             </a>
-                            <a class="badge badge-link" href="#" target="_blank">
-                                Project Page
+                            <a class="link-item" href="https://orcid.org/my-orcid?orcid=0009-0007-3581-6164" target="_blank" rel="noopener noreferrer">
+                                学术档案
+                                <span>查看论文信息</span>
                             </a>
-                            <a class="badge badge-link" href="https://github.com" target="_blank">
-                                Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="pub-card">
-                    <div class="pub-thumb">
-                        <img src="teaser2.jpg" alt="Paper teaser 2" />
-                    </div>
-                    <div>
-                        <div class="pub-meta-title">
-                            Learning Probabilistic Trajectory Primitives for Earthmoving Tasks
-                        </div>
-                        <div class="pub-meta-authors">
-                            <strong>Your Name*</strong>, Coauthor C*, Coauthor D
-                        </div>
-                        <div class="badge badge-soft">Journal of Field Robotics, 2024</div>
-
-                        <div class="pub-badges">
-                            <a class="badge badge-link" href="#" target="_blank"> PDF </a>
-                            <a class="badge badge-link" href="#" target="_blank"> Video </a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ======= Service and Volunteer 区块 ======= -->
-    <section id="service">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="service.title">Service &amp; Volunteer</h2>
-                <p class="section-subtitle" data-i18n="service.subtitle">
-                    Academic service and community activities.
-                </p>
-            </div>
-
-            <div class="timeline-list">
-                <div class="timeline-item">
-                    <div class="timeline-title">Conference Reviewer</div>
-                    <div class="timeline-meta">
-                        IEEE International Conference on Robotics and Automation (ICRA),
-                        IEEE/RSJ International Conference on Intelligent Robots and Systems
-                        (IROS), Conference on Robot Learning (CoRL)
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-title">Workshop Organizer</div>
-                    <div class="timeline-meta">
-                        Multimodal Embodied Intelligence Workshop, 2024.
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-title">Invited Demo</div>
-                    <div class="timeline-meta">
-                        Robot Block Party, Museum of Science and Industry, 2023–2024.
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-title">Volunteer</div>
-                    <div class="timeline-meta">
-                        Midwest Robotics Workshop, 2022.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ======= Awards and Honors 区块 ======= -->
-    <section id="awards">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="awards.title">Awards and Honors</h2>
-                <p class="section-subtitle" data-i18n="awards.subtitle">
-                    Major scholarships and awards.
-                </p>
-            </div>
-
-            <div class="timeline-list">
-                <div class="timeline-item">
-                    <div class="timeline-title">
-                        National Scholarship (Top 0.1%)
-                    </div>
-                    <div class="timeline-meta">
-                        2020 • Ministry of Education, China
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-title">Outstanding Graduate Student</div>
-                    <div class="timeline-meta">
-                        2021 • Your University
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-title">
-                        First Prize, National Undergraduate Mathematical Contest in Modeling
-                    </div>
-                    <div class="timeline-meta">
-                        2019 • China Society for Industrial and Applied Mathematics
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ======= Projects 区块 ======= -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="projects.title">Projects</h2>
-                <p class="section-subtitle" data-i18n="projects.subtitle">
-                    Selected research and side projects. Videos / demos can be embedded here.
-                </p>
-            </div>
-
-            <div class="projects-grid">
-                <!-- 项目卡片 1 -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <div class="project-media-placeholder">
-                            Video / Demo Placeholder (UR5 / Excavator Demo)
-                        </div>
-                    </div>
-                    <div>
-                        <div class="project-title">
-                            Embodied ChatGPT for Robot Block Party
-                        </div>
-                        <p class="project-desc">
-                            We implemented a language-driven control system on a UR5 robot. The
-                            robot can interpret natural language commands and perform pick-and-place
-                            and stacking tasks in a shared workspace, showcased at a public
-                            robotics festival.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" class="badge badge-link" target="_blank"> Video </a>
-                            <a href="#" class="badge badge-link" target="_blank"> Code </a>
-                            <a href="#" class="badge badge-link" target="_blank">
-                                Project Details
+                            <a class="link-item" href="html/news.html">
+                                动态归档
+                                <span>完整时间线</span>
                             </a>
                         </div>
-                    </div>
+                    </article>
                 </div>
+            </div>
+        </section>
+    </main>
 
-                <!-- 项目卡片 2 -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <div class="project-media-placeholder">
-                            Screenshot Placeholder (App / Web)
-                        </div>
-                    </div>
-                    <div>
-                        <div class="project-title">
-                            AI Transnational Travel Assistant App
-                        </div>
-                        <p class="project-desc">
-                            An auxiliary application for tourists from China and Japan to travel
-                            independently. It leverages modern AI to translate signs and menus,
-                            recommend local attractions and restaurants, and provide navigation
-                            tips for public transportation.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" class="badge badge-link" target="_blank"> GitHub </a>
-                            <a href="#" class="badge badge-link" target="_blank"> Demo Video </a>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </section>
-
-    <!-- ======= 页脚 ======= -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <div data-i18n="footer.copy">
-                © 2024 Chenlong Feng. All rights reserved.
-            </div>
-            <div class="footer-map">
-                Visitor Map
-            </div>
-        </div>
+    <footer class="site-footer">
+        <div class="container">© 2026 冯晨龙。</div>
     </footer>
 
-        <!-- News 滚动条轮播脚本 -->
     <script>
         (function () {
-            const track = document.getElementById("newsStripTrack");
-            if (!track) return;
+            const toggle = document.getElementById("navToggle");
+            const nav = document.getElementById("siteNav");
+            if (!toggle || !nav) return;
 
-            const slides = Array.from(track.querySelectorAll(".news-strip-slide"));
-            const prevBtn = document.getElementById("newsStripPrev");
-            const nextBtn = document.getElementById("newsStripNext");
-            const dots = Array.from(document.querySelectorAll(".news-dot"));
-
-            let current = 0;
-            const total = slides.length;
-
-            function goTo(index) {
-                if (total === 0) return;
-                current = (index + total) % total;
-                track.style.transform = "translateX(-" + current * 100 + "%)";
-                dots.forEach(function (dot, i) {
-                    dot.classList.toggle("news-dot-active", i === current);
-                });
-            }
-
-            // 左右按钮
-            if (prevBtn) {
-                prevBtn.addEventListener("click", function () {
-                    goTo(current - 1);
-                });
-            }
-            if (nextBtn) {
-                nextBtn.addEventListener("click", function () {
-                    goTo(current + 1);
-                });
-            }
-
-            // 点击小圆点
-            dots.forEach(function (dot, i) {
-                dot.addEventListener("click", function () {
-                    goTo(i);
-                });
+            toggle.addEventListener("click", function () {
+                nav.classList.toggle("open");
             });
 
-            // 可选：自动轮播（9 秒一张）
-            let timer = setInterval(function () {
-                goTo(current + 1);
-            }, 9000);
-
-            // 鼠标移入暂停，移出继续（主要对桌面端有用）
-            track.addEventListener("mouseenter", function () {
-                clearInterval(timer);
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("open");
+                });
             });
-            track.addEventListener("mouseleave", function () {
-                timer = setInterval(function () {
-                    goTo(current + 1);
-                }, 9000);
-            });
-
-            // 初始化位置
-            goTo(0);
         })();
-    </script>
-
-
-    <!-- ======= JS：导航平滑滚动 & 手机菜单 & 多语言 ======= -->
-    <script>
-        // ===== 平滑滚动到指定 section =====
-        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-            link.addEventListener("click", function (e) {
-                const href = this.getAttribute("href");
-                // 只处理 # 开头且不是纯 "#" 的链接
-                if (href && href.startsWith("#") && href.length > 1) {
-                    e.preventDefault();
-                    const targetId = href.substring(1);
-                    const target = document.getElementById(targetId);
-                    if (target) {
-                        target.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }
-                    // 点击菜单项后关闭手机端导航
-                    document.getElementById("navLinks").classList.remove("open");
-                }
-            });
-        });
-
-        // ===== 手机端导航展开/收起 =====
-        const navToggle = document.getElementById("navToggle");
-        const navLinks = document.getElementById("navLinks");
-        navToggle.addEventListener("click", function () {
-            navLinks.classList.toggle("open");
-        });
-
-        // ===== 多语言字典：根据 data-i18n 的 key 替换文本 =====
-        const i18n = {
-            en: {
-                "nav.overview": "Overview",
-                "nav.news": "News",
-                "nav.publications": "Publications",
-                "nav.service": "Service",
-                "nav.awards": "Awards",
-                "nav.projects": "Projects",
-                "nav.cv": "CV",
-
-                "hero.subtitle": "Ph.D. Researcher",
-                "hero.name": "Chenlong Feng 冯晨龙",
-                "hero.title": "Construction robotics, Motion planning and control",
-                "hero.bio":
-                    "I am a Ph.D. student in Mechanical Engineering / Robotics, focusing on motion planning, learning from expert demonstrations, and safe autonomy of construction robotics. My research aims to bridge robust control with data-driven intelligence for real-world embodied agents.",
-                "hero.tag1": "Open to collaborations",
-                "hero.tag2": "Looking for a job in 2027",
-                "hero.school": "Affiliation: Jilin University",
-
-                "btn.viewPublications": "📄 View Publications",
-                "btn.github": "🐙 GitHub",
-                "btn.scholar": "🎓 Google Scholar",
-
-                "news.title": "Latest News",
-                "news.subtitle": "A few recent updates from my research and work.",
-                "news.viewAll": "View All News",
-
-                "pubs.title": "Publications",
-                "pubs.subtitle": "Representative works. * indicates equal contribution.",
-
-                "service.title": "Service & Volunteer",
-                "service.subtitle": "Academic service and community activities.",
-
-                "awards.title": "Awards and Honors",
-                "awards.subtitle": "Major scholarships and awards.",
-
-                "projects.title": "Projects",
-                "projects.subtitle":
-                    "Selected research and side projects. Videos / demos can be embedded here.",
-
-                "footer.copy": "© 2024 Chenlong Feng. All rights reserved."
-            },
-            zh: {
-                "nav.overview": "概览",
-                "nav.news": "动态",
-                "nav.publications": "论文成果",
-                "nav.service": "学术服务",
-                "nav.awards": "奖励荣誉",
-                "nav.projects": "项目",
-                "nav.cv": "简历",
-
-                "hero.subtitle": "博士研究生",
-                "hero.name": "冯晨龙 Chenlong Feng",
-                "hero.title": "施工机器人 · 运动规划与控制",
-                "hero.bio":
-                    "我是一名机械工程 / 机器人学方向的博士研究生，主要研究施工机器人的运动规划、专家示教轨迹学习以及安全自主控制。我的工作致力于将鲁棒控制与数据驱动智能结合起来，使具身智能体在真实复杂环境中更加可靠、高效。",
-                "hero.tag1": "欢迎学术合作",
-                "hero.tag2": "计划 2027 年毕业求职",
-                "hero.school": "毕业学校：吉林大学",
-
-                "btn.viewPublications": "📄 查看论文",
-                "btn.github": "🐙 GitHub",
-                "btn.scholar": "🎓 谷歌学术",
-
-                "news.title": "最新动态",
-                "news.subtitle": "这里记录我最近的一些科研与工作进展。",
-                "news.viewAll": "查看更多动态",
-
-                "pubs.title": "论文成果",
-                "pubs.subtitle": "代表性工作；* 表示共同一作。",
-
-                "service.title": "学术服务与志愿活动",
-                "service.subtitle": "包括会议审稿、研讨会组织及科普活动等。",
-
-                "awards.title": "奖励与荣誉",
-                "awards.subtitle": "部分奖学金与竞赛获奖。",
-
-                "projects.title": "项目",
-                "projects.subtitle": "部分科研项目与兴趣项目展示，可嵌入视频或交互 Demo。",
-
-                "footer.copy": "© 2024 冯晨龙。保留所有权利。"
-            }
-        };
-
-        /**
-         * 设置站点语言
-         * @param {("en"|"zh")} lang
-         */
-        function setLanguage(lang) {
-            // html 标签 lang，用于 SEO / 无障碍
-            document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-
-            // 按 data-i18n 替换文本
-            document.querySelectorAll("[data-i18n]").forEach(function (el) {
-                const key = el.getAttribute("data-i18n");
-                const text = i18n[lang][key];
-                if (text) {
-                    el.textContent = text;
-                }
-            });
-
-            // 更新语言按钮样式
-            document.querySelectorAll(".lang-btn").forEach(function (btn) {
-                btn.classList.toggle("active", btn.dataset.lang === lang);
-            });
-
-            // 存储到 localStorage，记住用户选择
-            try {
-                localStorage.setItem("siteLanguage", lang);
-            } catch (e) {
-                // 有些隐私模式可能禁止 localStorage，这里忽略错误即可
-            }
-        }
-
-        // ===== 初始化语言：优先使用用户上次选择，其次根据浏览器语言自动判断 =====
-        (function initLanguage() {
-            let lang = "en";
-            try {
-                const saved = localStorage.getItem("siteLanguage");
-                if (saved === "en" || saved === "zh") {
-                    lang = saved;
-                } else {
-                    const browserLang = navigator.language || navigator.userLanguage || "";
-                    if (browserLang.toLowerCase().startsWith("zh")) {
-                        lang = "zh";
-                    }
-                }
-            } catch (e) {
-                // localStorage 取值失败时退化为默认英文
-            }
-            setLanguage(lang);
-        })();
-
-        // ===== 给语言按钮绑定点击事件 =====
-        document.querySelectorAll(".lang-btn").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                const lang = this.dataset.lang;
-                if (lang === "en" || lang === "zh") {
-                    setLanguage(lang);
-                }
-            });
-        });
     </script>
 </body>
 </html>
