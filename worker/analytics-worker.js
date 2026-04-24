@@ -92,10 +92,11 @@ function jsonHeaders(request) {
 }
 
 async function recordVisit(request, env) {
-  const body = await readJsonBody(request);
+  const body = request.method === "POST" ? await readJsonBody(request) : {};
+  const url = new URL(request.url);
   const now = Date.now();
   const day = shanghaiDayKey(now);
-  const path = normalizePath(body.path || new URL(request.url).pathname);
+  const path = normalizePath(body.path || url.searchParams.get("path") || "/");
   const ua = request.headers.get("user-agent") || "";
   const ip = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
   const visitorHash = (await sha256Hex(`${day}|${ip}|${ua}`)).slice(0, 16);
@@ -226,7 +227,7 @@ export default {
         headers: corsHeaders(request)
       });
     }
-    if (url.pathname === "/api/visit" && request.method === "POST") {
+    if (url.pathname === "/api/visit" && (request.method === "POST" || request.method === "GET")) {
       return recordVisit(request, env);
     }
     if (url.pathname === "/api/analytics" && request.method === "GET") {

@@ -484,12 +484,26 @@
     }
 
     function renderTrend(data) {
+      const rawTrend = Array.isArray(data.trend) ? data.trend : [];
+      const trendMap = new Map(rawTrend.map((item) => [String(item.day || ""), item]));
+      const fallbackTrend = [];
+      for (let i = 6; i >= 0; i -= 1) {
+        const ts = Date.now() - i * 24 * 60 * 60 * 1000;
+        const dayKey = new Date(ts).toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" });
+        const existing = trendMap.get(dayKey);
+        fallbackTrend.push({
+          day: dayKey.slice(5),
+          total: Number(existing?.total || 0),
+          unique: Number(existing?.unique || 0)
+        });
+      }
+
       trendChart.setOption({
         grid: { left: 36, right: 14, top: 18, bottom: 28 },
         tooltip: { trigger: "axis" },
         xAxis: {
           type: "category",
-          data: data.trend.map((item) => item.day),
+          data: fallbackTrend.map((item) => item.day),
           axisLine: { lineStyle: { color: "#d8dee6" } },
           axisLabel: { color: "#5f6b7a" }
         },
@@ -514,7 +528,7 @@
             lineStyle: { color: "#2f5a82", width: 3 },
             itemStyle: { color: "#2f5a82" },
             areaStyle: { color: "rgba(47, 90, 130, 0.08)" },
-            data: data.trend.map((item) => item.total)
+            data: fallbackTrend.map((item) => item.total)
           },
           {
             name: "匿名访客",
@@ -524,7 +538,7 @@
             symbolSize: 7,
             lineStyle: { color: "#7c97b4", width: 3 },
             itemStyle: { color: "#7c97b4" },
-            data: data.trend.map((item) => item.unique)
+            data: fallbackTrend.map((item) => item.unique)
           }
         ]
       });
@@ -532,7 +546,13 @@
 
     async function loadAnalytics() {
       try {
-        const response = await fetch(analyticsEndpoint, { cache: "no-store" });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        const response = await fetch(analyticsEndpoint, {
+          cache: "no-store",
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
         if (!response.ok) throw new Error("analytics endpoint unavailable");
         const data = await response.json();
         renderMetrics(data, "实时数据");
@@ -551,6 +571,9 @@
     }
 
     loadAnalytics();
+    setTimeout(loadAnalytics, 2000);
+    const analyticsTimer = setInterval(loadAnalytics, 15000);
+    window.addEventListener("beforeunload", () => clearInterval(analyticsTimer));
     window.addEventListener("resize", () => {
       chart.resize();
       trendChart.resize();

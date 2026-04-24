@@ -5,34 +5,35 @@
     : "";
   const analyticsBase = (configuredBase || DEFAULT_ANALYTICS_BASE).replace(/\/+$/, "");
   const endpoint = `${analyticsBase}/api/visit`;
-  const payload = JSON.stringify({
+  const visit = {
     path: location.pathname + location.search,
     title: document.title || "",
     referrer: document.referrer || ""
-  });
-
-  const send = () => {
-    try {
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(endpoint, new Blob([payload], { type: "application/json" }));
-        return;
-      }
-    } catch (err) {
-      // fall through to fetch
-    }
-
-    fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: payload,
-      keepalive: true,
-      credentials: "omit"
-    }).catch(() => {});
   };
 
-  if (document.readyState === "complete") {
-    send();
-  } else {
-    window.addEventListener("load", send, { once: true });
+  function buildGetUrl() {
+    const params = new URLSearchParams({
+      path: visit.path,
+      title: visit.title,
+      referrer: visit.referrer,
+      ts: String(Date.now())
+    });
+    return `${endpoint}?${params.toString()}`;
   }
+
+  function sendByGet() {
+    const url = buildGetUrl();
+    fetch(url, {
+      method: "GET",
+      mode: "no-cors",
+      keepalive: true,
+      credentials: "omit"
+    }).catch(() => {
+      // Fallback for stricter environments.
+      const img = new Image();
+      img.src = url;
+    });
+  }
+
+  sendByGet();
 })();
