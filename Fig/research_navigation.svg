@@ -1,83 +1,241 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="复杂场景车辆自主导航示意图">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Constraint-aware motion planning for vehicles">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#102337"/>
-      <stop offset="100%" stop-color="#2d5e8b"/>
+      <stop offset="0%" stop-color="#fbfbfc"/>
+      <stop offset="100%" stop-color="#f3f7fb"/>
     </linearGradient>
-    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f7fafc"/>
     </linearGradient>
-    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8ad7ff"/>
-      <stop offset="100%" stop-color="#e8f7ff"/>
+    <linearGradient id="terrainA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d7efff"/>
+      <stop offset="40%" stop-color="#9ed2ff"/>
+      <stop offset="70%" stop-color="#ffd88c"/>
+      <stop offset="100%" stop-color="#ef6f63"/>
     </linearGradient>
+    <linearGradient id="terrainB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef3f8"/>
+      <stop offset="100%" stop-color="#cfd8e3"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#203040"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#148a4b"/>
+    </marker>
+    <marker id="arrowMagenta" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d116a4"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#72849a" flood-opacity="0.14"/>
+    </filter>
   </defs>
-  <rect width="1200" height="800" rx="36" fill="url(#bg)"/>
-  <g opacity="0.15" stroke="#d9ecff" stroke-width="1">
-    <path d="M60 120H1140M60 220H1140M60 320H1140M60 420H1140M60 520H1140M60 620H1140M60 720H1140"/>
-    <path d="M150 70V730M290 70V730M430 70V730M570 70V730M710 70V730M850 70V730M990 70V730"/>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="72" y="78" fill="#17314f" font-family="Arial, Microsoft YaHei, sans-serif" font-size="34" font-weight="700">Constraint-aware motion planning for vehicles</text>
+  <text x="72" y="112" fill="#60798e" font-family="Arial, Microsoft YaHei, sans-serif" font-size="18">Terrain traversability assessment, constraint checking and optimized path generation</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="160" width="1460" height="660" rx="28" fill="url(#panel)" stroke="#d8e2eb"/>
   </g>
-  <circle cx="945" cy="160" r="180" fill="#8ad7ff" fill-opacity="0.1"/>
 
-  <rect x="70" y="95" width="250" height="615" rx="28" fill="url(#card)" stroke="#e8f7ff" stroke-opacity="0.18"/>
-  <rect x="350" y="95" width="250" height="615" rx="28" fill="url(#card)" stroke="#e8f7ff" stroke-opacity="0.18"/>
-  <rect x="630" y="95" width="500" height="615" rx="28" fill="url(#card)" stroke="#e8f7ff" stroke-opacity="0.18"/>
+  <g font-family="Arial, Microsoft YaHei, sans-serif">
+    <rect x="98" y="192" width="450" height="560" rx="20" fill="#ffffff" stroke="#dbe3eb"/>
+    <rect x="575" y="192" width="450" height="560" rx="20" fill="#ffffff" stroke="#dbe3eb"/>
+    <rect x="1052" y="192" width="450" height="560" rx="20" fill="#ffffff" stroke="#dbe3eb"/>
 
-  <text x="195" y="145" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">地形评估</text>
-  <text x="195" y="178" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">通行性与风险</text>
-  <text x="475" y="145" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">代价地图</text>
-  <text x="475" y="178" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">障碍与可通行区域</text>
-  <text x="880" y="145" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">路径规划</text>
-  <text x="880" y="178" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">约束感知轨迹输出</text>
+    <text x="122" y="228" fill="#7a4aa0" font-size="22" font-weight="700">A  Terrain traversability map</text>
+    <text x="599" y="228" fill="#7a4aa0" font-size="22" font-weight="700">B  Constraint-aware search</text>
+    <text x="1076" y="228" fill="#7a4aa0" font-size="22" font-weight="700">C  Optimized trajectory</text>
 
-  <g>
-    <path d="M105 610 C150 560, 165 520, 205 515 S270 530, 290 480" stroke="#8ad7ff" stroke-width="6" fill="none"/>
-    <path d="M95 640 C135 575, 155 540, 195 490 S255 430, 280 390" stroke="#ffffff" stroke-opacity="0.22" stroke-width="20" fill="none"/>
-    <path d="M120 650 C160 620, 205 580, 240 610" stroke="#8ad7ff" stroke-width="4" stroke-dasharray="7 10" fill="none"/>
-    <path d="M130 585 L160 540 L200 550 L220 500 L265 490" stroke="#e8f7ff" stroke-width="4" fill="none"/>
-    <circle cx="120" cy="650" r="10" fill="#8ad7ff"/>
-    <circle cx="170" cy="540" r="10" fill="#8ad7ff"/>
-    <circle cx="220" cy="500" r="10" fill="#8ad7ff"/>
-    <circle cx="265" cy="490" r="10" fill="#8ad7ff"/>
-    <g fill="#e8f7ff" fill-opacity="0.1" stroke="#e8f7ff" stroke-opacity="0.45" stroke-width="2">
-      <path d="M130 450 L175 420 L205 450 L160 480 Z"/>
-      <path d="M210 370 L245 345 L275 370 L240 395 Z"/>
-      <path d="M130 330 L165 305 L190 330 L155 355 Z"/>
+    <!-- Panel A -->
+    <g transform="translate(118,252)">
+      <rect x="0" y="0" width="410" height="470" rx="16" fill="#f8fbfe" stroke="#e3e9ef"/>
+      <g opacity="0.95" stroke="#e7edf3" stroke-width="1">
+        <path d="M18 60H392M18 108H392M18 156H392M18 204H392M18 252H392M18 300H392M18 348H392M18 396H392M18 444H392"/>
+        <path d="M62 18V452M110 18V452M158 18V452M206 18V452M254 18V452M302 18V452M350 18V452"/>
+      </g>
+      <g>
+        <rect x="18" y="18" width="48" height="48" fill="#d9f0ff"/>
+        <rect x="66" y="18" width="48" height="48" fill="#bfe1ff"/>
+        <rect x="114" y="18" width="48" height="48" fill="#a6d2ff"/>
+        <rect x="162" y="18" width="48" height="48" fill="#8bc2ff"/>
+        <rect x="210" y="18" width="48" height="48" fill="#79b5ff"/>
+        <rect x="258" y="18" width="48" height="48" fill="#66a7ff"/>
+        <rect x="306" y="18" width="48" height="48" fill="#57a0ff"/>
+        <rect x="354" y="18" width="48" height="48" fill="#4a96ff"/>
+        <rect x="18" y="66" width="48" height="48" fill="#d5eef8"/>
+        <rect x="66" y="66" width="48" height="48" fill="#d8ebd5"/>
+        <rect x="114" y="66" width="48" height="48" fill="#dce9c8"/>
+        <rect x="162" y="66" width="48" height="48" fill="#f5e7ad"/>
+        <rect x="210" y="66" width="48" height="48" fill="#f4d28f"/>
+        <rect x="258" y="66" width="48" height="48" fill="#f1bb7d"/>
+        <rect x="306" y="66" width="48" height="48" fill="#eea56c"/>
+        <rect x="354" y="66" width="48" height="48" fill="#e98f64"/>
+        <rect x="18" y="114" width="48" height="48" fill="#e7f4ff"/>
+        <rect x="66" y="114" width="48" height="48" fill="#eaf6e8"/>
+        <rect x="114" y="114" width="48" height="48" fill="#fff4bf"/>
+        <rect x="162" y="114" width="48" height="48" fill="#ffdd96"/>
+        <rect x="210" y="114" width="48" height="48" fill="#ffc46f"/>
+        <rect x="258" y="114" width="48" height="48" fill="#ffab5b"/>
+        <rect x="306" y="114" width="48" height="48" fill="#ff8f57"/>
+        <rect x="354" y="114" width="48" height="48" fill="#ef6f63"/>
+        <rect x="18" y="162" width="48" height="48" fill="#eef6ff"/>
+        <rect x="66" y="162" width="48" height="48" fill="#f0faeb"/>
+        <rect x="114" y="162" width="48" height="48" fill="#f4f7d9"/>
+        <rect x="162" y="162" width="48" height="48" fill="#f9e9b5"/>
+        <rect x="210" y="162" width="48" height="48" fill="#f4cf8c"/>
+        <rect x="258" y="162" width="48" height="48" fill="#ecb373"/>
+        <rect x="306" y="162" width="48" height="48" fill="#e89467"/>
+        <rect x="354" y="162" width="48" height="48" fill="#e67162"/>
+      </g>
+
+      <g opacity="0.55" fill="none" stroke="#7f8f9d" stroke-width="3">
+        <path d="M30 414 C88 372, 130 380, 172 340 S258 252, 322 286 S370 370, 392 346"/>
+        <path d="M26 360 C88 338, 118 320, 166 282 S254 208, 320 240 S370 314, 392 292"/>
+        <path d="M36 302 C90 270, 138 248, 188 222 S278 176, 342 196 S384 238, 396 220"/>
+      </g>
+
+      <g>
+        <circle cx="344" cy="346" r="18" fill="#3b4650"/>
+        <circle cx="110" cy="124" r="10" fill="#53626f"/>
+        <circle cx="238" cy="86" r="10" fill="#53626f"/>
+        <circle cx="316" cy="186" r="10" fill="#53626f"/>
+        <circle cx="176" cy="278" r="10" fill="#53626f"/>
+      </g>
+
+      <g transform="translate(50,344)">
+        <rect x="0" y="0" width="84" height="36" rx="10" fill="#1f78d1"/>
+        <rect x="14" y="-18" width="52" height="20" rx="6" fill="#6ec0ff"/>
+        <circle cx="16" cy="38" r="8" fill="#404954"/>
+        <circle cx="68" cy="38" r="8" fill="#404954"/>
+        <path d="M84 18 L120 18" stroke="#1f78d1" stroke-width="6" marker-end="url(#arrow)"/>
+      </g>
+      <circle cx="62" cy="378" r="8" fill="#1f78d1"/>
+      <text x="62" y="412" fill="#17314f" font-size="15" font-weight="700" text-anchor="middle">Start</text>
+      <circle cx="380" cy="92" r="9" fill="#16a34a"/>
+      <text x="380" y="70" fill="#17314f" font-size="15" font-weight="700" text-anchor="middle">Goal</text>
+
+      <g transform="translate(286,32)">
+        <rect x="0" y="0" width="102" height="126" rx="14" fill="#ffffff" stroke="#dce3ea"/>
+        <text x="51" y="24" fill="#17314f" font-size="14" font-weight="700" text-anchor="middle">Legend</text>
+        <rect x="14" y="36" width="18" height="18" fill="#5aa9ff"/><text x="40" y="51" fill="#4b5560" font-size="13">low cost</text>
+        <rect x="14" y="58" width="18" height="18" fill="#f7d37b"/><text x="40" y="73" fill="#4b5560" font-size="13">mid cost</text>
+        <rect x="14" y="80" width="18" height="18" fill="#ef6f63"/><text x="40" y="95" fill="#4b5560" font-size="13">high cost</text>
+        <rect x="14" y="102" width="18" height="10" fill="#3b4650"/><text x="40" y="111" fill="#4b5560" font-size="13">obstacle</text>
+      </g>
+
+      <text x="20" y="456" fill="#60788d" font-size="14">Traversability cost derived from terrain observation</text>
     </g>
-    <path d="M90 690 C150 650, 225 650, 300 610 S430 560, 540 590 S650 690, 760 630 S935 530, 1120 570" stroke="#84d2ff" stroke-width="5" fill="none" opacity="0.8"/>
-    <path d="M90 690 C150 650, 225 650, 300 610 S430 560, 540 590 S650 690, 760 630 S935 530, 1120 570" stroke="#ffffff" stroke-opacity="0.16" stroke-width="18" fill="none"/>
-  </g>
 
-  <g>
-    <rect x="388" y="285" width="170" height="180" rx="18" fill="#0f2538" stroke="#8ad7ff" stroke-width="2.5"/>
-    <g opacity="0.9" stroke="#d9ecff" stroke-width="1">
-      <path d="M405 310H541M405 340H541M405 370H541M405 400H541M405 430H541M405 460H541"/>
-      <path d="M430 295V475M460 295V475M490 295V475M520 295V475"/>
+    <!-- Panel B -->
+    <g transform="translate(595,252)">
+      <rect x="0" y="0" width="410" height="470" rx="16" fill="#f8fbfe" stroke="#e3e9ef"/>
+      <g opacity="0.85" stroke="#e7edf3" stroke-width="1">
+        <path d="M18 90H392M18 180H392M18 270H392M18 360H392"/>
+      </g>
+
+      <rect x="18" y="28" width="374" height="64" rx="14" fill="#ffffff" stroke="#dbe3eb"/>
+      <text x="36" y="55" fill="#17314f" font-size="17" font-weight="700">Constraint evaluation</text>
+      <text x="36" y="78" fill="#60788d" font-size="13">filter candidates before global optimization</text>
+
+      <rect x="18" y="112" width="112" height="330" rx="14" fill="#ffffff" stroke="#dbe3eb"/>
+      <rect x="144" y="112" width="112" height="330" rx="14" fill="#ffffff" stroke="#dbe3eb"/>
+      <rect x="270" y="112" width="122" height="330" rx="14" fill="#ffffff" stroke="#dbe3eb"/>
+
+      <text x="74" y="138" fill="#17314f" font-size="15" font-weight="700" text-anchor="middle">Slope</text>
+      <text x="200" y="138" fill="#17314f" font-size="15" font-weight="700" text-anchor="middle">Obstacle</text>
+      <text x="331" y="138" fill="#17314f" font-size="15" font-weight="700" text-anchor="middle">Turning radius</text>
+
+      <g transform="translate(36,164)">
+        <path d="M0 88 L82 20" stroke="#aab5c0" stroke-width="10" stroke-linecap="round"/>
+        <path d="M0 104 L82 36" stroke="#ef6f63" stroke-width="4" stroke-dasharray="7 7" marker-end="url(#arrow)"/>
+        <rect x="0" y="110" width="82" height="12" fill="#d9dee5"/>
+        <text x="41" y="146" fill="#60788d" font-size="13" text-anchor="middle">too steep</text>
+      </g>
+
+      <g transform="translate(162,164)">
+        <path d="M8 92 C26 74, 34 54, 56 42 S88 22, 94 8" fill="none" stroke="#8b96a3" stroke-width="3"/>
+        <circle cx="58" cy="42" r="12" fill="#3b4650"/>
+        <circle cx="84" cy="18" r="12" fill="#3b4650"/>
+        <rect x="34" y="62" width="50" height="20" rx="6" fill="#1f78d1"/>
+        <circle cx="38" cy="94" r="7" fill="#3b4650"/>
+        <circle cx="72" cy="94" r="7" fill="#3b4650"/>
+        <circle cx="52" cy="60" r="20" fill="none" stroke="#ef6f63" stroke-width="4"/>
+        <text x="60" y="146" fill="#60788d" font-size="13" text-anchor="middle">collision risk</text>
+      </g>
+
+      <g transform="translate(284,160)">
+        <path d="M10 86 C32 76, 52 60, 74 42 S106 16, 108 8" fill="none" stroke="#16a34a" stroke-width="4" marker-end="url(#arrowGreen)"/>
+        <path d="M10 86 C32 68, 50 56, 66 48 S96 24, 108 8" fill="none" stroke="#8bbf98" stroke-width="2" stroke-dasharray="5 6"/>
+        <circle cx="40" cy="64" r="7" fill="#3b4650"/>
+        <circle cx="66" cy="48" r="7" fill="#3b4650"/>
+        <circle cx="92" cy="24" r="7" fill="#3b4650"/>
+        <text x="56" y="146" fill="#60788d" font-size="13" text-anchor="middle">feasible</text>
+      </g>
+
+      <g transform="translate(32,348)">
+        <rect x="0" y="0" width="350" height="76" rx="12" fill="#f4f9fd" stroke="#dbe3eb"/>
+        <text x="175" y="28" fill="#17314f" font-size="15" font-weight="700" text-anchor="middle">Feasible candidates retained</text>
+        <text x="175" y="51" fill="#60788d" font-size="12.5" text-anchor="middle">invalid samples removed by constraints</text>
+      </g>
     </g>
-    <circle cx="435" cy="345" r="16" fill="#1b3550" stroke="#8ad7ff" stroke-width="4"/>
-    <circle cx="505" cy="400" r="16" fill="#1b3550" stroke="#8ad7ff" stroke-width="4"/>
-    <circle cx="470" cy="430" r="16" fill="#1b3550" stroke="#8ad7ff" stroke-width="4"/>
-    <path d="M415 455 C445 430, 470 412, 515 372" stroke="#8ad7ff" stroke-width="5"/>
-    <path d="M415 455 C458 452, 480 440, 528 430" stroke="#e8f7ff" stroke-width="4" stroke-dasharray="8 8"/>
-    <text x="473" y="500" fill="#d9ecff" font-size="14" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">地形代价栅格</text>
+
+    <!-- Panel C -->
+    <g transform="translate(1072,252)">
+      <rect x="0" y="0" width="410" height="470" rx="16" fill="#f8fbfe" stroke="#e3e9ef"/>
+      <rect x="18" y="18" width="374" height="352" rx="14" fill="#ffffff" stroke="#dbe3eb"/>
+      <g opacity="0.9" stroke="#edf1f5" stroke-width="1">
+        <path d="M18 70H392M18 122H392M18 174H392M18 226H392M18 278H392M18 330H392"/>
+        <path d="M74 18V370M130 18V370M186 18V370M242 18V370M298 18V370M354 18V370"/>
+      </g>
+
+      <g fill="#d7e5ef">
+        <path d="M22 84 C74 54, 122 60, 174 40 S282 20, 338 46 S388 84, 388 84 L388 120 L22 120 Z"/>
+        <path d="M22 196 C74 168, 122 172, 170 150 S276 128, 334 148 S388 196, 388 196 L388 244 L22 244 Z" opacity="0.82"/>
+        <path d="M22 292 C74 270, 124 270, 176 246 S286 214, 338 236 S388 286, 388 286 L388 332 L22 332 Z" opacity="0.74"/>
+      </g>
+
+      <g opacity="0.55" fill="#3b4650">
+        <circle cx="96" cy="84" r="9"/>
+        <circle cx="244" cy="112" r="11"/>
+        <circle cx="330" cy="172" r="9"/>
+        <circle cx="164" cy="244" r="11"/>
+        <circle cx="286" cy="300" r="10"/>
+      </g>
+
+      <circle cx="58" cy="330" r="10" fill="#1f78d1"/>
+      <text x="58" y="354" fill="#17314f" font-size="14" font-weight="700" text-anchor="middle">Start</text>
+      <circle cx="366" cy="54" r="10" fill="#16a34a"/>
+      <text x="366" y="42" fill="#17314f" font-size="14" font-weight="700" text-anchor="middle">Goal</text>
+
+      <path d="M58 330 C104 296, 128 288, 164 254 S228 180, 262 156 S318 86, 366 54" fill="none" stroke="#d116a4" stroke-width="6" marker-end="url(#arrowMagenta)"/>
+      <path d="M60 328 C106 288, 132 280, 170 246 S232 176, 266 150 S322 84, 366 54" fill="none" stroke="#f0a3d6" stroke-width="3" stroke-dasharray="8 8"/>
+
+      <g fill="#d116a4">
+        <circle cx="58" cy="330" r="5"/>
+        <circle cx="114" cy="288" r="5"/>
+        <circle cx="168" cy="244" r="5"/>
+        <circle cx="220" cy="190" r="5"/>
+        <circle cx="272" cy="142" r="5"/>
+        <circle cx="326" cy="88" r="5"/>
+        <circle cx="366" cy="54" r="5"/>
+      </g>
+
+      <g transform="translate(22,384)">
+        <rect x="0" y="0" width="374" height="40" rx="12" fill="#ffffff" stroke="#dbe3eb"/>
+        <text x="187" y="26" fill="#17314f" font-size="15" font-weight="700" text-anchor="middle">Collision-free optimized path</text>
+      </g>
+      <g transform="translate(22,434)">
+        <rect x="0" y="0" width="374" height="18" rx="9" fill="#f4f9fd" stroke="#dbe3eb"/>
+        <path d="M14 9 H74" stroke="#1f78d1" stroke-width="4" stroke-linecap="round"/>
+        <text x="96" y="13" fill="#60788d" font-size="13">search seed</text>
+        <path d="M228 9 H288" stroke="#d116a4" stroke-width="4" stroke-linecap="round"/>
+        <text x="310" y="13" fill="#60788d" font-size="13">optimized path</text>
+      </g>
+    </g>
   </g>
 
-  <g>
-    <rect x="700" y="280" width="320" height="200" rx="20" fill="#0f2538" stroke="#8ad7ff" stroke-width="2.5"/>
-    <rect x="718" y="298" width="284" height="164" rx="16" fill="#173654" stroke="#d9ecff" stroke-opacity="0.18"/>
-    <path d="M730 426 C770 390, 810 400, 845 360 S915 310, 955 335 S995 390, 1005 325" stroke="url(#route)" stroke-width="7" fill="none"/>
-    <path d="M730 426 C770 390, 810 400, 845 360 S915 310, 955 335 S995 390, 1005 325" stroke="#ffffff" stroke-opacity="0.18" stroke-width="18" fill="none"/>
-    <circle cx="730" cy="426" r="8" fill="#8ad7ff"/>
-    <circle cx="845" cy="360" r="8" fill="#8ad7ff"/>
-    <circle cx="955" cy="335" r="8" fill="#8ad7ff"/>
-    <circle cx="1005" cy="325" r="8" fill="#8ad7ff"/>
-    <path d="M905 540 L915 480 L950 470 L980 430" stroke="#e8f7ff" stroke-width="5" fill="none" opacity="0.8"/>
-    <rect x="860" y="390" width="78" height="42" rx="10" fill="#1b3550" stroke="#8ad7ff" stroke-width="3"/>
-    <circle cx="880" cy="432" r="14" fill="#1b3550" stroke="#8ad7ff" stroke-width="4"/>
-    <circle cx="918" cy="432" r="14" fill="#1b3550" stroke="#8ad7ff" stroke-width="4"/>
-    <text x="860" y="555" fill="#d9ecff" font-size="14" font-family="Microsoft YaHei, PingFang SC, sans-serif">约束感知车辆</text>
-  </g>
-
-  <text x="600" y="734" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">可穿越性评估 - 代价地图 - 轨迹规划</text>
+  <text x="800" y="858" fill="#17314f" font-size="26" font-family="Arial, Microsoft YaHei, sans-serif" font-weight="700" text-anchor="middle">From terrain assessment to constraint-aware motion planning</text>
 </svg>

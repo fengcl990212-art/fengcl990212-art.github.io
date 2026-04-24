@@ -1,79 +1,101 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="机理-数据融合建模示意图">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Obstacle avoidance experiment scenario and point cloud map">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#102339"/>
-      <stop offset="100%" stop-color="#2d5d8d"/>
+      <stop offset="0%" stop-color="#fbfbfc"/>
+      <stop offset="100%" stop-color="#f3f6fa"/>
     </linearGradient>
     <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f7f9fc"/>
     </linearGradient>
-    <linearGradient id="path" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8ad7ff"/>
-      <stop offset="100%" stop-color="#e8f7ff"/>
-    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2a2a2a"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#76889c" flood-opacity="0.14"/>
+    </filter>
   </defs>
-  <rect width="1200" height="800" rx="36" fill="url(#bg)"/>
-  <g opacity="0.15" stroke="#d9ecff" stroke-width="1">
-    <path d="M60 120H1140M60 220H1140M60 320H1140M60 420H1140M60 520H1140M60 620H1140M60 720H1140"/>
-    <path d="M120 70V730M260 70V730M400 70V730M540 70V730M680 70V730M820 70V730M960 70V730M1100 70V730"/>
-  </g>
-  <circle cx="965" cy="170" r="175" fill="#8ad7ff" fill-opacity="0.1"/>
 
-  <rect x="70" y="90" width="250" height="620" rx="28" fill="url(#panel)" stroke="#e8f7ff" stroke-opacity="0.18"/>
-  <rect x="480" y="90" width="240" height="620" rx="28" fill="url(#panel)" stroke="#e8f7ff" stroke-opacity="0.18"/>
-  <rect x="850" y="90" width="280" height="620" rx="28" fill="url(#panel)" stroke="#e8f7ff" stroke-opacity="0.18"/>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="72" y="78" fill="#17314f" font-family="Arial, Microsoft YaHei, sans-serif" font-size="34" font-weight="700">Obstacle avoidance experiment scenario</text>
+  <text x="72" y="112" fill="#61788b" font-family="Arial, Microsoft YaHei, sans-serif" font-size="18">Experimental setup and point cloud reconstruction</text>
 
-  <text x="195" y="145" fill="#ffffff" font-size="28" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">工程装备</text>
-  <text x="195" y="178" fill="#d9ecff" font-size="16" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">液压挖掘机作业链路</text>
-  <text x="600" y="145" fill="#ffffff" font-size="28" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">机理模型</text>
-  <text x="600" y="178" fill="#d9ecff" font-size="16" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">动力学与约束表达</text>
-  <text x="990" y="145" fill="#ffffff" font-size="28" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">数据学习</text>
-  <text x="990" y="178" fill="#d9ecff" font-size="16" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">残差学习与参数校正</text>
-
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M110 600 L150 510 L230 510 L250 610 L180 650 Z" fill="#f6fbff" fill-opacity="0.10" stroke="#e8f7ff" stroke-opacity="0.75" stroke-width="4"/>
-    <circle cx="170" cy="640" r="22" fill="#1b3550" stroke="#8ad7ff" stroke-width="6"/>
-    <circle cx="240" cy="640" r="22" fill="#1b3550" stroke="#8ad7ff" stroke-width="6"/>
-    <path d="M140 510 L190 445 L245 470" stroke="#e8f7ff" stroke-width="10"/>
-    <path d="M190 445 L290 410" stroke="#e8f7ff" stroke-width="10"/>
-    <path d="M245 470 L320 360" stroke="#e8f7ff" stroke-width="10"/>
-    <path d="M120 560 L250 560" stroke="#8ad7ff" stroke-width="7" stroke-dasharray="10 10"/>
-    <path d="M150 510 L210 505" stroke="#8ad7ff" stroke-width="6"/>
-    <circle cx="150" cy="510" r="8" fill="#8ad7ff"/>
-    <circle cx="190" cy="445" r="8" fill="#8ad7ff"/>
-    <circle cx="245" cy="470" r="8" fill="#8ad7ff"/>
-    <circle cx="290" cy="410" r="8" fill="#8ad7ff"/>
-    <circle cx="320" cy="360" r="8" fill="#8ad7ff"/>
-    <path d="M118 530 H258" stroke="#ffffff" stroke-opacity="0.28" stroke-width="18"/>
+  <g filter="url(#shadow)">
+    <rect x="70" y="160" width="1460" height="650" rx="28" fill="url(#panel)" stroke="#d8e2eb"/>
   </g>
 
-  <g>
-    <rect x="510" y="245" width="180" height="120" rx="18" fill="#11314b" stroke="#8ad7ff" stroke-width="2.5"/>
-    <text x="600" y="288" fill="#ffffff" font-size="24" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">动力学模型</text>
-    <text x="600" y="322" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">受力 · 约束 · 状态</text>
-    <rect x="515" y="390" width="170" height="92" rx="16" fill="#1a4568" stroke="#d9ecff" stroke-opacity="0.4"/>
-    <text x="600" y="425" fill="#ffffff" font-size="22" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">残差修正</text>
-    <text x="600" y="454" fill="#d9ecff" font-size="14" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">学习未知非线性</text>
-    <path d="M600 365 L600 390" stroke="url(#path)" stroke-width="6" stroke-linecap="round"/>
-    <path d="M585 378 L600 392 L615 378" fill="none" stroke="#8ad7ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="510" y="535" width="180" height="110" rx="18" fill="#0f2538" stroke="#8ad7ff" stroke-width="2.5"/>
-    <polyline points="530,615 560,585 590,600 620,565 655,575 680,552" fill="none" stroke="#8ad7ff" stroke-width="5"/>
-    <text x="600" y="668" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">精确作业控制输出</text>
+  <rect x="96" y="190" width="688" height="570" rx="22" fill="#efefef" stroke="#d9e1e8"/>
+  <rect x="816" y="190" width="688" height="570" rx="22" fill="#ffffff" stroke="#d9e1e8"/>
+
+  <g transform="translate(110,208)">
+    <rect x="0" y="0" width="620" height="510" rx="18" fill="#dedede"/>
+    <rect x="22" y="246" width="250" height="144" rx="6" fill="#1f78d1" stroke="#175f9c" stroke-width="3"/>
+    <rect x="44" y="262" width="206" height="112" rx="4" fill="#5db0ff" opacity="0.18"/>
+    <g fill="#484848">
+      <circle cx="68" cy="304" r="10"/><circle cx="94" cy="304" r="10"/><circle cx="120" cy="304" r="10"/><circle cx="146" cy="304" r="10"/><circle cx="172" cy="304" r="10"/><circle cx="198" cy="304" r="10"/><circle cx="224" cy="304" r="10"/>
+    </g>
+    <path d="M286 224 L316 198 L350 184 L390 174 L430 170 L468 176" fill="none" stroke="#9fa8b2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M468 176 L502 192" fill="none" stroke="#9fa8b2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M502 192 L532 214" fill="none" stroke="#9fa8b2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M348 194 L372 220" fill="none" stroke="#9fa8b2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M372 220 L412 192" fill="none" stroke="#9fa8b2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M412 192 L450 160" fill="none" stroke="#9fa8b2" stroke-width="12" stroke-linecap="round"/>
+    <path d="M450 160 L480 174" fill="none" stroke="#9fa8b2" stroke-width="12" stroke-linecap="round"/>
+    <rect x="314" y="150" width="18" height="214" fill="#c7d0d8"/>
+    <rect x="356" y="132" width="18" height="230" fill="#c7d0d8"/>
+    <rect x="398" y="146" width="18" height="216" fill="#c7d0d8"/>
+    <rect x="440" y="128" width="18" height="238" fill="#c7d0d8"/>
+    <rect x="482" y="142" width="18" height="224" fill="#c7d0d8"/>
+    <rect x="524" y="130" width="18" height="236" fill="#c7d0d8"/>
+    <rect x="286" y="230" width="240" height="16" rx="8" fill="#aeb7bf"/>
+    <path d="M38 162 L76 162 L80 210 L44 210 Z" fill="#98a4af"/>
+    <path d="M66 162 L112 156 L112 202 L80 210 Z" fill="#a9b4bd"/>
+    <path d="M108 156 L154 150 L154 198 L112 202 Z" fill="#919ca7"/>
+    <path d="M286 224 C316 216, 340 202, 362 186" stroke="#7d8690" stroke-width="10" stroke-linecap="round"/>
+    <path d="M362 186 C392 172, 420 162, 448 160" stroke="#7d8690" stroke-width="10" stroke-linecap="round"/>
+    <path d="M448 160 C472 162, 492 170, 502 192" stroke="#7d8690" stroke-width="10" stroke-linecap="round"/>
+    <path d="M502 192 C516 204, 524 212, 532 214" stroke="#7d8690" stroke-width="10" stroke-linecap="round"/>
+    <path d="M286 224 L320 194" stroke="#a33" stroke-width="5" stroke-dasharray="7 7"/>
+    <path d="M320 194 L364 178" stroke="#a33" stroke-width="5" stroke-dasharray="7 7"/>
+    <path d="M364 178 L416 164" stroke="#a33" stroke-width="5" stroke-dasharray="7 7"/>
+    <path d="M416 164 L470 170" stroke="#a33" stroke-width="5" stroke-dasharray="7 7"/>
+    <path d="M470 170 L522 194" stroke="#a33" stroke-width="5" stroke-dasharray="7 7"/>
   </g>
 
-  <g>
-    <rect x="880" y="255" width="220" height="120" rx="18" fill="#11314b" stroke="#8ad7ff" stroke-width="2.5"/>
-    <text x="990" y="295" fill="#ffffff" font-size="24" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">传感器数据</text>
-    <text x="990" y="328" fill="#d9ecff" font-size="15" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">位姿 · 载荷 · 轨迹</text>
-    <rect x="898" y="418" width="185" height="102" rx="16" fill="#1a4568" stroke="#d9ecff" stroke-opacity="0.35"/>
-    <text x="990" y="455" fill="#ffffff" font-size="23" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">学习网络</text>
-    <text x="990" y="487" fill="#d9ecff" font-size="14" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">拟合误差与参数漂移</text>
-    <path d="M880 315 C805 315, 775 315, 690 315" stroke="url(#path)" stroke-width="7" stroke-linecap="round"/>
-    <path d="M690 315 L708 304 L708 326 Z" fill="#8ad7ff"/>
-    <path d="M907 520 C845 560, 760 585, 700 595" stroke="#8ad7ff" stroke-width="6" stroke-dasharray="9 10"/>
-    <path d="M700 595 L718 584 L718 606 Z" fill="#8ad7ff"/>
+  <g transform="translate(842,208)">
+    <rect x="0" y="0" width="610" height="510" rx="18" fill="#ffffff" stroke="#dfe6ed"/>
+    <g>
+      <circle cx="108" cy="374" r="4" fill="#f2a900"/><circle cx="132" cy="360" r="4" fill="#ff8200"/><circle cx="160" cy="346" r="4" fill="#ff4b00"/>
+      <circle cx="192" cy="334" r="4" fill="#ff00a8"/><circle cx="226" cy="324" r="4" fill="#a800ff"/><circle cx="262" cy="316" r="4" fill="#6200ff"/>
+      <circle cx="300" cy="312" r="4" fill="#2e2eff"/><circle cx="342" cy="312" r="4" fill="#0097ff"/><circle cx="384" cy="316" r="4" fill="#00d9ff"/>
+      <circle cx="426" cy="324" r="4" fill="#00ff8c"/><circle cx="470" cy="336" r="4" fill="#9dff00"/><circle cx="512" cy="352" r="4" fill="#ffe100"/>
+      <circle cx="548" cy="370" r="4" fill="#ff9f00"/><circle cx="574" cy="396" r="4" fill="#ff4b00"/><circle cx="548" cy="422" r="4" fill="#a800ff"/>
+      <circle cx="504" cy="430" r="4" fill="#4f00ff"/><circle cx="454" cy="432" r="4" fill="#008dff"/><circle cx="404" cy="426" r="4" fill="#00f4ff"/>
+      <circle cx="356" cy="416" r="4" fill="#00ff84"/><circle cx="304" cy="402" r="4" fill="#8fff00"/><circle cx="260" cy="390" r="4" fill="#ffd800"/>
+      <circle cx="218" cy="382" r="4" fill="#ff8a00"/><circle cx="178" cy="382" r="4" fill="#ff3e00"/><circle cx="140" cy="388" r="4" fill="#ff00b4"/>
+    </g>
+    <g fill="#3c3c3c" opacity="0.88">
+      <path d="M80 432 C128 418, 168 420, 210 406 L220 416 C182 430, 142 438, 94 448 Z"/>
+      <path d="M200 404 C246 394, 286 390, 332 380 L342 390 C300 396, 258 408, 212 418 Z"/>
+      <path d="M324 380 C372 370, 408 364, 456 356 L466 366 C422 374, 384 386, 334 394 Z"/>
+      <path d="M450 356 C494 348, 530 340, 570 330 L580 340 C542 350, 502 360, 458 366 Z"/>
+    </g>
+    <path d="M286 188 L322 166 L364 164 L382 188 L352 212 L308 214 Z" fill="#666"/>
+    <path d="M364 164 L402 148 L442 148 L456 170 L420 194 L382 188 Z" fill="#777"/>
+    <path d="M442 148 L482 136 L518 136 L530 156 L494 178 L456 170 Z" fill="#888"/>
+    <path d="M530 156 L556 172 L572 196 L540 202 L518 182 Z" fill="#999"/>
+    <path d="M320 176 L300 226" stroke="#333" stroke-width="12" stroke-linecap="round"/>
+    <path d="M452 184 L470 234" stroke="#333" stroke-width="12" stroke-linecap="round"/>
+    <path d="M542 208 L560 252" stroke="#333" stroke-width="12" stroke-linecap="round"/>
+    <path d="M300 226 C360 236, 412 244, 470 256" stroke="#333" stroke-width="14" stroke-linecap="round"/>
+    <path d="M470 256 C514 262, 540 272, 582 298" stroke="#333" stroke-width="14" stroke-linecap="round"/>
+    <path d="M582 298 C590 304, 594 310, 600 320" stroke="#333" stroke-width="14" stroke-linecap="round"/>
+    <g opacity="0.65" stroke="#8f9aa5" stroke-width="1">
+      <path d="M70 468 H600M70 488 H600M70 508 H600"/>
+    </g>
+    <rect x="0" y="0" width="610" height="510" rx="18" fill="none" stroke="#d0d7de"/>
   </g>
 
-  <text x="600" y="734" fill="#ffffff" font-size="26" font-weight="700" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif">机理约束与数据学习融合建模</text>
+  <text x="116" y="824" fill="#111" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28">(a) Obstacle avoidance experiment scenario</text>
+  <text x="938" y="824" fill="#111" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28">(b) Point cloud map</text>
 </svg>
