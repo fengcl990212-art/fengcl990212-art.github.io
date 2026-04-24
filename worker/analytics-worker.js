@@ -35,6 +35,43 @@ const PROVINCE_MAP = {
   MO: "澳门"
 };
 
+const PROVINCE_ALIAS = {
+  "北京市": "北京", "北京": "北京",
+  "上海市": "上海", "上海": "上海",
+  "天津市": "天津", "天津": "天津",
+  "重庆市": "重庆", "重庆": "重庆",
+  "河北省": "河北", "河北": "河北",
+  "山西省": "山西", "山西": "山西",
+  "辽宁省": "辽宁", "辽宁": "辽宁",
+  "吉林省": "吉林", "吉林": "吉林",
+  "黑龙江省": "黑龙江", "黑龙江": "黑龙江",
+  "江苏省": "江苏", "江苏": "江苏",
+  "浙江省": "浙江", "浙江": "浙江",
+  "安徽省": "安徽", "安徽": "安徽",
+  "福建省": "福建", "福建": "福建",
+  "江西省": "江西", "江西": "江西",
+  "山东省": "山东", "山东": "山东",
+  "河南省": "河南", "河南": "河南",
+  "湖北省": "湖北", "湖北": "湖北",
+  "湖南省": "湖南", "湖南": "湖南",
+  "广东省": "广东", "广东": "广东",
+  "海南省": "海南", "海南": "海南",
+  "四川省": "四川", "四川": "四川",
+  "贵州省": "贵州", "贵州": "贵州",
+  "云南省": "云南", "云南": "云南",
+  "陕西省": "陕西", "陕西": "陕西",
+  "甘肃省": "甘肃", "甘肃": "甘肃",
+  "青海省": "青海", "青海": "青海",
+  "台湾省": "台湾", "台湾": "台湾",
+  "内蒙古自治区": "内蒙古", "内蒙古": "内蒙古",
+  "广西壮族自治区": "广西", "广西": "广西",
+  "西藏自治区": "西藏", "西藏": "西藏",
+  "宁夏回族自治区": "宁夏", "宁夏": "宁夏",
+  "新疆维吾尔自治区": "新疆", "新疆": "新疆",
+  "香港特别行政区": "香港", "香港": "香港",
+  "澳门特别行政区": "澳门", "澳门": "澳门"
+};
+
 const DAY_FORMATTER = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Asia/Shanghai",
   year: "numeric",
@@ -52,11 +89,22 @@ function normalizePath(input) {
   return value.startsWith("/") ? value : `/${value}`;
 }
 
-function getProvince(request) {
+function normalizeProvinceName(input) {
+  const value = String(input || "").trim();
+  if (!value) return "未知";
+  return PROVINCE_ALIAS[value] || value;
+}
+
+function getProvince(request, clientProvince = "") {
+  const preferred = normalizeProvinceName(clientProvince);
+  if (preferred !== "未知") return preferred;
+
   const cf = request.cf || {};
-  const code = String(cf.regionCode || cf.region || cf.country || "未知").trim();
+  const byRegion = normalizeProvinceName(cf.region || "");
+  if (byRegion !== "未知") return byRegion;
+
+  const code = String(cf.regionCode || cf.country || "未知").trim();
   if (PROVINCE_MAP[code]) return PROVINCE_MAP[code];
-  if (/^[A-Z]{2}$/.test(code)) return code;
   return "未知";
 }
 
@@ -74,7 +122,7 @@ async function readJsonBody(request) {
   }
 }
 
-function corsHeaders(request) {
+function corsHeaders() {
   return {
     "access-control-allow-origin": "*",
     "access-control-allow-methods": "GET,POST,OPTIONS",
@@ -83,11 +131,11 @@ function corsHeaders(request) {
   };
 }
 
-function jsonHeaders(request) {
+function jsonHeaders() {
   return {
     "content-type": "application/json; charset=utf-8",
     "cache-control": "no-store",
-    ...corsHeaders(request)
+    ...corsHeaders()
   };
 }
 
@@ -97,10 +145,11 @@ async function recordVisit(request, env) {
   const now = Date.now();
   const day = shanghaiDayKey(now);
   const path = normalizePath(body.path || url.searchParams.get("path") || "/");
+  const clientProvince = body.province || url.searchParams.get("province") || "";
   const ua = request.headers.get("user-agent") || "";
   const ip = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
   const visitorHash = (await sha256Hex(`${day}|${ip}|${ua}`)).slice(0, 16);
-  const province = getProvince(request);
+  const province = getProvince(request, clientProvince);
 
   await env.DB.prepare(
     `INSERT INTO daily_stats(day, total, unique_visitors, updated_at)
@@ -138,13 +187,14 @@ async function recordVisit(request, env) {
   await env.DB.prepare(`DELETE FROM province_stats WHERE day < ?1`).bind(shanghaiDayKey(cutoff)).run();
   await env.DB.prepare(`DELETE FROM daily_stats WHERE day < ?1`).bind(shanghaiDayKey(cutoff)).run();
 
-  return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders(request) });
+  return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders() });
 }
 
 async function readStats(request, env) {
   const url = new URL(request.url);
   const days = Math.max(7, Math.min(30, Number(url.searchParams.get("days") || 14)));
   const today = shanghaiDayKey();
+
   const rows = await env.DB.prepare(
     `SELECT day, total, unique_visitors
      FROM daily_stats
@@ -215,24 +265,25 @@ async function readStats(request, env) {
     provinces,
     trend,
     recent
-  }), { headers: jsonHeaders(request) });
+  }), { headers: jsonHeaders() });
 }
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
     if (request.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
-        headers: corsHeaders(request)
+        headers: corsHeaders()
       });
     }
-    if (url.pathname === "/api/visit" && (request.method === "POST" || request.method === "GET")) {
+    if (url.pathname === "/api/visit" && (request.method === "GET" || request.method === "POST")) {
       return recordVisit(request, env);
     }
     if (url.pathname === "/api/analytics" && request.method === "GET") {
       return readStats(request, env);
     }
-    return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders(request) });
+    return new Response(JSON.stringify({ ok: true }), { headers: jsonHeaders() });
   }
 };

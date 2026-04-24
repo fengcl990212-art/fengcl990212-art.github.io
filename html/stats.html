@@ -372,10 +372,62 @@
       : "";
     const analyticsBase = (configuredBase || DEFAULT_ANALYTICS_BASE).replace(/\/+$/, "");
     const analyticsEndpoint = `${analyticsBase}/api/analytics?days=14`;
+    const OFFLINE_KEY = "fcl_analytics_offline_v1";
 
     document.getElementById("navToggle").addEventListener("click", () => {
       document.getElementById("siteNav").classList.toggle("open");
     });
+
+    function shanghaiDayKey(ts) {
+      return new Date(ts).toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" });
+    }
+
+    function readOfflineData() {
+      try {
+        const raw = localStorage.getItem(OFFLINE_KEY);
+        if (!raw) return { ...emptyData, generatedAt: Date.now() };
+        const payload = JSON.parse(raw);
+        const today = shanghaiDayKey(Date.now());
+        const days = payload.days || {};
+        const provincesObj = payload.provinces || {};
+        const recentRows = Array.isArray(payload.recent) ? payload.recent : [];
+
+        const trend = Object.keys(days)
+          .sort()
+          .slice(-14)
+          .map((day) => ({
+            day,
+            total: Number(days[day]?.total || 0),
+            unique: Number(days[day]?.unique || 0)
+          }));
+
+        const provinces = Object.keys(provincesObj).map((name) => ({
+          name,
+          value: Number(provincesObj[name] || 0)
+        })).sort((a, b) => b.value - a.value);
+
+        const recent = recentRows.slice(0, 12).map((row) => ({
+          time: new Date(row.ts || Date.now()).toLocaleTimeString("zh-CN", { hour12: false }),
+          hash: String(row.hash || "").slice(0, 8),
+          province: row.province || "未知",
+          path: row.path || "/"
+        }));
+
+        return {
+          generatedAt: Date.now(),
+          today,
+          total: Number(payload.total || 0),
+          todayTotal: Number(days[today]?.total || 0),
+          todayUnique: Number(days[today]?.unique || 0),
+          activeProvinces: provinces.length,
+          provinces,
+          trend,
+          recent
+        };
+      } catch {
+        return { ...emptyData, generatedAt: Date.now() };
+      }
+    }
 
     async function tryRegisterMap(url) {
       const response = await fetch(url, { cache: "force-cache" });
@@ -446,7 +498,7 @@
         const provinceValues = data.provinces.map((item) => ({
           name: PROVINCE_NAME_MAP[item.name] || item.name,
           value: item.value
-        }));
+        })).filter((item) => item.name && item.name !== "未知");
         chart.setOption({
           backgroundColor: "#ffffff",
           tooltip: { trigger: "item" },
@@ -561,12 +613,13 @@
         renderMap(data);
         renderTrend(data);
       } catch (error) {
-        const fallback = { ...emptyData, generatedAt: Date.now() };
-        renderMetrics(fallback, "后端暂不可达");
-        renderProvinceList(fallback);
-        renderLogs(fallback);
-        renderMap(fallback);
-        renderTrend(fallback);
+        const offline = readOfflineData();
+        const label = offline.total > 0 ? "本地离线统计（网络受限）" : "后端暂不可达";
+        renderMetrics(offline, label);
+        renderProvinceList(offline);
+        renderLogs(offline);
+        renderMap(offline);
+        renderTrend(offline);
       }
     }
 
