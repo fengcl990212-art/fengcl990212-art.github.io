@@ -175,7 +175,7 @@
     <div class="container site-header-inner">
       <div class="brand">
         <div class="brand-title">冯晨龙</div>
-        <div class="brand-subtitle">匿名访问统计</div>
+        <div class="brand-subtitle">访问统计</div>
       </div>
       <button class="nav-toggle" id="navToggle" aria-label="切换导航"><span></span></button>
       <nav class="nav" id="siteNav">
@@ -192,9 +192,8 @@
   <main>
     <div class="container">
       <section class="hero">
-        <span class="eyebrow">匿名统计面板</span>
-        <h1>浏览量与省级热度</h1>
-        <p class="summary">仅保存脱敏哈希与省级聚合，不记录明文 IP。页面用于展示总浏览量、当日浏览量、匿名访客轨迹和中国省级访问分布，适合与边缘函数或 D1 数据库配合部署。</p>
+        <span class="eyebrow">统计面板</span>
+        <h1>浏览量</h1>
         <div class="status-row">
           <span class="status-pill" id="dataStatus">等待接口数据</span>
           <span class="status-pill">原始 IP 不入库</span>
@@ -229,8 +228,7 @@
           <section class="panel">
             <div class="panel-head">
               <div>
-                <h2 class="panel-title">中国匿名访问热力图</h2>
-                <div class="panel-subtitle">按省级聚合展示，不暴露明文定位</div>
+                <h2 class="panel-title">访问热力图</h2>
               </div>
               <div class="panel-subtitle" id="mapUpdated">--</div>
             </div>
@@ -254,12 +252,10 @@
             <section class="panel">
               <div class="panel-head">
                 <div>
-                  <h2 class="panel-title">最近匿名记录</h2>
-                  <div class="panel-subtitle">仅显示脱敏识别码与省份</div>
+                  <h2 class="panel-title">最近访问记录</h2>
                 </div>
               </div>
               <div class="log-list" id="logList"></div>
-              <div class="section-note">显示内容仅包含匿名识别码、访问省份与页面路径，不保存明文 IP。</div>
             </section>
           </div>
         </div>
@@ -268,7 +264,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2026 冯晨龙。匿名统计面板。</div>
+    <div class="container">© 2026 冯晨龙，匿名统计面板</div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
