@@ -1,0 +1,71 @@
+<svg width="560" height="760" viewBox="0 0 560 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="42" y1="40" x2="526" y2="724" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10314A"/>
+      <stop offset="1" stop-color="#091D30"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="70" y1="116" x2="510" y2="704" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B4566" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#133450" stop-opacity="0.95"/>
+    </linearGradient>
+    <radialGradient id="heat1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(392 394) rotate(90) scale(148)">
+      <stop stop-color="#8BE0FF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#8BE0FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="heat2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(330 426) rotate(90) scale(118)">
+      <stop stop-color="#58B8E6" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#58B8E6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="560" height="760" rx="24" fill="url(#bg)"/>
+  <rect x="26" y="26" width="508" height="708" rx="22" stroke="#5E89A8" stroke-opacity="0.35" stroke-width="2"/>
+  <rect x="48" y="92" width="464" height="628" rx="18" fill="url(#panel)" stroke="#7FB7DD" stroke-opacity="0.3"/>
+
+  <text x="74" y="154" fill="#D9EEFF" font-size="16" font-family="Arial, sans-serif" letter-spacing="1">SCIENCE ROBOTICS STYLE COVER</text>
+  <text x="74" y="186" fill="#FFFFFF" font-size="28" font-weight="700" font-family="Arial, sans-serif">GLOBAL PROBABILISTIC</text>
+  <text x="74" y="220" fill="#FFFFFF" font-size="28" font-weight="700" font-family="Arial, sans-serif">TRAJECTORY PLANNING</text>
+  <text x="74" y="252" fill="#A9D7F2" font-size="15" font-family="Arial, sans-serif">Excavator trajectory learning from expert demonstrations</text>
+
+  <rect x="70" y="286" width="206" height="250" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <rect x="86" y="476" width="150" height="36" rx="8" fill="#213F5C"/>
+  <circle cx="106" cy="494" r="8" fill="#84D7FF"/>
+  <circle cx="131" cy="494" r="8" fill="#84D7FF"/>
+  <rect x="146" y="488" width="78" height="10" rx="5" fill="#98C6E8"/>
+  <rect x="116" y="442" width="28" height="44" rx="5" fill="#9FC8E6"/>
+  <path d="M142 446L182 420L208 430L165 456L142 446Z" fill="#79B4DE"/>
+  <path d="M202 429L236 376L252 384L218 438L202 429Z" fill="#A9D7F2"/>
+  <path d="M248 382L260 360L274 368L262 390L248 382Z" fill="#D7EEFF"/>
+  <path d="M274 368L294 346L308 358L287 380L274 368Z" fill="#F4C45A"/>
+  <circle cx="182" cy="424" r="7" fill="#E5F4FF"/>
+  <circle cx="236" cy="376" r="6" fill="#E5F4FF"/>
+  <circle cx="262" cy="360" r="5" fill="#E5F4FF"/>
+
+  <rect x="296" y="286" width="190" height="250" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <rect x="310" y="300" width="162" height="222" rx="10" fill="#0A2338"/>
+  <rect x="310" y="300" width="162" height="222" fill="url(#heat1)"/>
+  <rect x="310" y="300" width="162" height="222" fill="url(#heat2)"/>
+  <path d="M322 468C350 430 366 404 392 386C418 368 436 348 462 318" stroke="#A6D8F7" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+  <path d="M322 492C344 460 362 436 386 420C408 404 426 384 448 346" stroke="#6EC5F0" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+  <path d="M324 508C356 476 380 456 404 434C430 410 448 392 468 360" stroke="#FFCC63" stroke-width="4" fill="none"/>
+  <circle cx="324" cy="508" r="6" fill="#FFF2D0"/>
+  <circle cx="468" cy="360" r="6" fill="#FFF2D0"/>
+  <text x="322" y="318" fill="#BFE4FB" font-size="12" font-family="Arial, sans-serif">Trajectory samples</text>
+  <text x="322" y="336" fill="#FFE3A6" font-size="12" font-family="Arial, sans-serif">Optimal path</text>
+
+  <rect x="70" y="560" width="416" height="128" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <rect x="86" y="584" width="108" height="76" rx="10" fill="#1C4A6E"/>
+  <rect x="224" y="584" width="108" height="76" rx="10" fill="#22567F"/>
+  <rect x="362" y="584" width="108" height="76" rx="10" fill="#286491"/>
+  <text x="100" y="618" fill="#D6ECFD" font-size="13" font-family="Arial, sans-serif">Expert</text>
+  <text x="100" y="636" fill="#D6ECFD" font-size="13" font-family="Arial, sans-serif">Demonstrations</text>
+  <text x="238" y="618" fill="#D6ECFD" font-size="13" font-family="Arial, sans-serif">Probabilistic</text>
+  <text x="238" y="636" fill="#D6ECFD" font-size="13" font-family="Arial, sans-serif">Model</text>
+  <text x="376" y="618" fill="#D6ECFD" font-size="13" font-family="Arial, sans-serif">Safe</text>
+  <text x="376" y="636" fill="#D6ECFD" font-size="13" font-family="Arial, sans-serif">Execution</text>
+  <path d="M194 622H220" stroke="#9FD7F7" stroke-width="3"/>
+  <path d="M332 622H358" stroke="#9FD7F7" stroke-width="3"/>
+  <path d="M216 622L210 617V627L216 622Z" fill="#9FD7F7"/>
+  <path d="M354 622L348 617V627L354 622Z" fill="#9FD7F7"/>
+
+  <text x="74" y="705" fill="#8CC3E5" font-size="12" font-family="Arial, sans-serif">Automation in Construction · 2026</text>
+</svg>

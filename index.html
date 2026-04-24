@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>冯晨龙 | 主页</title>
+    <link rel="preload" as="image" href="Fig/fengcl-960.jpg" imagesrcset="Fig/fengcl-960.jpg 1x">
     <style>
         :root {
             --bg: #f4f6f8;
@@ -338,6 +339,11 @@
             padding: 22px 0;
         }
 
+        main > section:not(.hero) {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 960px;
+        }
+
         .section-head {
             display: flex;
             align-items: end;
@@ -419,8 +425,8 @@
 
         .pub-item {
             display: grid;
-            grid-template-columns: 72px minmax(0, 1fr) auto;
-            gap: 18px;
+            grid-template-columns: 72px 140px minmax(0, 1fr) auto;
+            gap: 16px;
             padding: 18px 20px;
             align-items: start;
         }
@@ -430,6 +436,49 @@
             font-size: 18px;
             font-weight: 700;
             padding-top: 2px;
+        }
+
+        .pub-cover {
+            position: relative;
+            overflow: hidden;
+            min-height: 176px;
+            aspect-ratio: 560 / 760;
+            border-radius: 10px;
+            border: 1px solid rgba(40, 70, 102, 0.22);
+            background: #0f2a40;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 6px 18px rgba(13, 31, 47, 0.12);
+        }
+
+        .pub-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pub-cover-a {
+            background: #183a59;
+        }
+
+        .pub-cover-b {
+            background: #214468;
+        }
+
+        .pub-cover-c {
+            background: #274d73;
+        }
+
+        .pub-cover-d {
+            background: #2d567d;
+        }
+
+        .pub-main {
+            min-width: 0;
+        }
+
+        .pub-cta {
+            align-self: center;
+            justify-self: end;
         }
 
         .pub-title {
@@ -730,6 +779,15 @@
                 gap: 10px;
             }
 
+            .pub-cover {
+                min-height: 150px;
+                max-width: 220px;
+            }
+
+            .pub-cta {
+                justify-self: start;
+            }
+
             .news-actions {
                 justify-self: start;
             }
@@ -795,7 +853,7 @@
                     <aside class="hero-side">
                         <div class="portrait-card">
                             <div class="portrait-frame">
-                                <img src="Fig/fengcl.jpg" alt="冯晨龙照片">
+                                <img src="Fig/fengcl-960.jpg" alt="冯晨龙照片" width="960" height="1280" decoding="async" fetchpriority="high">
                             </div>
                             <div class="portrait-note">研究方向：具身智能工程装备、工程车辆智能控制与运动规划</div>
                         </div>
@@ -816,7 +874,7 @@
                     <article class="section-card">
                         <div class="section-index">01</div>
                         <div class="section-visual">
-                            <img src="Fig/fig1.png" alt="机理-数据融合建模示意图">
+                            <img src="Fig/fig1-900.jpg" alt="机理-数据融合建模示意图" width="900" height="454" loading="lazy" decoding="async">
                         </div>
                         <h3>机理-数据融合建模与精确控制</h3>
                         <p>面向液压挖掘装备精准作业场景，研究动力学建模、非线性残差学习与控制性能提升问题</p>
@@ -825,7 +883,7 @@
                     <article class="section-card">
                         <div class="section-index">02</div>
                         <div class="section-visual">
-                            <img src="Fig/fig2.png" alt="模仿学习运动规划示意图">
+                            <img src="Fig/fig2-900.jpg" alt="模仿学习运动规划示意图" width="900" height="421" loading="lazy" decoding="async">
                         </div>
                         <h3>模仿学习运动规划</h3>
                         <p>从专家操作轨迹中学习任务演化规律，提升工程装备自主作业技能的泛化能力、可迁移性与作业效率</p>
@@ -834,7 +892,7 @@
                     <article class="section-card">
                         <div class="section-index">03</div>
                         <div class="section-visual">
-                            <img src="Fig/fig3.png" alt="复杂场景车辆自主导航示意图">
+                            <img src="Fig/fig3-900.jpg" alt="复杂场景车辆自主导航示意图" width="900" height="640" loading="lazy" decoding="async">
                         </div>
                         <h3>复杂场景车辆自主导航</h3>
                         <p>围绕非结构场景复杂特性，研究崎岖地形可穿越性评估、路径搜索和轨迹优化方法</p>
@@ -854,7 +912,10 @@
                 <div class="pub-list">
                     <article class="pub-item">
                         <div class="pub-year">2026</div>
-                        <div>
+                        <div class="pub-cover pub-cover-a">
+                            <img src="Fig/pub-cover-2026.svg" alt="2026论文封面：挖掘机全局概率轨迹规划" loading="lazy" decoding="async">
+                        </div>
+                        <div class="pub-main">
                             <h3 class="pub-title">Excavator trajectory planning via global probabilistic learning from expert demonstrations</h3>
                             <p class="pub-text">提出融合全局概率建模与采样优化的轨迹规划方法，实现任务变化下的高效泛化、跨平台迁移与安全执行</p>
                             <div class="pub-meta">
@@ -863,12 +924,15 @@
                                 <span class="meta-tag">IF=11.5</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.autcon.2025.106736" target="_blank" rel="noopener noreferrer">查看论文</a>
+                        <a class="button pub-cta" href="https://doi.org/10.1016/j.autcon.2025.106736" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
 
                     <article class="pub-item">
                         <div class="pub-year">2025</div>
-                        <div>
+                        <div class="pub-cover pub-cover-b">
+                            <img src="Fig/pub-cover-2025.svg" alt="2025论文封面：可穿越性约束运动规划" loading="lazy" decoding="async">
+                        </div>
+                        <div class="pub-main">
                             <h3 class="pub-title">Constraint-aware motion planning for vehicles with terrain traversability assessment and optimization in construction scenarios</h3>
                             <p class="pub-text">建立地形可穿越性评估、路径搜索与轨迹优化一体化框架，用于复杂施工场景车辆自主导航</p>
                             <div class="pub-meta">
@@ -877,12 +941,15 @@
                                 <span class="meta-tag">IF=9.9</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.aei.2025.103625" target="_blank" rel="noopener noreferrer">查看论文</a>
+                        <a class="button pub-cta" href="https://doi.org/10.1016/j.aei.2025.103625" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
 
                     <article class="pub-item">
                         <div class="pub-year">2024</div>
-                        <div>
+                        <div class="pub-cover pub-cover-c">
+                            <img src="Fig/pub-cover-2024-task.svg" alt="2024论文封面：任务单元轨迹生成" loading="lazy" decoding="async">
+                        </div>
+                        <div class="pub-main">
                             <h3 class="pub-title">Task-unit based trajectory generation for excavators utilizing expert operator skills</h3>
                             <p class="pub-text">将挖掘任务分解为任务单元，结合动态运动基元与统计模型，实现复杂任务轨迹的组合与泛化</p>
                             <div class="pub-meta">
@@ -891,12 +958,15 @@
                                 <span class="meta-tag">IF=11.5</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.autcon.2023.105247" target="_blank" rel="noopener noreferrer">查看论文</a>
+                        <a class="button pub-cta" href="https://doi.org/10.1016/j.autcon.2023.105247" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
 
                     <article class="pub-item">
                         <div class="pub-year">2024</div>
-                        <div>
+                        <div class="pub-cover pub-cover-d">
+                            <img src="Fig/pub-cover-2024-pinn.svg" alt="2024论文封面：物理信息网络精确控制" loading="lazy" decoding="async">
+                        </div>
+                        <div class="pub-main">
                             <h3 class="pub-title">Physics-informed neutral network with physically consistent and residual learning for excavator precision operation control</h3>
                             <p class="pub-text">针对非线性与外界扰动问题，构建物理信息模型与性能约束控制方法，实现挖掘机精确跟踪控制</p>
                             <div class="pub-meta">
@@ -905,7 +975,7 @@
                                 <span class="meta-tag">IF=6.6</span>
                             </div>
                         </div>
-                        <a class="button" href="https://doi.org/10.1016/j.asoc.2024.112402" target="_blank" rel="noopener noreferrer">查看论文</a>
+                        <a class="button pub-cta" href="https://doi.org/10.1016/j.asoc.2024.112402" target="_blank" rel="noopener noreferrer">查看论文</a>
                     </article>
                 </div>
             </div>
@@ -1156,6 +1226,7 @@
                                 <span>完整时间线</span>
                             </a>
                             <a class="link-item" href="html/stats.html">
+                                站点统计
                                 <span>站点运行数据</span>
                             </a>
                         </div>
@@ -1186,6 +1257,6 @@
             });
         })();
     </script>
-    <script src="js/visit-tracker.js"></script>
+    <script src="js/visit-tracker.js" defer></script>
 </body>
 </html>

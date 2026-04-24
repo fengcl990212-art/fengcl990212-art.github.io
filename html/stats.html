@@ -267,43 +267,9 @@
     <div class="container">© 2026 冯晨龙，匿名统计面板</div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="../js/vendor/echarts.min.js"></script>
   <script src="../js/visit-tracker.js"></script>
   <script>
-    const demoData = {
-      generatedAt: Date.now(),
-      today: new Date().toISOString().slice(0, 10),
-      total: 12586,
-      todayTotal: 218,
-      todayUnique: 137,
-      activeProvinces: 15,
-      provinces: [
-        { name: "江苏", value: 42 },
-        { name: "浙江", value: 35 },
-        { name: "广东", value: 31 },
-        { name: "北京", value: 29 },
-        { name: "山东", value: 24 },
-        { name: "上海", value: 19 },
-        { name: "河南", value: 17 },
-        { name: "湖北", value: 14 }
-      ],
-      trend: [
-        { day: "04-18", total: 176, unique: 122 },
-        { day: "04-19", total: 184, unique: 128 },
-        { day: "04-20", total: 190, unique: 131 },
-        { day: "04-21", total: 204, unique: 136 },
-        { day: "04-22", total: 208, unique: 134 },
-        { day: "04-23", total: 214, unique: 139 },
-        { day: "04-24", total: 218, unique: 137 }
-      ],
-      recent: [
-        { time: "16:20:11", hash: "a1b2c3d4", province: "江苏", path: "/index.html" },
-        { time: "16:18:32", hash: "b2c3d4e5", province: "浙江", path: "/html/news.html" },
-        { time: "16:11:07", hash: "c3d4e5f6", province: "广东", path: "/html/stats.html" },
-        { time: "15:54:48", hash: "d4e5f607", province: "北京", path: "/index.html" }
-      ]
-    };
-
     const el = (id) => document.getElementById(id);
     const totalVisits = el("totalVisits");
     const todayVisits = el("todayVisits");
@@ -595,7 +561,7 @@
     async function loadAnalytics() {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
         const response = await fetch(analyticsEndpoint, {
           cache: "no-store",
           signal: controller.signal
@@ -620,8 +586,16 @@
     }
 
     loadAnalytics();
-    setTimeout(loadAnalytics, 2000);
-    const analyticsTimer = setInterval(loadAnalytics, 15000);
+    const analyticsTimer = setInterval(() => {
+      if (document.visibilityState === "visible") {
+        loadAnalytics();
+      }
+    }, 60000);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        loadAnalytics();
+      }
+    });
     window.addEventListener("beforeunload", () => clearInterval(analyticsTimer));
     window.addEventListener("resize", () => {
       chart.resize();

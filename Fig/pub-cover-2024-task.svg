@@ -1,0 +1,75 @@
+<svg width="560" height="760" viewBox="0 0 560 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="36" y1="44" x2="526" y2="722" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12324C"/>
+      <stop offset="1" stop-color="#0A1F31"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="50" y1="96" x2="510" y2="712" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1C486A" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#133B58" stop-opacity="0.96"/>
+    </linearGradient>
+  </defs>
+  <rect width="560" height="760" rx="24" fill="url(#bg)"/>
+  <rect x="26" y="26" width="508" height="708" rx="22" stroke="#5E89A8" stroke-opacity="0.35" stroke-width="2"/>
+  <rect x="48" y="92" width="464" height="628" rx="18" fill="url(#panel)" stroke="#7FB7DD" stroke-opacity="0.3"/>
+
+  <text x="74" y="154" fill="#D9EEFF" font-size="16" font-family="Arial, sans-serif" letter-spacing="1">SCIENCE ROBOTICS STYLE COVER</text>
+  <text x="74" y="186" fill="#FFFFFF" font-size="27" font-weight="700" font-family="Arial, sans-serif">TASK-UNIT TRAJECTORY</text>
+  <text x="74" y="219" fill="#FFFFFF" font-size="27" font-weight="700" font-family="Arial, sans-serif">GENERATION</text>
+  <text x="74" y="251" fill="#A9D7F2" font-size="15" font-family="Arial, sans-serif">Expert operator skills to compositional motion primitives</text>
+
+  <rect x="72" y="286" width="416" height="188" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <text x="90" y="316" fill="#D7EEFF" font-size="14" font-family="Arial, sans-serif" font-weight="700">Task Unit Sequence</text>
+  <rect x="90" y="336" width="78" height="42" rx="8" fill="#22567F"/>
+  <rect x="184" y="336" width="78" height="42" rx="8" fill="#2A618D"/>
+  <rect x="278" y="336" width="78" height="42" rx="8" fill="#2F6A97"/>
+  <rect x="372" y="336" width="78" height="42" rx="8" fill="#3673A2"/>
+  <text x="111" y="362" fill="#F2F9FF" font-size="13" font-family="Arial, sans-serif">U1</text>
+  <text x="205" y="362" fill="#F2F9FF" font-size="13" font-family="Arial, sans-serif">U2</text>
+  <text x="299" y="362" fill="#F2F9FF" font-size="13" font-family="Arial, sans-serif">U3</text>
+  <text x="393" y="362" fill="#F2F9FF" font-size="13" font-family="Arial, sans-serif">U4</text>
+  <path d="M168 357H182" stroke="#A8D6F4" stroke-width="3"/>
+  <path d="M262 357H276" stroke="#A8D6F4" stroke-width="3"/>
+  <path d="M356 357H370" stroke="#A8D6F4" stroke-width="3"/>
+  <path d="M182 357L176 352V362L182 357Z" fill="#A8D6F4"/>
+  <path d="M276 357L270 352V362L276 357Z" fill="#A8D6F4"/>
+  <path d="M370 357L364 352V362L370 357Z" fill="#A8D6F4"/>
+
+  <rect x="90" y="392" width="360" height="66" rx="8" fill="#123954" stroke="#6EA6CB" stroke-opacity="0.4"/>
+  <path d="M108 438C146 424 178 416 212 414C248 412 284 420 320 422C352 424 384 420 432 404" stroke="#8FD8FF" stroke-width="3.5" fill="none"/>
+  <circle cx="108" cy="438" r="5" fill="#EAF6FF"/>
+  <circle cx="432" cy="404" r="5" fill="#EAF6FF"/>
+  <text x="104" y="408" fill="#C7E8FF" font-size="12" font-family="Arial, sans-serif">composed trajectory</text>
+
+  <rect x="72" y="490" width="202" height="198" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <text x="90" y="518" fill="#D7EEFF" font-size="14" font-family="Arial, sans-serif" font-weight="700">Skill Library</text>
+  <circle cx="118" cy="550" r="14" fill="#2A618D"/>
+  <circle cx="176" cy="550" r="14" fill="#2F6A97"/>
+  <circle cx="234" cy="550" r="14" fill="#3673A2"/>
+  <circle cx="118" cy="610" r="14" fill="#2F6A97"/>
+  <circle cx="176" cy="610" r="14" fill="#3673A2"/>
+  <circle cx="234" cy="610" r="14" fill="#3D7EAE"/>
+  <path d="M132 550H162" stroke="#9ED5F5" stroke-width="2"/>
+  <path d="M190 550H220" stroke="#9ED5F5" stroke-width="2"/>
+  <path d="M118 564V596" stroke="#9ED5F5" stroke-width="2"/>
+  <path d="M176 564V596" stroke="#9ED5F5" stroke-width="2"/>
+  <path d="M234 564V596" stroke="#9ED5F5" stroke-width="2"/>
+  <path d="M132 610H162" stroke="#9ED5F5" stroke-width="2"/>
+  <path d="M190 610H220" stroke="#9ED5F5" stroke-width="2"/>
+
+  <rect x="286" y="490" width="202" height="198" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <text x="304" y="518" fill="#D7EEFF" font-size="14" font-family="Arial, sans-serif" font-weight="700">Trajectory Execution</text>
+  <rect x="304" y="538" width="166" height="130" rx="10" fill="#11354F"/>
+  <rect x="322" y="628" width="96" height="26" rx="6" fill="#224B6C"/>
+  <circle cx="340" cy="641" r="6" fill="#CDEAFF"/>
+  <circle cx="359" cy="641" r="6" fill="#CDEAFF"/>
+  <rect x="372" y="636" width="38" height="8" rx="4" fill="#D9EEFF"/>
+  <rect x="336" y="596" width="22" height="34" rx="4" fill="#A4CCE9"/>
+  <path d="M356 598L394 580L408 588L370 606L356 598Z" fill="#7FB9E1"/>
+  <path d="M398 584L424 548L436 554L410 592L398 584Z" fill="#AED9F3"/>
+  <path d="M434 554L450 536L460 544L444 562L434 554Z" fill="#FFCC63"/>
+  <circle cx="394" cy="580" r="5" fill="#EAF6FF"/>
+  <circle cx="424" cy="548" r="5" fill="#EAF6FF"/>
+
+  <text x="74" y="705" fill="#8CC3E5" font-size="12" font-family="Arial, sans-serif">Automation in Construction · 2024</text>
+</svg>

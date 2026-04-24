@@ -3,6 +3,7 @@
   const OFFLINE_KEY = "fcl_analytics_offline_v1";
   const QUEUE_KEY = "fcl_analytics_queue_v1";
   const VISITOR_KEY = "fcl_visitor_id_v1";
+
   const configuredBase = typeof window !== "undefined" && typeof window.__ANALYTICS_BASE__ === "string"
     ? window.__ANALYTICS_BASE__.trim()
     : "";
@@ -45,58 +46,7 @@
 
   function normalizeProvince(name) {
     const raw = String(name || "").trim();
-    if (!raw) return "未知";
-    const map = {
-      "北京市": "北京", "北京": "北京",
-      "上海市": "上海", "上海": "上海",
-      "天津市": "天津", "天津": "天津",
-      "重庆市": "重庆", "重庆": "重庆",
-      "河北省": "河北", "河北": "河北",
-      "山西省": "山西", "山西": "山西",
-      "辽宁省": "辽宁", "辽宁": "辽宁",
-      "吉林省": "吉林", "吉林": "吉林",
-      "黑龙江省": "黑龙江", "黑龙江": "黑龙江",
-      "江苏省": "江苏", "江苏": "江苏",
-      "浙江省": "浙江", "浙江": "浙江",
-      "安徽省": "安徽", "安徽": "安徽",
-      "福建省": "福建", "福建": "福建",
-      "江西省": "江西", "江西": "江西",
-      "山东省": "山东", "山东": "山东",
-      "河南省": "河南", "河南": "河南",
-      "湖北省": "湖北", "湖北": "湖北",
-      "湖南省": "湖南", "湖南": "湖南",
-      "广东省": "广东", "广东": "广东",
-      "海南省": "海南", "海南": "海南",
-      "四川省": "四川", "四川": "四川",
-      "贵州省": "贵州", "贵州": "贵州",
-      "云南省": "云南", "云南": "云南",
-      "陕西省": "陕西", "陕西": "陕西",
-      "甘肃省": "甘肃", "甘肃": "甘肃",
-      "青海省": "青海", "青海": "青海",
-      "台湾省": "台湾", "台湾": "台湾",
-      "内蒙古自治区": "内蒙古", "内蒙古": "内蒙古",
-      "广西壮族自治区": "广西", "广西": "广西",
-      "西藏自治区": "西藏", "西藏": "西藏",
-      "宁夏回族自治区": "宁夏", "宁夏": "宁夏",
-      "新疆维吾尔自治区": "新疆", "新疆": "新疆",
-      "香港特别行政区": "香港", "香港": "香港",
-      "澳门特别行政区": "澳门", "澳门": "澳门"
-    };
-    return map[raw] || raw;
-  }
-
-  async function detectProvince() {
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2500);
-      const response = await fetch("https://ipapi.co/json/", { signal: controller.signal, cache: "no-store" });
-      clearTimeout(timeoutId);
-      if (!response.ok) return "未知";
-      const data = await response.json();
-      return normalizeProvince(data.region || data.region_code || data.country_name);
-    } catch {
-      return "未知";
-    }
+    return raw || "未知";
   }
 
   function updateOfflineStats(province) {
@@ -130,7 +80,6 @@
       hash: visitorId.slice(-8)
     });
     stats.recent = stats.recent.slice(0, 20);
-
     writeStorage(OFFLINE_KEY, stats);
   }
 
@@ -139,30 +88,38 @@
       path: payload.path,
       title: payload.title,
       referrer: payload.referrer,
-      province: payload.province || "未知",
       ts: String(Date.now())
     });
+    if (payload.province) {
+      params.set("province", payload.province);
+    }
     return `${endpoint}?${params.toString()}`;
   }
 
   async function sendPayload(payload) {
     const url = buildGetUrl(payload);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
     try {
       await fetch(url, {
         method: "GET",
         mode: "no-cors",
         keepalive: true,
-        credentials: "omit"
+        credentials: "omit",
+        signal: controller.signal
       });
       return true;
     } catch {
       try {
         const img = new Image();
+        img.decoding = "async";
         img.src = url;
       } catch {
         // ignore
       }
       return false;
+    } finally {
+      clearTimeout(timeoutId);
     }
   }
 
@@ -172,32 +129,58 @@
     writeStorage(QUEUE_KEY, queue.slice(-100));
   }
 
-  async function flushQueue() {
+  async function flushQueue(limit) {
     const queue = readStorage(QUEUE_KEY, []);
     if (!queue.length) return;
+
+    const max = Math.max(1, Number(limit || 3));
+    const head = queue.slice(0, max);
+    const tail = queue.slice(max);
     const remain = [];
-    for (const item of queue) {
-      // no-cors cannot read response status; network rejection still indicates failure.
+
+    for (const item of head) {
       const ok = await sendPayload(item);
       if (!ok) remain.push(item);
     }
-    writeStorage(QUEUE_KEY, remain);
+
+    writeStorage(QUEUE_KEY, remain.concat(tail).slice(-100));
   }
 
-  async function run() {
-    const province = await detectProvince();
-    updateOfflineStats(province);
+  function scheduleBackgroundFlush() {
+    const task = function () {
+      flushQueue(3).catch(function () {
+        // ignore
+      });
+    };
 
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(task, { timeout: 1500 });
+      return;
+    }
+
+    setTimeout(task, 1200);
+  }
+
+  function run() {
     const payload = {
       path: visit.path,
       title: visit.title,
       referrer: visit.referrer,
-      province
+      province: ""
     };
-    const ok = await sendPayload(payload);
-    if (!ok) queuePayload(payload);
-    await flushQueue();
+
+    updateOfflineStats(payload.province);
+
+    sendPayload(payload).then(function (ok) {
+      if (!ok) queuePayload(payload);
+    });
+
+    scheduleBackgroundFlush();
   }
 
-  run();
+  if (typeof window.requestIdleCallback === "function") {
+    window.requestIdleCallback(run, { timeout: 1200 });
+  } else {
+    setTimeout(run, 0);
+  }
 })();

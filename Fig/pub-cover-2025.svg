@@ -1,0 +1,67 @@
+<svg width="560" height="760" viewBox="0 0 560 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="44" y1="38" x2="524" y2="724" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#112E47"/>
+      <stop offset="1" stop-color="#081B2C"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="50" y1="94" x2="510" y2="710" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A4465" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#123552" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="terrain" x1="82" y1="288" x2="478" y2="516" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#28567A"/>
+      <stop offset="0.4" stop-color="#3A749A"/>
+      <stop offset="1" stop-color="#7F9C68"/>
+    </linearGradient>
+  </defs>
+  <rect width="560" height="760" rx="24" fill="url(#bg)"/>
+  <rect x="26" y="26" width="508" height="708" rx="22" stroke="#5E89A8" stroke-opacity="0.35" stroke-width="2"/>
+  <rect x="48" y="92" width="464" height="628" rx="18" fill="url(#panel)" stroke="#7FB7DD" stroke-opacity="0.3"/>
+
+  <text x="74" y="154" fill="#D9EEFF" font-size="16" font-family="Arial, sans-serif" letter-spacing="1">SCIENCE ROBOTICS STYLE COVER</text>
+  <text x="74" y="186" fill="#FFFFFF" font-size="27" font-weight="700" font-family="Arial, sans-serif">CONSTRAINT-AWARE</text>
+  <text x="74" y="219" fill="#FFFFFF" font-size="27" font-weight="700" font-family="Arial, sans-serif">MOTION PLANNING</text>
+  <text x="74" y="251" fill="#A9D7F2" font-size="15" font-family="Arial, sans-serif">Terrain traversability assessment and trajectory optimization</text>
+
+  <rect x="72" y="286" width="416" height="248" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <rect x="84" y="300" width="392" height="220" rx="10" fill="url(#terrain)"/>
+  <path d="M84 448L120 420L170 434L222 396L274 416L326 368L380 392L430 338L476 356" stroke="#A7C982" stroke-width="4" opacity="0.55"/>
+  <path d="M84 486L136 462L184 474L236 438L286 456L336 420L392 436L446 398L476 408" stroke="#95B876" stroke-width="4" opacity="0.55"/>
+  <g opacity="0.28" stroke="#CBE7FA" stroke-width="1.2">
+    <path d="M84 336H476"/>
+    <path d="M84 372H476"/>
+    <path d="M84 408H476"/>
+    <path d="M84 444H476"/>
+    <path d="M84 480H476"/>
+    <path d="M128 300V520"/>
+    <path d="M176 300V520"/>
+    <path d="M224 300V520"/>
+    <path d="M272 300V520"/>
+    <path d="M320 300V520"/>
+    <path d="M368 300V520"/>
+    <path d="M416 300V520"/>
+  </g>
+  <path d="M102 500C148 470 192 456 230 438C268 420 300 398 336 376C370 356 404 336 454 320" stroke="#92D7FF" stroke-width="3.5" stroke-dasharray="8 6" fill="none"/>
+  <path d="M102 500C152 486 210 470 252 446C288 424 322 404 358 382C390 362 420 350 454 334" stroke="#FFD06D" stroke-width="4.5" fill="none"/>
+  <rect x="102" y="494" width="26" height="15" rx="3" fill="#E4F4FF"/>
+  <circle cx="110" cy="512" r="4" fill="#D6ECFD"/>
+  <circle cx="122" cy="512" r="4" fill="#D6ECFD"/>
+  <text x="334" y="318" fill="#D7EEFF" font-size="12" font-family="Arial, sans-serif">candidate trajectories</text>
+  <text x="334" y="336" fill="#FFE2A3" font-size="12" font-family="Arial, sans-serif">optimal constrained path</text>
+
+  <rect x="72" y="552" width="272" height="136" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <text x="92" y="578" fill="#D7EEFF" font-size="14" font-family="Arial, sans-serif" font-weight="700">Traversability Index</text>
+  <rect x="92" y="594" width="230" height="18" rx="8" fill="#1E4B70"/>
+  <rect x="92" y="594" width="176" height="18" rx="8" fill="#6BC08A"/>
+  <text x="92" y="632" fill="#D7EEFF" font-size="13" font-family="Arial, sans-serif">slope, roughness, obstacle penalty</text>
+  <text x="92" y="654" fill="#A8D3EE" font-size="12" font-family="Arial, sans-serif">J = w₁·risk + w₂·distance + w₃·smoothness</text>
+
+  <rect x="358" y="552" width="130" height="136" rx="12" fill="#0E2940" stroke="#7FB7DD" stroke-opacity="0.35"/>
+  <rect x="376" y="590" width="94" height="50" rx="8" fill="#274F73"/>
+  <rect x="390" y="614" width="66" height="8" rx="4" fill="#D5EDFF"/>
+  <circle cx="406" cy="642" r="6" fill="#D5EDFF"/>
+  <circle cx="440" cy="642" r="6" fill="#D5EDFF"/>
+  <text x="372" y="673" fill="#D7EEFF" font-size="12" font-family="Arial, sans-serif">UGV Planner</text>
+
+  <text x="74" y="705" fill="#8CC3E5" font-size="12" font-family="Arial, sans-serif">Advanced Engineering Informatics · 2025</text>
+</svg>
